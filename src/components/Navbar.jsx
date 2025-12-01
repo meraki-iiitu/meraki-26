@@ -24,7 +24,7 @@ const Navbar = () => {
             <div className="hidden md:flex items-center gap-6">
                 <div className="flex gap-6 font-pixel text-white/80 text-sm tracking-widest">
                     <Link to="/" className="hover:text-white cursor-pointer hover:underline decoration-accent-400 underline-offset-4">HOME</Link>
-                    <Link to="/" className="hover:text-white cursor-pointer hover:underline decoration-accent-400 underline-offset-4">ABOUT</Link>
+                    <Link to="/about" className="hover:text-white cursor-pointer hover:underline decoration-accent-400 underline-offset-4">ABOUT</Link>
                     <Link to="/" className="hover:text-white cursor-pointer hover:underline decoration-accent-400 underline-offset-4">EVENTS</Link>
                 </div>
                 <div className="text-white/90 font-terminal text-lg md:text-xl tracking-wide border-l-2 border-accent-500 pl-4 ml-4">
@@ -51,7 +51,7 @@ const Navbar = () => {
                     >
                         <div className="flex flex-col gap-8 font-pixel text-white text-xl tracking-widest text-center">
                             <Link to="/" onClick={toggleMenu} className="hover:text-accent-400 cursor-pointer">HOME</Link>
-                            <span onClick={toggleMenu} className="hover:text-accent-400 cursor-pointer">ABOUT</span>
+                            <Link to="/about" onClick={toggleMenu} className="hover:text-accent-400 cursor-pointer">ABOUT</Link>
                             <span onClick={toggleMenu} className="hover:text-accent-400 cursor-pointer">EVENTS</span>
                         </div>
                     </motion.div>
