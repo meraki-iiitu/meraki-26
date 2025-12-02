@@ -9,11 +9,15 @@ const Hero = () => {
             {/* Background Image with Parallax-like Scale */}
             <motion.div
                 className="absolute inset-0 z-0"
-                initial={{ scale: 1.1, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 2.5, ease: "easeOut" }}
+                style={{ overflow: "hidden" }}
             >
-                <div
+                <motion.div
+                    initial={{ scale: 1.5 }}
+                    animate={{ scale: 1}}
+                    transition={{ duration: 2.5, ease: "easeOut" }}
                     className="w-full h-full bg-cover bg-center opacity-60"
                     style={{ backgroundImage: `url(${heroImage})` }}
                 />
