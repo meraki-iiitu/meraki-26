@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import heroImage from '../assets/iiitu.webp';
 import Faq from './Faq';
 import Elite from './Elite';
+import Sponsors from './Sponsors';
+
 
 const Hero = () => {
     return (
@@ -17,7 +19,7 @@ const Hero = () => {
             >
                 <motion.div
                     initial={{ scale: 1.5 }}
-                    animate={{ scale: 1}}
+                    animate={{ scale: 1 }}
                     transition={{ duration: 2.5, ease: "easeOut" }}
                     className="w-full h-full bg-cover bg-center opacity-60"
                     style={{ backgroundImage: `url(${heroImage})` }}
@@ -27,7 +29,7 @@ const Hero = () => {
 
             {/* Content Container */}
             <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-                
+
                 {/* Main Title */}
                 <motion.h1
                     className="text-4xl md:text-6xl lg:text-8xl font-minecraft text-white mb-8 leading-tight"
@@ -71,15 +73,17 @@ const Hero = () => {
                         <span className="text-accent-400">&gt;</span>
                         <span>Feb 5-7, 2026</span>
                     </div>
-                    
+
                     <div className="flex items-center gap-3">
                         <span>IIIT Una</span>
                         <span className="text-accent-400 animate-pulse">_</span>
                     </div>
                 </motion.div>
             </div>
-                    <Elite></Elite>
-                    <Faq></Faq>
+<Elite />
+<Sponsors />
+<Faq />
+
         </section>
     );
 };
