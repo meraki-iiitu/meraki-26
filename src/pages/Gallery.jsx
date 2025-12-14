@@ -15,20 +15,30 @@ const Gallery = () => {
                 backgroundAttachment: 'fixed'
             }}
         >
-            {}
+            { }
             <div className="absolute inset-0 bg-black/60"></div>
             <div className="max-w-7xl mx-auto px-6 relative z-10">
-                {}
-                <div className="text-center mb-8">
-                    <h1 className="font-minecraft text-2xl md:text-3xl text-white tracking-wider">
-                        Gallery
+                <div className="text-center mb-16">
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                        <div className="w-0 h-0 border-t-[10px] border-b-[10px] border-l-[14px] border-t-transparent border-b-transparent border-l-cyan-400"></div>
+                        <h2 className="font-terminal text-cyan-400 text-sm md:text-base tracking-[0.3em] uppercase">
+                            EVENT MEMORIES
+                        </h2>
+                        <div className="w-0 h-0 border-t-[10px] border-b-[10px] border-r-[14px] border-t-transparent border-b-transparent border-r-cyan-400"></div>
+                    </div>
+                    <h1 className="font-minecraft text-5xl md:text-7xl text-white mb-4 tracking-wider"
+                        style={{
+                            textShadow: '4px 4px 0px #000, 2px 2px 0px rgba(6, 182, 212, 0.5)'
+                        }}>
+                        GALLERY
                     </h1>
+                    <div className="w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mx-auto"></div>
                 </div>
 
-                {}
+                { }
                 <div className="border-8 border-black border-dotted p-8 bg-white">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {}
+                        { }
                         {galleryCollections.map((collection, index) => (
                             <div
                                 key={collection.id}
@@ -47,9 +57,9 @@ const Gallery = () => {
                     </div>
                 </div>
 
-                {}
+                { }
                 <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                    {}
+                    { }
                     <div>
                         <h3 className="font-pixel text-sm text-gray-300 mb-2">COORDINATORS</h3>
                         <p className="font-terminal text-xs text-gray-400">Pranav garg</p>
@@ -60,7 +70,7 @@ const Gallery = () => {
                         <p className="font-terminal text-xs text-gray-400">XXXXXXXXXX</p>
                     </div>
 
-                    {}
+                    { }
                     <div className="flex flex-col items-center justify-center">
                         <p className="font-terminal text-xs text-gray-300 mb-2">Indian Institute Of</p>
                         <p className="font-terminal text-xs text-gray-300 mb-2">Information Technology Una</p>
@@ -68,7 +78,7 @@ const Gallery = () => {
                         <h2 className="font-minecraft text-3xl text-white">MERAKI</h2>
                     </div>
 
-                    {}
+                    { }
                     <div className="space-y-4">
                         <div>
                             <h3 className="font-pixel text-sm text-gray-300 mb-2">OTHER POSTS</h3>
@@ -83,7 +93,7 @@ const Gallery = () => {
                     </div>
                 </div>
 
-                {}
+                { }
                 <div className="mt-8 text-center border-t border-gray-600 pt-4">
                     <p className="font-terminal text-xs text-gray-400">
                         ©2025 MERAKI - TechFest IIIT Una | Developed by GDSC@IIITU
@@ -91,7 +101,7 @@ const Gallery = () => {
                 </div>
             </div>
 
-            {}
+            { }
             <AnimatePresence>
                 {selectedCollection && (
                     <motion.div
@@ -108,7 +118,7 @@ const Gallery = () => {
                             className="bg-white border-8 border-black p-8 max-w-6xl w-full max-h-[90vh] overflow-y-auto"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            {}
+                            { }
                             <div className="flex justify-between items-center mb-6 border-b-4 border-black pb-4">
                                 <div>
                                     <h2 className="font-minecraft text-3xl text-black">{selectedCollection.title}</h2>
@@ -124,7 +134,7 @@ const Gallery = () => {
                                 </button>
                             </div>
 
-                            {}
+                            { }
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {selectedCollection.images.map((image, index) => (
                                     <motion.div

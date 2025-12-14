@@ -30,45 +30,55 @@ const EventDetails = () => {
                 backgroundAttachment: 'fixed'
             }}
         >
-            {}
+            { }
             <div className="absolute inset-0 bg-black/70"></div>
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
-                {}
-                <div className="text-center mb-8">
-                    <h1 className="font-minecraft text-2xl md:text-3xl text-white tracking-wider">
-                        navbar
+                <div className="text-center mb-16">
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                        <div className="w-0 h-0 border-t-[10px] border-b-[10px] border-l-[14px] border-t-transparent border-b-transparent border-l-cyan-400"></div>
+                        <h2 className="font-terminal text-cyan-400 text-sm md:text-base tracking-[0.3em] uppercase">
+                            EVENT INFORMATION
+                        </h2>
+                        <div className="w-0 h-0 border-t-[10px] border-b-[10px] border-r-[14px] border-t-transparent border-b-transparent border-r-cyan-400"></div>
+                    </div>
+                    <h1 className="font-minecraft text-4xl md:text-6xl text-white mb-4 tracking-wider"
+                        style={{
+                            textShadow: '4px 4px 0px #000, 2px 2px 0px rgba(6, 182, 212, 0.5)'
+                        }}>
+                        {eventData.title}
                     </h1>
+                    <div className="w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mx-auto"></div>
                 </div>
 
-                {}
+                { }
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                    {}
+                    { }
                     <div className="border-4 border-white bg-gray-800">
                         <div className="aspect-video bg-gradient-to-br from-amber-900 via-orange-800 to-yellow-900 flex items-center justify-center">
                             <span className="text-8xl">🤖</span>
                         </div>
                     </div>
 
-                    {}
+                    { }
                     <div className="space-y-6">
-                        {}
+                        { }
                         <div className="inline-block bg-cyan-400 text-black font-pixel text-xs px-4 py-2">
                             {eventData.badge}
                         </div>
 
-                        {}
+                        { }
                         <h1 className="font-minecraft text-5xl md:text-6xl text-white">
                             {eventData.title}
                         </h1>
 
-                        {}
+                        { }
                         <div className="flex items-center gap-3">
                             <span className="text-4xl">💰</span>
                             <span className="font-pixel text-3xl text-yellow-400">{eventData.price}</span>
                         </div>
 
-                        {}
+                        { }
                         <div className="flex flex-wrap gap-3">
                             {eventData.tags.map((tag, index) => (
                                 <span
@@ -80,14 +90,14 @@ const EventDetails = () => {
                             ))}
                         </div>
 
-                        {}
+                        { }
                         <button className="bg-gradient-to-r from-orange-600 to-orange-500 text-white font-pixel text-lg px-8 py-4 border-2 border-orange-800 hover:from-orange-500 hover:to-orange-400 transition-all">
                             REGISTER NOW!
                         </button>
                     </div>
                 </div>
 
-                {}
+                { }
                 <div className="bg-gray-800/80 border-2 border-gray-600 p-8">
                     <h2 className="font-pixel text-2xl text-white mb-6">DETAILS</h2>
 
@@ -104,7 +114,7 @@ const EventDetails = () => {
                         </button>
                     </div>
 
-                    {}
+                    { }
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                         <div className="border-l-4 border-cyan-400 pl-4">
                             <h4 className="font-pixel text-white mb-2">EVENT DATE</h4>
@@ -125,7 +135,7 @@ const EventDetails = () => {
                     </div>
                 </div>
 
-                {}
+                { }
                 <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center border-t border-gray-600 pt-8">
                     <div>
                         <h3 className="font-pixel text-sm text-gray-300 mb-2">COORDINATORS</h3>

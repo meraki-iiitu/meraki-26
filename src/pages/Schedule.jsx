@@ -16,21 +16,29 @@ const Schedule = () => {
                 backgroundAttachment: 'fixed'
             }}
         >
-            {}
+            { }
             <div className="absolute inset-0 bg-black/70"></div>
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
-                {}
-                <div className="text-center mb-12">
-                    <div className="bg-white/90 backdrop-blur-sm py-3 px-6 inline-block border-4 border-black mb-8">
-                        <h1 className="font-minecraft text-2xl md:text-3xl text-black tracking-wider">
-                            Schedule
-                        </h1>
+                <div className="text-center mb-16">
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                        <div className="w-0 h-0 border-t-[10px] border-b-[10px] border-l-[14px] border-t-transparent border-b-transparent border-l-cyan-400"></div>
+                        <h2 className="font-terminal text-cyan-400 text-sm md:text-base tracking-[0.3em] uppercase">
+                            EVENT TIMELINE
+                        </h2>
+                        <div className="w-0 h-0 border-t-[10px] border-b-[10px] border-r-[14px] border-t-transparent border-b-transparent border-r-cyan-400"></div>
                     </div>
+                    <h1 className="font-minecraft text-5xl md:text-7xl text-white mb-4 tracking-wider"
+                        style={{
+                            textShadow: '4px 4px 0px #000, 2px 2px 0px rgba(6, 182, 212, 0.5)'
+                        }}>
+                        SCHEDULE
+                    </h1>
+                    <div className="w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mx-auto"></div>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                    {}
+                    { }
                     <div className="lg:col-span-1">
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
@@ -38,7 +46,7 @@ const Schedule = () => {
                             transition={{ duration: 0.6 }}
                             className="bg-gray-800/90 backdrop-blur-sm border-4 border-gray-700 p-6"
                         >
-                            {}
+                            { }
                             <div className="aspect-square bg-gradient-to-br from-blue-400 to-cyan-500 mb-4 flex items-center justify-center overflow-hidden border-4 border-gray-700">
                                 <img src={avatarImg} alt="GameTag" className="w-full h-full object-cover" />
                             </div>
@@ -52,9 +60,9 @@ const Schedule = () => {
                         </motion.div>
                     </div>
 
-                    {}
+                    { }
                     <div className="lg:col-span-3">
-                        {}
+                        { }
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -78,7 +86,7 @@ const Schedule = () => {
                             ))}
                         </motion.div>
 
-                        {}
+                        { }
                         <motion.div
                             key={activeDay}
                             initial={{ opacity: 0, x: 20 }}
@@ -91,7 +99,7 @@ const Schedule = () => {
                             </div>
                         </motion.div>
 
-                        {}
+                        { }
                         <motion.div
                             key={`schedule-${activeDay}`}
                             initial={{ opacity: 0 }}
@@ -107,18 +115,18 @@ const Schedule = () => {
                                     transition={{ delay: index * 0.1 }}
                                     className="bg-gray-800/90 backdrop-blur-sm border-2 border-gray-700 hover:border-cyan-400 transition-all p-4 flex items-center gap-4 group cursor-pointer"
                                 >
-                                    {}
+                                    { }
                                     <div className="w-14 h-14 bg-cyan-400 flex items-center justify-center text-2xl border-2 border-cyan-600 flex-shrink-0 group-hover:scale-110 transition-transform">
                                         {item.icon}
                                     </div>
 
-                                    {}
+                                    { }
                                     <div className="flex-1">
                                         <p className="font-pixel text-base text-white mb-1">{item.event}</p>
                                         <p className="font-terminal text-xs text-gray-400">Event ID: EVT-{activeDay}{index + 1}</p>
                                     </div>
 
-                                    {}
+                                    { }
                                     <div className="font-terminal text-sm text-cyan-400 bg-gray-900 px-4 py-2 border border-gray-700">
                                         {item.time}
                                     </div>
@@ -128,7 +136,7 @@ const Schedule = () => {
                     </div>
                 </div>
 
-                {}
+                { }
                 <div className="mt-16 border-t-2 border-gray-700 pt-8">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mb-8">
                         <div>
@@ -155,7 +163,7 @@ const Schedule = () => {
                         </div>
                     </div>
 
-                    {}
+                    { }
                     <div className="text-center border-t border-gray-800 pt-4">
                         <p className="font-terminal text-xs text-gray-500">
                             ©2025 MERAKI - TechFest IIIT Una | Developed by GDSC@IIITU

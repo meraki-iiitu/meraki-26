@@ -15,23 +15,28 @@ const Team = () => {
                 backgroundAttachment: 'fixed'
             }}
         >
-            {}
+            { }
             <div className="absolute inset-0 bg-black/70"></div>
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
-                {}
-
-                {}
-                <div className="text-center mb-8">
-                    <p className="font-terminal text-cyan-400 text-sm mb-2 tracking-widest">
-                        LEADERSHIP & GUIDANCE
-                    </p>
-                    <h1 className="font-minecraft text-5xl md:text-6xl text-white mb-16">
+                <div className="text-center mb-16">
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                        <div className="w-0 h-0 border-t-[10px] border-b-[10px] border-l-[14px] border-t-transparent border-b-transparent border-l-cyan-400"></div>
+                        <h2 className="font-terminal text-cyan-400 text-sm md:text-base tracking-[0.3em] uppercase">
+                            LEADERSHIP & GUIDANCE
+                        </h2>
+                        <div className="w-0 h-0 border-t-[10px] border-b-[10px] border-r-[14px] border-t-transparent border-b-transparent border-r-cyan-400"></div>
+                    </div>
+                    <h1 className="font-minecraft text-5xl md:text-7xl text-white mb-4 tracking-wider"
+                        style={{
+                            textShadow: '4px 4px 0px #000, 2px 2px 0px rgba(6, 182, 212, 0.5)'
+                        }}>
                         COORDINATORS
                     </h1>
+                    <div className="w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mx-auto"></div>
                 </div>
 
-                {}
+                { }
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
                     {coordinators.map((coord, index) => (
                         <motion.div
@@ -41,7 +46,7 @@ const Team = () => {
                             transition={{ delay: index * 0.1 }}
                             className="text-center"
                         >
-                            {}
+                            { }
                             <div className={`w-48 h-48 rounded-full mx-auto mb-4 border-4 flex items-center justify-center overflow-hidden relative ${coord.isHOD
                                 ? 'border-amber-300'
                                 : 'border-gray-300'
@@ -62,17 +67,25 @@ const Team = () => {
                     ))}
                 </div>
 
-                {}
-                <div className="text-center mb-8">
-                    <p className="font-terminal text-cyan-400 text-sm mb-2 tracking-widest">
-                        THE EXECUTING TEAM
-                    </p>
-                    <h2 className="font-minecraft text-4xl md:text-5xl text-white mb-16">
+                { }
+                <div className="text-center mb-16">
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                        <div className="w-0 h-0 border-t-[10px] border-b-[10px] border-l-[14px] border-t-transparent border-b-transparent border-l-cyan-400"></div>
+                        <h2 className="font-terminal text-cyan-400 text-sm md:text-base tracking-[0.3em] uppercase">
+                            THE EXECUTING TEAM
+                        </h2>
+                        <div className="w-0 h-0 border-t-[10px] border-b-[10px] border-r-[14px] border-t-transparent border-b-transparent border-r-cyan-400"></div>
+                    </div>
+                    <h1 className="font-minecraft text-5xl md:text-7xl text-white mb-4 tracking-wider"
+                        style={{
+                            textShadow: '4px 4px 0px #000, 2px 2px 0px rgba(6, 182, 212, 0.5)'
+                        }}>
                         CONVENORS
-                    </h2>
+                    </h1>
+                    <div className="w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mx-auto"></div>
                 </div>
 
-                {}
+                { }
                 <div className="mb-16">
                     <h3 className="font-pixel text-2xl text-white text-center mb-8">
                         CORE COORDINATORS
@@ -92,7 +105,7 @@ const Team = () => {
                     </div>
                 </div>
 
-                {}
+                { }
                 <div className="mb-16">
                     <h3 className="font-pixel text-2xl text-white text-center mb-8">
                         DEPARTMENT HEADS
@@ -112,7 +125,7 @@ const Team = () => {
                     </div>
                 </div>
 
-                {}
+                { }
                 <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center border-t border-gray-600 pt-8">
                     <div>
                         <h3 className="font-pixel text-sm text-gray-300 mb-2">COORDINATORS</h3>
