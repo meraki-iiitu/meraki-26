@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
-import faq from "../assets/faq.png";
+import { motion } from "framer-motion";
+import faq from "../assets/faq.webp";
 import Box from "./Box";
 
 const questions = Array.from({ length: 12 }).map((_, i) => ({
@@ -41,18 +42,46 @@ export default function Faq() {
 
     return (
         <div
-            className="min-h-screen w-full "
-            style={{ backgroundImage: `url(${faq})` }}>
+            id="faq"
+            className="w-full min-h-fit pb-12"
+            style={{
+                backgroundImage: `url(${faq})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+            }}>
 
-            <div className="flex items-center gap-3 ml-10">
-               
-                <div className="w-0 h-0 border-t-[10px] border-b-[10px] border-l-[14px] border-t-transparent border-b-transparent border-l-[#1ec0d0]"></div>
-
-               
-                <h2 className="font-minecraft text-white text-3xl tracking-[2px]">
-                    FAQs
-                </h2>
-            </div>
+            <motion.div
+                className="flex items-center gap-4 ml-10 pt-20"
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+            >
+                {}
+                <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 blur-md opacity-50"></div>
+                    <div className="relative bg-black/80 border-4 border-cyan-400 px-6 py-3"
+                        style={{
+                            boxShadow: '0 0 20px rgba(6,182,212,0.5), inset 0 0 10px rgba(6,182,212,0.2)',
+                            borderImage: 'linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6) 1'
+                        }}
+                    >
+                        <h2
+                            className="font-minecraft text-4xl tracking-[3px] relative"
+                            style={{
+                                background: 'linear-gradient(180deg, #ffffff 0%, #06b6d4 50%, #0891b2 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                backgroundClip: 'text',
+                                filter: 'drop-shadow(0 0 15px rgba(6,182,212,0.8)) drop-shadow(2px 2px 0px rgba(0,0,0,0.8))',
+                            }}
+                        >
+                            FAQs
+                        </h2>
+                    </div>
+                </div>
+            </motion.div>
 
             <div
                 className=" flex items-start justify-center py-12"
