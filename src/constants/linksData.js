@@ -76,11 +76,16 @@ export const footerCoordinators = [
     {
         name: "Pranav Garg",
         email: "23346@iiitu.ac.in",
-        phone: "+91XXXXXXXXX",
+        phone: "+91 7696897912",
     },
     {
-        name: "Pranav Garg",
-        email: "23346@iiitu.ac.in",
-        phone: "+91XXXXXXXXX",
+        name: "Rishav Raj",
+        email: "23241@iiitu.ac.in",
+        phone: "+91 8595055375",
+    },
+    {
+        name: "Tanishq Singh",
+        email: "23364@iiitu.ac.in",
+        phone: "+91 7017488532",
     },
 ];
