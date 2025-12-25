@@ -97,52 +97,176 @@ const Team = () => {
         </motion.div>
 
         {/* Faculty Coordinators Grid */}
+        {/* Responsive Coordinators Grid */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12 mb-12 sm:mb-16 md:mb-20"
+          className="mb-12 sm:mb-16 md:mb-20"
           variants={containerVariants}
           initial="hidden"
           animate="show"
         >
-          {coordinators.map((coord, index) => (
+          {/* Mobile View: Director first, then others */}
+          <div className="md:hidden">
             <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ scale: 1.03, y: -4 }}
-              whileTap={{ scale: 0.98 }}
-              className="text-center cursor-pointer"
+              className="flex flex-col items-center gap-6 sm:gap-8"
+              variants={containerVariants}
             >
-              {/* 
-               * Coordinator Avatar
-               * 
-               * @badge Director gets gold border and "DIRECTOR" badge
-               * @hover Border color changes to cyan
-               */}
-              <div
-                className={`w-28 h-28 sm:w-36 sm:h-36 md:w-48 md:h-48 rounded-full mx-auto mb-3 sm:mb-4 border-3 sm:border-4 flex items-center justify-center overflow-hidden relative transition-all duration-300 hover:border-cyan-400 ${coord.isDirector ? "border-amber-300" : "border-gray-300"
-                  }`}
-              >
-                <img
-                  src={coord.image || avatarImg}
-                  alt={coord.name}
-                  className="w-full h-full object-cover"
-                />
-                {coord.isDirector && (
-                  <span className="absolute bottom-1 sm:bottom-2 bg-amber-500 text-white font-pixel text-[8px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 z-10">
-                    DIRECTOR
-                  </span>
-                )}
-              </div>
-              <h3 className="font-pixel text-sm sm:text-base md:text-lg text-white">{coord.name}</h3>
-              <p className="font-terminal text-xs sm:text-sm text-gray-300">
-                {coord.role}
-              </p>
-              {coord.subtitle && (
-                <p className="font-terminal text-[10px] sm:text-xs text-gray-400">
-                  {coord.subtitle}
-                </p>
-              )}
+              {coordinators.map((coord, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.03, y: -4 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="text-center cursor-pointer w-full"
+                >
+                  {/* 
+                   * Coordinator Avatar
+                   * 
+                   * @badge Director gets gold border and "DIRECTOR" badge
+                   * @hover Border color changes to cyan
+                   */}
+                  <div
+                    className={`w-28 h-28 sm:w-36 sm:h-36 rounded-full mx-auto mb-3 sm:mb-4 border-3 sm:border-4 flex items-center justify-center overflow-hidden relative transition-all duration-300 hover:border-cyan-400 ${coord.isDirector ? "border-amber-300" : "border-gray-300"
+                      }`}
+                  >
+                    <img
+                      src={coord.image || avatarImg}
+                      alt={coord.name}
+                      className="w-full h-full object-cover"
+                    />
+                    {coord.isDirector && (
+                      <span className="absolute bottom-1 sm:bottom-2 bg-amber-500 text-white font-pixel text-[8px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 z-10">
+                        DIRECTOR
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="font-pixel text-sm sm:text-base text-white">{coord.name}</h3>
+                  <p className="font-terminal text-xs sm:text-sm text-gray-300">
+                    {coord.role}
+                  </p>
+                  {coord.subtitle && (
+                    <p className="font-terminal text-[10px] sm:text-xs text-gray-400">
+                      {coord.subtitle}
+                    </p>
+                  )}
+                </motion.div>
+              ))}
             </motion.div>
-          ))}
+          </div>
+
+          {/* Desktop View: Director in center (3 cols with center positioning) */}
+          <div className="hidden md:block">
+            <motion.div
+              className="grid grid-cols-3 gap-8 md:gap-12 items-start"
+              variants={containerVariants}
+            >
+              {/* Left: Non-director coordinators (excluding director) */}
+              <div className="col-span-1">
+                {coordinators
+                  .filter(coord => !coord.isDirector)
+                  .slice(0, 1)
+                  .map((coord, index) => (
+                    <motion.div
+                      key={index}
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.03, y: -4 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="text-center cursor-pointer"
+                    >
+                      <div
+                        className="w-48 h-48 rounded-full mx-auto mb-4 border-4 flex items-center justify-center overflow-hidden relative transition-all duration-300 hover:border-cyan-400 border-gray-300"
+                      >
+                        <img
+                          src={coord.image || avatarImg}
+                          alt={coord.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <h3 className="font-pixel text-lg text-white">{coord.name}</h3>
+                      <p className="font-terminal text-sm text-gray-300">
+                        {coord.role}
+                      </p>
+                      {coord.subtitle && (
+                        <p className="font-terminal text-xs text-gray-400">
+                          {coord.subtitle}
+                        </p>
+                      )}
+                    </motion.div>
+                  ))}
+              </div>
+
+              {/* Center: Director */}
+              <div className="col-span-1">
+                {coordinators
+                  .filter(coord => coord.isDirector)
+                  .map((coord, index) => (
+                    <motion.div
+                      key={index}
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.03, y: -4 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="text-center cursor-pointer"
+                    >
+                      <div
+                        className="w-48 h-48 rounded-full mx-auto mb-4 border-4 border-amber-300 flex items-center justify-center overflow-hidden relative transition-all duration-300 hover:border-cyan-400"
+                      >
+                        <img
+                          src={coord.image || avatarImg}
+                          alt={coord.name}
+                          className="w-full h-full object-cover"
+                        />
+                        <span className="absolute bottom-2 bg-amber-500 text-white font-pixel text-xs px-3 py-1 z-10">
+                          DIRECTOR
+                        </span>
+                      </div>
+                      <h3 className="font-pixel text-lg text-white">{coord.name}</h3>
+                      <p className="font-terminal text-sm text-gray-300">
+                        {coord.role}
+                      </p>
+                      {coord.subtitle && (
+                        <p className="font-terminal text-xs text-gray-400">
+                          {coord.subtitle}
+                        </p>
+                      )}
+                    </motion.div>
+                  ))}
+              </div>
+
+              {/* Right: Remaining non-director coordinators */}
+              <div className="col-span-1">
+                {coordinators
+                  .filter(coord => !coord.isDirector)
+                  .slice(1)
+                  .map((coord, index) => (
+                    <motion.div
+                      key={index}
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.03, y: -4 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="text-center cursor-pointer"
+                    >
+                      <div
+                        className="w-48 h-48 rounded-full mx-auto mb-4 border-4 flex items-center justify-center overflow-hidden relative transition-all duration-300 hover:border-cyan-400 border-gray-300"
+                      >
+                        <img
+                          src={coord.image || avatarImg}
+                          alt={coord.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <h3 className="font-pixel text-lg text-white">{coord.name}</h3>
+                      <p className="font-terminal text-sm text-gray-300">
+                        {coord.role}
+                      </p>
+                      {coord.subtitle && (
+                        <p className="font-terminal text-xs text-gray-400">
+                          {coord.subtitle}
+                        </p>
+                      )}
+                    </motion.div>
+                  ))}
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
 
         {/* 
