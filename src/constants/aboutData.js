@@ -14,7 +14,18 @@
  * @constant
  * @type {string}
  */
-export const ABOUT_IIIT_UNA = `Indian Institute of Information Technology, Una (IIIT Una) is a public-private partnership (PPP) engineering institute established by the Government of India along with the Government of Himachal Pradesh and industry partners like HP Power Corporation & HP Transmission Corporation. It is part of the group of 20 IIITs created to boost IT & tech education in India.`;
+export const ABOUT_IIIT_UNA = `Indian Institute of Information Technology Una (IIIT Una), established in 2014, is an
+Institute of National Importance located in Saloh, Himachal Pradesh. It operates under
+a Public-Private Partnership (PPP) model, with joint funding from the Ministry of Human
+Resource Development (Government of India), the Government of Himachal Pradesh,
+and industry partners such as H.P. Power Corporation and H.P. Power Transmission
+Corporation.
+IIIT Una is dedicated to nurturing bright minds by providing quality education and
+advanced technical skills. The institute plays a crucial role in preparing students for
+real-world challenges, ensuring they are well-equipped to address technical and
+societal issues at both national and global levels. With a focus on innovation, research,
+and holistic development, IIIT Una aims to empower future leaders who can contribute
+to the growth and progress of the country and beyond.`;
 
 /**
  * About Meraki description text.
