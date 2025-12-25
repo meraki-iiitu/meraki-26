@@ -7,8 +7,22 @@
  * @module constants/teamData
  */
 
+// Import coordinator photos
+import pranavImg from '../assets/coordinators/pranav.webp';
+import rishavImg from '../assets/coordinators/Rishav.webp';
+import tanishqImg from '../assets/coordinators/Tanishq.webp';
+import awadhImg from '../assets/coordinators/Avadh.webp';
+import sheenaImg from '../assets/coordinators/sheena.webp';
+import adityaImg from '../assets/coordinators/AdityaPandey.webp';
+import aryanImg from '../assets/coordinators/Aryan.webp';
+import jayaniImg from '../assets/coordinators/Jayni.webp';
+import ridhamImg from '../assets/coordinators/Ridham.webp';
+import purusharthImg from '../assets/coordinators/Purusharth Rana.webp';
+import vinitImg from '../assets/coordinators/Vinit.webp';
+import sreekarImg from '../assets/coordinators/sreekar.webp';
+
 /**
- * Faculty and lead coordinators.
+ * Faculty coordinators (COORDINATORS section)
  * Displayed prominently at the top of the Team page.
  * 
  * @constant
@@ -17,49 +31,66 @@
  * @property {string} name - Full name
  * @property {string} role - Position/title
  * @property {string} [subtitle] - Additional descriptor
- * @property {boolean} [isHOD] - If true, styled as HOD card
+ * @property {boolean} [isDirector] - If true, styled as Director card
+ * @property {string} [image] - Path to coordinator photo
  */
 export const coordinators = [
     {
-        name: 'Dr. Madan Verma',
-        role: 'Faculty Coordinator',
-        subtitle: 'DR. MADAN - IIIT UNA'
-    },
-    {
         name: 'Prof. Manish Gaur',
-        role: 'HOD CSE',
-        isHOD: true
+        role: 'Director',
+        subtitle: 'IIIT UNA',
+        isDirector: true
+    },
+    {
+        name: 'Dr. Tanu Wadhera',
+        role: 'Technical Coordinator',
+        subtitle: 'IIIT UNA'
     },
     {
         name: 'Dr. Madan Verma',
-        role: 'Faculty Coordinator'
+        role: 'Technical Coordinator',
+        subtitle: 'IIIT UNA'
     }
 ];
 
 /**
- * Core student coordinators.
- * Secondary section on Team page.
+ * Overall Core Coordinators (CONVENORS section)
+ * Top-level student coordinators with contact information.
  * 
  * @constant
- * @type {Array<{name: string, role: string}>}
+ * @type {Array<{name: string, role: string, phone?: string, image?: string}>}
  */
 export const coreCoordinators = [
-    { name: 'Core Member 1', role: 'Coordinator' },
-    { name: 'Core Member 2', role: 'Coordinator' },
-    { name: 'Core Member 3', role: 'Coordinator' },
-    { name: 'Core Member 4', role: 'Coordinator' },
-    { name: 'Core Member 5', role: 'Coordinator' },
+    { name: 'Pranav Garg', role: 'Overall Coordinator', phone: '+91 76968 97912', image: pranavImg },
+    { name: 'Rishav Raj', role: 'Overall Coordinator', phone: '+91 85950 55375', image: rishavImg },
+    { name: 'Tanishq Singh', role: 'Overall Coordinator', phone: '+91 70174 88532', image: tanishqImg },
+];
+
+/**
+ * Day-wise coordinators.
+ * Coordinators assigned to each day of the fest.
+ * 
+ * @constant
+ * @type {Array<{name: string, role: string, image?: string}>}
+ */
+export const dayCoordinators = [
+    { name: 'Awadh', role: 'Day 1 Coordinator', image: awadhImg },
+    { name: 'Sheena', role: 'Day 1 Coordinator', image: sheenaImg },
+    { name: 'Aditya Pandey', role: 'Day 1 Coordinator', image: adityaImg },
+    { name: 'Aryan Raj', role: 'Day 2 Coordinator', image: aryanImg },
+    { name: 'Jayani Srivastava', role: 'Day 2 Coordinator', image: jayaniImg },
+    { name: 'Ridham', role: 'Day 3 Coordinator', image: ridhamImg },
+    { name: 'Purusharth Rana', role: 'Day 3 Coordinator', image: purusharthImg },
 ];
 
 /**
  * Department/team leads.
- * Tertiary section on Team page.
+ * Heads of various departments for the fest.
  * 
  * @constant
- * @type {Array<{name: string, role: string}>}
+ * @type {Array<{name: string, role: string, image?: string}>}
  */
 export const departmentHeads = [
-    { name: 'Department Head 1', role: 'Lead' },
-    { name: 'Department Head 2', role: 'Lead' },
-    { name: 'Department Head 3', role: 'Lead' },
+    { name: 'Deepu', role: 'Decorations Head', image: sreekarImg },
+    { name: 'Vinit', role: 'Design Head', image: vinitImg },
 ];

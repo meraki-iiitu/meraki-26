@@ -12,7 +12,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import coordinatorsBg from "../assets/coordinators.webp";
 import avatarImg from "../assets/avatar_pixel.webp";
-import { coordinators, coreCoordinators, departmentHeads } from "../constants";
+import { coordinators, coreCoordinators, dayCoordinators, departmentHeads } from "../constants";
 
 /**
  * Animation variants for staggered grid entrance.
@@ -114,21 +114,21 @@ const Team = () => {
               {/* 
                * Coordinator Avatar
                * 
-               * @badge HOD coordinators get gold border and "HOD CSE" badge
+               * @badge Director gets gold border and "DIRECTOR" badge
                * @hover Border color changes to cyan
                */}
               <div
-                className={`w-28 h-28 sm:w-36 sm:h-36 md:w-48 md:h-48 rounded-full mx-auto mb-3 sm:mb-4 border-3 sm:border-4 flex items-center justify-center overflow-hidden relative transition-all duration-300 hover:border-cyan-400 ${coord.isHOD ? "border-amber-300" : "border-gray-300"
+                className={`w-28 h-28 sm:w-36 sm:h-36 md:w-48 md:h-48 rounded-full mx-auto mb-3 sm:mb-4 border-3 sm:border-4 flex items-center justify-center overflow-hidden relative transition-all duration-300 hover:border-cyan-400 ${coord.isDirector ? "border-amber-300" : "border-gray-300"
                   }`}
               >
                 <img
-                  src={avatarImg}
+                  src={coord.image || avatarImg}
                   alt={coord.name}
                   className="w-full h-full object-cover"
                 />
-                {coord.isHOD && (
-                  <span className="absolute bottom-1 sm:bottom-2 bg-red-600 text-white font-pixel text-[8px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 z-10">
-                    HOD CSE
+                {coord.isDirector && (
+                  <span className="absolute bottom-1 sm:bottom-2 bg-amber-500 text-white font-pixel text-[8px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 z-10">
+                    DIRECTOR
                   </span>
                 )}
               </div>
@@ -188,31 +188,38 @@ const Team = () => {
             CORE COORDINATORS
           </h3>
           <motion.div
-            className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8"
+            className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10"
             variants={containerVariants}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
           >
-            {coreCoordinators.map((_, index) => (
+            {coreCoordinators.map((coord, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{ scale: 1.08, y: -4 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full border-3 sm:border-4 border-gray-300 hover:border-cyan-400 transition-all cursor-pointer overflow-hidden"
+                whileHover={{ scale: 1.05, y: -4 }}
+                whileTap={{ scale: 0.98 }}
+                className="text-center cursor-pointer"
               >
-                <img
-                  src={avatarImg}
-                  alt="Core Coordinator"
-                  className="w-full h-full object-cover"
-                />
+                <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full border-3 sm:border-4 border-gray-300 hover:border-cyan-400 transition-all overflow-hidden mx-auto mb-2 sm:mb-3">
+                  <img
+                    src={coord.image || avatarImg}
+                    alt={coord.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h4 className="font-pixel text-xs sm:text-sm md:text-base text-white">{coord.name}</h4>
+                <p className="font-terminal text-[10px] sm:text-xs text-gray-300">{coord.role}</p>
+                {coord.phone && (
+                  <p className="font-terminal text-[9px] sm:text-[10px] text-cyan-400 mt-1">{coord.phone}</p>
+                )}
               </motion.div>
             ))}
           </motion.div>
         </motion.div>
 
-        {/* Department Heads Avatar Row */}
+        {/* Day Coordinators Section */}
         <motion.div
           className="mb-10 sm:mb-12 md:mb-16"
           initial={{ opacity: 0 }}
@@ -221,28 +228,72 @@ const Team = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           <h3 className="font-pixel text-lg sm:text-xl md:text-2xl text-white text-center mb-6 sm:mb-8">
-            DEPARTMENT HEADS
+            DAY COORDINATORS
           </h3>
           <motion.div
-            className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8"
+            className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10"
             variants={containerVariants}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
           >
-            {departmentHeads.map((_, index) => (
+            {dayCoordinators.map((coord, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{ scale: 1.08, y: -4 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full border-3 sm:border-4 border-gray-300 hover:border-cyan-400 transition-all cursor-pointer overflow-hidden"
+                whileHover={{ scale: 1.05, y: -4 }}
+                whileTap={{ scale: 0.98 }}
+                className="text-center cursor-pointer"
               >
-                <img
-                  src={avatarImg}
-                  alt="Department Head"
-                  className="w-full h-full object-cover"
-                />
+                <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full border-3 sm:border-4 border-gray-300 hover:border-cyan-400 transition-all overflow-hidden mx-auto mb-2 sm:mb-3">
+                  <img
+                    src={coord.image || avatarImg}
+                    alt={coord.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h4 className="font-pixel text-xs sm:text-sm text-white">{coord.name}</h4>
+                <p className="font-terminal text-[10px] sm:text-xs text-gray-300">{coord.role}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        {/* Department Heads Section */}
+        <motion.div
+          className="mb-10 sm:mb-12 md:mb-16"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <h3 className="font-pixel text-lg sm:text-xl md:text-2xl text-white text-center mb-6 sm:mb-8">
+            DEPARTMENT HEADS
+          </h3>
+          <motion.div
+            className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            {departmentHeads.map((head, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05, y: -4 }}
+                whileTap={{ scale: 0.98 }}
+                className="text-center cursor-pointer"
+              >
+                <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full border-3 sm:border-4 border-gray-300 hover:border-cyan-400 transition-all overflow-hidden mx-auto mb-2 sm:mb-3">
+                  <img
+                    src={head.image || avatarImg}
+                    alt={head.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h4 className="font-pixel text-xs sm:text-sm text-white">{head.name}</h4>
+                <p className="font-terminal text-[10px] sm:text-xs text-gray-300">{head.role}</p>
               </motion.div>
             ))}
           </motion.div>

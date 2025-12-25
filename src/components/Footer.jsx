@@ -40,7 +40,14 @@ const Footer = () => {
    * Base block size for decorative squares.
    * @constant {number}
    */
-  const blockSize = 25;
+  const blockSize = 17;
+  
+  /**
+   * Size for the custom decorative triangular squares.
+   * Responsive: 35px on mobile, 40px on tablet, 50px on desktop
+   * @constant {number}
+   */
+  const customSquareSize = 35; // Base size for mobile
 
   /**
    * Decorative colored squares for footer background.
@@ -69,20 +76,113 @@ const Footer = () => {
    *   { x: 20, y: 4, color: "#FF5733" },
    * ];
    */
-  const fixedSquares = [];
+  const fixedSquares = [
+    // Upper section triangles (in #303030 lighter section - negative y values)
+    // Left triangle pattern (50% from left = x: 10)
+    { x: 6, y: -1, color: "#242424" },
+    { x: 7, y: -2, color: "#242424" },
+    { x: 8, y: -1, color: "#242424" },
+    
+    // Right triangle pattern (50% from right = x: 30)
+    { x: 30, y: -1, color: "#242424" },
+    { x: 32, y: -2, color: "#242424" },
+    { x: 33, y: -1, color: "#242424" },
+    
+    // Two #303030 colored squares (responsive size)
+    // Square 1 - Adjust position as needed
+    { x: 11, y: 0, color: "#303030", size: 35 }, // Smaller base size
+    // Square 2 - Adjust position as needed
+    { x: 29, y: 0, color: "#303030", size: 35 }, // Smaller base size
+  ];
+
+  // Top border squares - creating a line of squares with gaps
+  // Small: fewer squares with larger gaps, Medium: 40 squares, Large: 80 squares
+  const topBorderSquaresSmall = [];
+  const topBorderSquaresMedium = [];
+  const topBorderSquaresLarge = [];
+  
+  // For small screens, use larger increment (3) to create bigger gaps
+  for (let i = 0; i <= 30; i += 3) {
+    topBorderSquaresSmall.push({ x: i, max: 30 });
+  }
+  for (let i = 0; i <= 40; i += 2) {
+    topBorderSquaresMedium.push({ x: i, max: 40 });
+  }
+  for (let i = 0; i <= 80; i += 2) {
+    topBorderSquaresLarge.push({ x: i, max: 80 });
+  }
 
   return (
     <footer
-      className="relative w-full overflow-hidden"
+      className="relative w-full overflow-visible"
       style={{ fontFamily: "'Press Start 2P', cursive" }}
     >
+      {/* 
+       * Top Border Squares - Small screens
+       * 
+       * Creates a line of squares at the top with gaps between them
+       * Positioned so half the square is above the footer
+       */}
+      <div className="absolute top-[-12.5px] left-0 right-0 h-[25px] pointer-events-none z-50 overflow-hidden sm:hidden">
+        {topBorderSquaresSmall.map((square, idx) => (
+          <div
+            key={`top-sm-${idx}`}
+            className="absolute"
+            style={{
+              width: `${blockSize}px`,
+              height: `${blockSize}px`,
+              left: `calc(${(square.x / square.max) * 100}%)`,
+              top: 0,
+              backgroundColor: "#808080",
+              boxShadow: "none",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Top Border Squares - Medium screens */}
+      <div className="absolute top-[-12.5px] left-0 right-0 h-[25px] pointer-events-none z-50 overflow-hidden hidden sm:block lg:hidden">
+        {topBorderSquaresMedium.map((square, idx) => (
+          <div
+            key={`top-md-${idx}`}
+            className="absolute"
+            style={{
+              width: `${blockSize}px`,
+              height: `${blockSize}px`,
+              left: `calc(${(square.x / square.max) * 100}%)`,
+              top: 0,
+              backgroundColor: "#808080",
+              boxShadow: "none",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Top Border Squares - Large screens */}
+      <div className="absolute top-[-12.5px] left-0 right-0 h-[25px] pointer-events-none z-50 overflow-hidden hidden lg:block">
+        {topBorderSquaresLarge.map((square, idx) => (
+          <div
+            key={`top-lg-${idx}`}
+            className="absolute"
+            style={{
+              width: `${blockSize}px`,
+              height: `${blockSize}px`,
+              left: `calc(${(square.x / square.max) * 100}%)`,
+              top: 0,
+              backgroundColor: "#808080",
+              boxShadow: "none",
+            }}
+          />
+        ))}
+      </div>
+
       {/* 
        * Background Layers
        * 
        * Two-tone split: lighter gray (38% top), darker gray (62% bottom)
        * Mimics Minecraft block transition effect.
        */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         {/* Top section - lighter gray */}
         <div
           className="absolute top-0 left-0 right-0"
@@ -105,20 +205,52 @@ const Footer = () => {
          * 
          * Positions each square based on x (percentage) and y (pixels).
          * Squares appear in the dark bottom section.
+         * Responsive sizing: 35px (mobile), 40px (tablet), 50px (desktop)
          */}
-        {fixedSquares.map((square, idx) => (
-          <div
-            key={idx}
-            className="absolute"
-            style={{
-              width: `${blockSize}px`,
-              height: `${blockSize}px`,
-              left: `calc(${(square.x / 40) * 100}%)`,
-              top: `calc(38% + ${square.y * blockSize}px)`,
-              backgroundColor: square.color,
-            }}
-          />
-        ))}
+        {fixedSquares.map((square, idx) => {
+          const baseSize = square.size || customSquareSize;
+          // Calculate responsive sizes
+          const smSize = baseSize + 5;  // 40px for tablets
+          const lgSize = baseSize + 15; // 50px for desktop
+          
+          return (
+            <React.Fragment key={idx}>
+              {/* Mobile view - 35px */}
+              <div
+                className="absolute sm:hidden"
+                style={{
+                  width: `${baseSize}px`,
+                  height: `${baseSize}px`,
+                  left: `calc(${(square.x / 40) * 100}%)`,
+                  top: `calc(38% + ${square.y * baseSize}px)`,
+                  backgroundColor: square.color,
+                }}
+              />
+              {/* Tablet view - 40px */}
+              <div
+                className="absolute hidden sm:block lg:hidden"
+                style={{
+                  width: `${smSize}px`,
+                  height: `${smSize}px`,
+                  left: `calc(${(square.x / 40) * 100}%)`,
+                  top: `calc(38% + ${square.y * smSize}px)`,
+                  backgroundColor: square.color,
+                }}
+              />
+              {/* Desktop view - 50px */}
+              <div
+                className="absolute hidden lg:block"
+                style={{
+                  width: `${lgSize}px`,
+                  height: `${lgSize}px`,
+                  left: `calc(${(square.x / 40) * 100}%)`,
+                  top: `calc(38% + ${square.y * lgSize}px)`,
+                  backgroundColor: square.color,
+                }}
+              />
+            </React.Fragment>
+          );
+        })}
       </div>
 
       {/* Content Container with stagger animation */}
@@ -198,19 +330,19 @@ const Footer = () => {
           <div className="flex items-center justify-center gap-3 md:gap-4 w-56 sm:w-64">
             <div className="text-right hidden sm:block">
               <p
-                className="text-[#C4A962] text-[8px] sm:text-[10px] md:text-xs leading-tight"
+                className="text-white text-[8px] sm:text-[10px] md:text-xs leading-tight"
                 style={{ fontFamily: "'VT323', monospace" }}
               >
                 Indian Institute of
               </p>
               <p
-                className="text-[#C4A962] text-[8px] sm:text-[10px] md:text-xs leading-tight"
+                className="text-white text-[8px] sm:text-[10px] md:text-xs leading-tight"
                 style={{ fontFamily: "'VT323', monospace" }}
               >
                 Information
               </p>
               <p
-                className="text-[#C4A962] text-[8px] sm:text-[10px] md:text-xs leading-tight"
+                className="text-white text-[8px] sm:text-[10px] md:text-xs leading-tight"
                 style={{ fontFamily: "'VT323', monospace" }}
               >
                 Technology Una
@@ -272,7 +404,7 @@ const Footer = () => {
                     className="text-gray-400 text-[8px] sm:text-[10px] hover:text-[#C4A962] transition-colors duration-300"
                     style={{
                       fontFamily: "'VT323', monospace",
-                      fontSize: "clamp(11px, 2vw, 14px)",
+                      fontSize: "clamp(14px, 2.5vw, 18px)",
                     }}
                   >
                     {fest.name}
@@ -361,7 +493,7 @@ const Footer = () => {
                       className="text-gray-400 text-[8px] sm:text-[10px] hover:text-[#C4A962] transition-colors duration-300"
                       style={{
                         fontFamily: "'VT323', monospace",
-                        fontSize: "clamp(11px, 2vw, 14px)",
+                        fontSize: "clamp(14px, 2.5vw, 18px)",
                       }}
                     >
                       {link.name}
@@ -372,7 +504,7 @@ const Footer = () => {
                       className="text-gray-400 text-[8px] sm:text-[10px] hover:text-[#C4A962] transition-colors duration-300"
                       style={{
                         fontFamily: "'VT323', monospace",
-                        fontSize: "clamp(11px, 2vw, 14px)",
+                        fontSize: "clamp(14px, 2.5vw, 18px)",
                       }}
                     >
                       {link.name}

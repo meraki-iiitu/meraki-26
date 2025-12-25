@@ -3,7 +3,7 @@
  * 
  * Features a tab-based UI where event titles appear as selectable tabs on the left
  * (desktop) or top (mobile), with event details displayed in a connected panel.
- * Uses Minecraft-style bevel borders and spring animations.
+ * Uses clean Minecraft-inspired pixel borders with instant tab switching.
  * 
  * @see DOCS.md#minecraft-bevel-borders for border styling
  * @see DOCS.md#animation-system for spring physics
@@ -11,11 +11,11 @@
  */
 
 import React, { useState, useRef, useMemo } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import eliteBg from "../assets/elite_minecraft_bg.webp";
 import { events } from "../constants";
-import { appleSlideUp, appleScaleIn, sectionTransition } from "../utils/motion";
+import { appleSlideUp, sectionTransition } from "../utils/motion";
 
 /**
  * Elite Events tabbed section component.
@@ -48,11 +48,9 @@ function Elite() {
   /**
    * Scroll-linked transforms for content animations.
    * 
-   * @contentOpacity Fade in/out curve at section boundaries
    * @contentY Slide up effect on enter
    * @contentScale Subtle scale for depth
    */
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.2], [60, 0]);
   const contentScale = useTransform(scrollYProgress, [0, 0.2], [0.98, 1]);
 
@@ -120,71 +118,79 @@ function Elite() {
         {/* Events UI Container */}
         <div className="flex-1 flex justify-center items-center w-full">
           <motion.div
-            className="flex flex-col md:flex-row w-full max-w-6xl mx-auto gap-0 overflow-visible"
+            className="flex flex-col md:flex-row w-full max-w-6xl mx-auto overflow-visible"
             variants={sectionTransition}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.1 }}
           >
             {/* 
-             * Tab Navigation
+             * Tab Navigation - Clean Minecraft Style
              * 
              * Desktop: Vertical stack on left (w-1/3)
              * Mobile: Horizontal scroll on top
-             * 
-             * @layout
-             * - flex-row on mobile with horizontal overflow
-             * - flex-col on desktop (md:flex-col)
-             * - snap-x for mobile touch scrolling
              */}
             <motion.div
-              className="w-full md:w-1/3 flex flex-row md:flex-col overflow-x-auto md:overflow-visible z-30 gap-2 md:gap-0 pb-2 md:pb-0 scrollbar-hide snap-x snap-mandatory"
+              className="w-full md:w-1/3 flex flex-row md:flex-col overflow-x-auto md:overflow-visible z-30 gap-0 pb-0 scrollbar-hide snap-x snap-mandatory"
               variants={appleSlideUp(0.1)}
             >
               {eliteEvents.map((event, index) => {
                 const isActive = activeTab === event.id;
+                const isFirst = index === 0;
+                const isLast = index === eliteEvents.length - 1;
+                
                 return (
                   <motion.button
                     key={event.id}
                     onClick={() => setActiveTab(event.id)}
-                    whileHover={!isActive ? { scale: 1.02, x: 5 } : {}}
+                    whileHover={!isActive ? { x: 4 } : {}}
                     whileTap={{ scale: 0.98 }}
-                    style={{ zIndex: isActive ? 40 : 10 }}
                     className={`
-                    relative group text-left transition-all duration-300
-                    shrink-0 md:shrink w-[200px] sm:w-[240px] md:w-full snap-start
-                    bg-[#474747] border-[3px] border-solid
-                   ${isActive
-                    ? "border-t-[#888888] border-l-[#666666] border-r-[#888888] md:border-r-0 border-b-0 md:border-b-[#1a1a1a] md:w-[calc(100%+3.1px)] md:-mr-[3px]"
-                     : "border-t-[#888888] border-r-[#1a1a1a] border-b-[#1a1a1a] border-l-[#666666] hover:bg-[#575757]"
-                   }
-                  `}
+                      relative group text-left transition-all duration-200
+                      shrink-0 md:shrink w-[200px] sm:w-[240px] md:w-full snap-start
+                      ${isActive 
+                        ? "bg-[#2a2a2a] z-20" 
+                        : "bg-[#1a1a1a] hover:bg-[#252525] z-10"
+                      }
+                      ${isFirst ? "rounded-t-lg md:rounded-tl-lg md:rounded-tr-none" : ""}
+                      ${isLast && !isActive ? "rounded-b-lg md:rounded-bl-lg md:rounded-br-none" : ""}
+                      border-2 border-[#3a3a3a]
+                      ${isActive 
+                        ? "border-r-[#3a3a3a] md:border-r-[#2a2a2a] border-l-cyan-500/50" 
+                        : "border-l-transparent hover:border-l-cyan-500/30"
+                      }
+                      ${!isFirst ? "-mt-[2px] md:-mt-0" : ""}
+                    `}
                   >
-                    {/* Inner content with inverted bevel */}
-                    <div
-                      className={`
-                    flex items-center gap-3 md:gap-4 p-3 md:p-4
-                    bg-[#3a3a3a] border-[2px] border-solid w-full h-full
-                    ${isActive
-                          ? "border-t-[#2a2a2a] border-l-[#2a2a2a] border-r-[#555555] md:border-r-0 border-b-0 md:border-b-[#555555]"
-                          : "border-t-[#2a2a2a] border-r-[#555555] border-b-[#555555] border-l-[#2a2a2a]"
-                        }
-                  `}
-                    >
+                    {/* Active indicator bar */}
+                    {isActive && (
+                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-400 to-cyan-600 rounded-l" />
+                    )}
+                    
+                    {/* Inner content */}
+                    <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4">
                       {/* Event thumbnail */}
-                      <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded flex items-center justify-center shrink-0 overflow-hidden transition-transform duration-300 group-hover:scale-110">
+                      <div className={`
+                        w-10 h-10 md:w-12 md:h-12 rounded-md flex items-center justify-center shrink-0 overflow-hidden 
+                        transition-all duration-300 group-hover:scale-105
+                        ${isActive 
+                          ? "ring-2 ring-cyan-500/50 shadow-lg shadow-cyan-500/20" 
+                          : "ring-1 ring-white/10"
+                        }
+                      `}>
                         <img
                           src={event.image}
                           alt={event.title}
-                          className="w-full h-full object-cover opacity-80"
+                          className={`w-full h-full object-cover transition-all duration-300 ${isActive ? "opacity-100" : "opacity-60 group-hover:opacity-80"}`}
                         />
                       </div>
                       {/* Event title */}
                       <span
-                        className={`font-minecraft text-xs sm:text-sm md:text-base transition-colors duration-300 whitespace-nowrap overflow-hidden text-ellipsis ${isActive
-                          ? "text-white"
-                          : "text-gray-400 group-hover:text-white"
-                          }`}
+                        className={`font-minecraft text-xs sm:text-sm md:text-base transition-colors duration-200 whitespace-nowrap overflow-hidden text-ellipsis ${
+                          isActive
+                            ? "text-cyan-400"
+                            : "text-gray-400 group-hover:text-gray-200"
+                        }`}
                       >
                         {event.title}
                       </span>
@@ -194,41 +200,54 @@ function Elite() {
               })}
             </motion.div>
 
-           <motion.div
-             className="relative z-20 w-full md:w-2/3 shadow-none
-             bg-[#474747] border-[3px] border-solid border-t-[#888888] border-r-[#1a1a1a] border-b-[#1a1a1a] md:border-l-0"
-           >
-             <div className="bg-[#3a3a3a] border-[2px] border-solid border-t-[#2a2a2a] border-r-[#555555] border-b-[#555555] border-l-[#2a2a2a] p-4 sm:p-6 md:p-8 flex flex-col gap-4 md:gap-6 items-center w-full h-full">
-               <div className="w-full relative group rounded-lg aspect-video overflow-hidden">
-                 <img
-                   src={activeEvent.image}
-                   alt={activeEvent.title}
-                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                 />
-                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-               </div>
-               <div className="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                 <div className="lg:w-2/3">
-                   <p className="font-minecraft text-gray-300 text-xs sm:text-sm leading-relaxed">
-                     {activeEvent.description}
-                   </p>
-                 </div>
-                 <motion.button
-                   whileHover={{ scale: 1.05 }}
-                   whileTap={{ scale: 0.98 }}
-                   onClick={() => navigate(`/event/${activeEvent.slug}`)}
-                   className="self-start lg:self-center px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[#D79928] to-[#C57135] border-2 border-white text-black font-minecraft text-xs sm:text-sm hover:from-[#E5A935] hover:to-[#D17E42] transition-all duration-300 rounded-sm cursor-pointer"
-                 >
-                   VIEW DETAILS →
-                 </motion.button>
-               </div>
-             </div>
-           </motion.div>
-         </motion.div>
-       </div>
-     </motion.div>
-   </section>
- );
+            {/* 
+             * Event Details Panel - Instant Switching
+             * 
+             * No fade animation - content switches immediately for snappy feel
+             */}
+            <div
+              className="relative z-20 w-full md:w-2/3 bg-[#2a2a2a] border-2 border-[#3a3a3a] rounded-lg md:rounded-l-none md:rounded-r-lg md:-ml-[2px]"
+            >
+              <div className="p-4 sm:p-6 md:p-8 flex flex-col gap-4 md:gap-6 items-center w-full h-full">
+                {/* Event Image with hover zoom */}
+                <div className="w-full relative group rounded-lg aspect-video overflow-hidden ring-1 ring-white/10">
+                  <img
+                    src={activeEvent.image}
+                    alt={activeEvent.title}
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {/* Title overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+                    <h3 className="font-minecraft text-white text-lg sm:text-xl md:text-2xl tracking-wide">
+                      {activeEvent.title}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Description and CTA */}
+                <div className="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                  <div className="lg:w-2/3">
+                    <p className="font-minecraft text-gray-300 text-xs sm:text-sm leading-relaxed">
+                      {activeEvent.description}
+                    </p>
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(215, 153, 40, 0.4)" }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => navigate(`/event/${activeEvent.slug}`)}
+                    className="self-start lg:self-center px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[#D79928] to-[#C57135] border-2 border-[#E5A935] text-black font-minecraft text-xs sm:text-sm hover:from-[#E5A935] hover:to-[#D17E42] transition-all duration-300 rounded cursor-pointer shadow-lg shadow-orange-500/20"
+                  >
+                    VIEW DETAILS →
+                  </motion.button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
+    </section>
+  );
 }
 
 export default Elite;
