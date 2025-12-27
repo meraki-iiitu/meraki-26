@@ -25,7 +25,7 @@ import { appleSlideUp, sectionTransition } from "../utils/motion";
  * @state activeTab - Currently selected event ID
  */
 function FlagshipEvent() {
-  // Filter to show only flagship (featured) events
+  // Filter to show only flagship events based on the isElite flag
   const flagshipEvents = useMemo(() => events.filter(event => event.isElite), []);
 
   const [activeTab, setActiveTab] = useState(flagshipEvents[0]?.id || null);
