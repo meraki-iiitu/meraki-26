@@ -362,19 +362,19 @@ New section added between Flagship Event and Sponsors sections.
 **Features:**
 - Responsive grid layout (1 col mobile, 2 cols tablet, 4 cols desktop)
 - Animated workshop cards with:
-  - Category emoji badges and difficulty level indicators
+  - Featured image, title, and short description text
   - Smooth hover lift animations (Y-axis)
-  - Duration badges in hours
   - Cyan gradient CTA buttons
-- Subtle grid pattern background overlay
+- Optional subtle background treatment behind cards (e.g., light grid pattern overlay)
 - Staggered entrance animations for each card
 
 **Card Components:**
-- **Image section**: Featured image with gradient overlay, category/duration badges
-- **Content section**: Title, description, difficulty badge
+- **Image section**: Featured image (can optionally include a gradient overlay)
+- **Content section**: Title and description text
 - **CTA button**: Cyan gradient with glow effect on hover
 
-**Difficulty Levels:**
+**Difficulty Level Color Guidelines (optional extension):**
+If you introduce difficulty tags to workshop cards in the future, use these recommended colors:
 ```javascript
 Beginner → Green (#22c55e)
 Intermediate → Yellow (#eab308)
