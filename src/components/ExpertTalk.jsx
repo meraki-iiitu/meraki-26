@@ -98,9 +98,9 @@ function ExpertTalk() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
                         {/* 
-                     * Default Bottom Bar - Shows name and title
-                     * Fades OUT on hover
-                     */}
+                         * Default Bottom Bar - Shows name and title
+                         * Fades OUT on hover
+                         */}
                         <div
                             className="absolute bottom-0 left-0 right-0 bg-black/85 backdrop-blur-sm p-3 sm:p-4 transition-opacity duration-500 ease-in-out opacity-100 group-hover:opacity-0"
                         >
