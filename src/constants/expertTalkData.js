@@ -8,7 +8,9 @@
  * @module constants/expertTalkData
  */
 
-import speakerPlaceholder from "../assets/minecraft_dungeons_placeholder.webp";
+import colSubhajeetImg from "../assets/experts/ColSubhajeetNahaRetd.jpg";
+import drAmitShuklaImg from "../assets/experts/DrAmitShukla.jpg";
+import skPandeyImg from "../assets/experts/ShShyamKrishnaPandey.jpg";
 
 /**
  * Expert talks array for speaker cards.
@@ -25,54 +27,38 @@ import speakerPlaceholder from "../assets/minecraft_dungeons_placeholder.webp";
 export const expertTalks = [
     {
         id: 1,
-        name: "Col. Subhajeet Naha Retd.",
-        title: "26+ years in army",
-        image: speakerPlaceholder,
+        name: "Col Subhajeet Naha (Retd)",
+        title: "Founder & CTO, Protecte Technologies",
+        image: colSubhajeetImg,
         highlights: [
-            "Founder @Protecte",
-            "Anti-Drone Warfare",
-            "Electronic warfare",
-            "AI/ML expert",
-            "Cybersecurity expert"
+            "Indian Army (26+ years)",
+            "Anti-Drone Warfare Expert",
+            "Electronic Warfare Expert",
+            "Blockchain, AI & Cybersecurity"
         ]
     },
     {
         id: 2,
-        name: "Dr. Ananya Sharma",
-        title: "AI Research Lead",
-        image: speakerPlaceholder,
+        name: "Dr. Amit Shukla",
+        title: "Chairperson, CAIR, IIT Mandi",
+        image: drAmitShuklaImg,
         highlights: [
-            "PhD in Machine Learning",
-            "Google AI Research",
-            "NLP & Vision expert",
-            "50+ publications",
-            "Stanford alumnus"
+            "Roboticist, AI Expert, Entrepreneur",
+            "Robotics & Drone Technology",
+            "AI & ML",
+            "Cyber Security",
+            "Electric Vehicles"
         ]
     },
     {
         id: 3,
-        name: "Vikram Reddy",
-        title: "Blockchain Pioneer",
-        image: speakerPlaceholder,
+        name: "Shri SK Pandey",
+        title: "Scientist/Engineer - SG, ISRO ISTRAC",
+        image: skPandeyImg,
         highlights: [
-            "Founder @ChainTech",
-            "Web3 architect",
-            "DeFi specialist",
-            "IIT Bombay alumnus",
-            "TEDx speaker"
-        ]
-    },
-    {
-        id: 4,
-        name: "Priya Mathur",
-        title: "Cybersecurity Expert",
-        image: speakerPlaceholder,
-        highlights: [
-            "CISSP certified",
-            "Bug bounty hunter",
-            "Ethical hacking",
-            "15+ years experience",
-            "Security consultant"
+            "Satcom",
+            "TTC Ground Stations",
+            "Control Engineering"
         ]
     },
 ];

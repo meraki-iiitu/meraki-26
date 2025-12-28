@@ -213,7 +213,7 @@ function ExpertTalk() {
                             ▶
                         </span>
                         <h2 className="font-minecraft text-white text-xl sm:text-2xl md:text-4xl tracking-widest uppercase">
-                            EXPERT TALK
+                            EXPERT TALKS
                         </h2>
                     </div>
                 </motion.div>
@@ -221,7 +221,7 @@ function ExpertTalk() {
                 {/* Speaker Cards Grid Container */}
                 <div className="flex justify-center items-center w-full">
                     <motion.div
-                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full max-w-7xl mx-auto gap-6 md:gap-8"
+                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center w-full max-w-7xl mx-auto gap-6 md:gap-8"
                         variants={sectionTransition}
                         initial="hidden"
                         whileInView="show"

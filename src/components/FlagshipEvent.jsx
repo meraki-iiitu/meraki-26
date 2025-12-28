@@ -118,7 +118,7 @@ function FlagshipEvent() {
         {/* Events UI Container */}
         <div className="flex-1 flex items-center justify-center">
           <motion.div
-            className="flex flex-col md:flex-row w-full max-w-6xl mx-auto overflow-visible min-h-[60vh]"
+            className="flex flex-col-reverse md:flex-row w-full max-w-6xl mx-auto overflow-visible min-h-[60vh]"
             variants={sectionTransition}
             initial="hidden"
             whileInView="show"
@@ -131,7 +131,7 @@ function FlagshipEvent() {
              * Mobile: Horizontal scroll on top
              */}
             <motion.div
-              className="w-full md:w-1/3 flex flex-row md:flex-col overflow-x-auto md:overflow-visible z-30 gap-0 pb-0 scrollbar-hide snap-x snap-mandatory"
+              className="w-full md:w-1/3 grid grid-cols-2 md:flex md:flex-col gap-0 z-30"
               variants={appleSlideUp(0.1)}
             >
               {flagshipEvents.map((event, index) => {
@@ -144,34 +144,41 @@ function FlagshipEvent() {
                     key={event.id}
                     onClick={() => setActiveTab(event.id)}
                     whileHover={!isActive ? { x: 4 } : {}}
-                    whileTap={{ scale: 0.98 }}
+                    whileTap={{ scale: 0.95 }}
                     className={`
-                      relative group text-left transition-all duration-200
-                      shrink-0 md:shrink w-[200px] sm:w-[240px] md:w-full snap-start
+                      relative group text-left transition-all duration-200 touch-manipulation
+                      w-full min-h-[56px] md:min-h-0
                       ${isActive
                         ? "bg-[#2a2a2a] z-20"
                         : "bg-[#1a1a1a] hover:bg-[#252525] z-10"
                       }
-                      ${isFirst ? "rounded-t-lg md:rounded-tl-lg md:rounded-tr-none" : ""}
-                      ${isLast && !isActive ? "rounded-b-lg md:rounded-bl-lg md:rounded-br-none" : ""}
+                      ${isFirst ? "rounded-bl-lg md:rounded-tl-lg md:rounded-bl-none" : ""}
+                      ${index === 1 ? "rounded-br-lg md:rounded-none" : ""}
+                      ${isLast && !isActive ? "md:rounded-bl-lg" : ""}
                       border-2 border-[#3a3a3a]
                       ${isActive
-                        ? "border-r-[#3a3a3a] md:border-r-[#2a2a2a] border-l-cyan-500/50"
-                        : "border-l-transparent hover:border-l-cyan-500/30"
+                        ? "md:border-r-[#2a2a2a] border-t-cyan-500/50 md:border-t-[#3a3a3a] md:border-l-cyan-500/50"
+                        : "border-t-transparent md:border-l-transparent hover:border-t-cyan-500/30 md:hover:border-l-cyan-500/30"
                       }
-                      ${!isFirst ? "-mt-[2px] md:-mt-0" : ""}
+                      ${index % 2 === 1 ? "-ml-[2px]" : ""}
+                      ${index >= 2 ? "-mt-[2px]" : ""}
+                      ${index >= 2 ? "md:-mt-[2px]" : "md:-mt-0"}
+                      md:-ml-0
                     `}
                   >
                     {/* Active indicator bar */}
                     {isActive && (
-                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-400 to-cyan-600 rounded-l" />
+                      <>
+                        <div className="absolute left-0 top-0 right-0 h-1 bg-gradient-to-r from-cyan-400 to-cyan-600 md:hidden" />
+                        <div className="hidden md:block absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-400 to-cyan-600 rounded-l" />
+                      </>
                     )}
 
                     {/* Inner content */}
-                    <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4">
+                    <div className="flex items-center gap-2 xs:gap-3 md:gap-4 p-2.5 xs:p-3 md:p-4">
                       {/* Event thumbnail */}
                       <div className={`
-                        w-10 h-10 md:w-12 md:h-12 rounded-md flex items-center justify-center shrink-0 overflow-hidden 
+                        w-9 h-9 xs:w-10 xs:h-10 md:w-12 md:h-12 rounded-md flex items-center justify-center shrink-0 overflow-hidden 
                         transition-all duration-300 group-hover:scale-105
                         ${isActive
                           ? "ring-2 ring-cyan-500/50 shadow-lg shadow-cyan-500/20"
@@ -186,7 +193,7 @@ function FlagshipEvent() {
                       </div>
                       {/* Event title */}
                       <span
-                        className={`font-minecraft text-xs sm:text-sm md:text-base transition-colors duration-200 whitespace-nowrap overflow-hidden text-ellipsis ${isActive
+                        className={`font-minecraft text-[10px] xs:text-xs sm:text-sm md:text-base transition-colors duration-200 whitespace-nowrap overflow-hidden text-ellipsis ${isActive
                           ? "text-cyan-400"
                           : "text-gray-400 group-hover:text-gray-200"
                           }`}
@@ -205,7 +212,7 @@ function FlagshipEvent() {
              * No fade animation - content switches immediately for snappy feel
              */}
             <div
-              className="relative z-20 w-full md:w-2/3 bg-[#2a2a2a] border-2 border-[#3a3a3a] rounded-lg md:rounded-l-none md:rounded-r-lg md:-ml-[2px] overflow-hidden group cursor-pointer"
+              className="relative z-20 w-full md:w-2/3 bg-[#2a2a2a] border-2 border-[#3a3a3a] rounded-t-lg rounded-b-none md:rounded-l-none md:rounded-r-lg md:rounded-tl-lg mb-0 md:mt-0 md:-ml-[2px] overflow-hidden group cursor-pointer min-h-[320px] xs:min-h-[360px] sm:min-h-[400px] md:min-h-[450px]"
               onClick={() => navigate(`/event/${activeEvent.slug}`)}
             >
               {/* Full Enclosing Image */}
@@ -217,21 +224,26 @@ function FlagshipEvent() {
                 />
 
                 {/* Base Overlay - Always visible for text contrast */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/20 md:via-black/40 md:from-black/90" />
 
                 {/* Content Container */}
-                <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+                <div className="absolute inset-0 flex flex-col justify-end p-4 xs:p-5 sm:p-6 md:p-8">
                   {/* Title - Always visible */}
-                  <h3 className="font-minecraft text-white text-2xl sm:text-3xl md:text-4xl tracking-wide mb-2 drop-shadow-lg transform transition-all duration-300 group-hover:-translate-y-2">
+                  <h3 className="font-minecraft text-white text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-wide drop-shadow-lg transform transition-all duration-300 md:group-hover:-translate-y-2">
                     {activeEvent.title}
                   </h3>
 
-                  {/* Description - Appears on Hover */}
-                  <div className="overflow-hidden transition-all duration-300 max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100">
-                    <p className="font-minecraft text-gray-200 text-sm sm:text-base leading-relaxed drop-shadow-md border-l-2 border-cyan-500 pl-3 mb-4">
+                  {/* Description - Hidden on mobile, appears on hover on desktop */}
+                  <div className="hidden md:block overflow-hidden transition-all duration-300 md:max-h-0 md:opacity-0 md:group-hover:max-h-40 md:group-hover:opacity-100">
+                    <p className="font-minecraft text-gray-200 text-xs xs:text-sm sm:text-base leading-relaxed drop-shadow-md border-l-2 border-cyan-500 pl-2 xs:pl-3 mt-2">
                       {activeEvent.description}
                     </p>
+                  </div>
 
+                  {/* Tap to view hint - Mobile only */}
+                  <div className="md:hidden flex items-center gap-2 text-cyan-400 text-xs xs:text-sm font-minecraft mt-3">
+                    <span>Tap to view details</span>
+                    <span className="animate-pulse">→</span>
                   </div>
                 </div>
               </div>

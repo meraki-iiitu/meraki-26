@@ -112,7 +112,7 @@ export const eventDetailsData = {
         teamSize: 'Open',
         venue: 'Open Ground, IIIT Una',
         contact: 'meraki@iiitu.ac.in | +91 7017488532',
-        registerLink: '#',
+        registerLink: 'mailto:meraki@iiitu.ac.in?subject=Sky Circuit Registration&body=Hello, I would like to showcase something cool at Sky Circuit event',
         buttonText: 'JOIN US',
         sponsors: [
             { name: "CAIR, IIT Mandi", logo: cairLogo, type: "Title Sponsor" },
