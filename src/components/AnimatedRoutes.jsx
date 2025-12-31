@@ -5,22 +5,38 @@
  * page enter/exit animations. Each route is wrapped in PageWrapper
  * for consistent transition behavior.
  * 
+ * Code-splitting is implemented using React.lazy() for route-based chunks.
+ * 
  * @see DOCS.md#animation-system for AnimatePresence behavior
  * @module components/AnimatedRoutes
  */
 
-import React from "react";
+import React, { Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Hero from "./Hero";
-import Contact from "./Contact";
-import Gallery from "../pages/Gallery";
-import Schedule from "../pages/Schedule";
-import Team from "../pages/Team";
-import DevTeam from "../pages/DevTeam";
-import EventDetails from "../pages/EventDetails";
-import WorkshopDetails from "../pages/WorkshopDetails";
 import PageWrapper from "./PageWrapper";
+
+// Lazy-loaded page components for code-splitting
+const Contact = React.lazy(() => import("./Contact"));
+const Gallery = React.lazy(() => import("../pages/Gallery"));
+const Schedule = React.lazy(() => import("../pages/Schedule"));
+const Team = React.lazy(() => import("../pages/Team"));
+const DevTeam = React.lazy(() => import("../pages/DevTeam"));
+const EventDetails = React.lazy(() => import("../pages/EventDetails"));
+const WorkshopDetails = React.lazy(() => import("../pages/WorkshopDetails"));
+
+/**
+ * Loading fallback component for lazy-loaded routes.
+ */
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-black">
+    <div className="text-center">
+      <div className="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+      <p className="font-minecraft text-cyan-400 text-lg tracking-wider">LOADING...</p>
+    </div>
+  </div>
+);
 
 /**
  * Animated route switcher with page transitions.
@@ -55,13 +71,13 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageWrapper><Hero /></PageWrapper>} />
-        <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
-        <Route path="/gallery" element={<PageWrapper><Gallery /></PageWrapper>} />
-        <Route path="/schedule" element={<PageWrapper><Schedule /></PageWrapper>} />
-        <Route path="/team" element={<PageWrapper><Team /></PageWrapper>} />
-        <Route path="/devteam" element={<PageWrapper><DevTeam /></PageWrapper>} />
-        <Route path="/event/:eventId" element={<PageWrapper><EventDetails /></PageWrapper>} />
-        <Route path="/workshop/:workshopSlug" element={<PageWrapper><WorkshopDetails /></PageWrapper>} />
+        <Route path="/contact" element={<PageWrapper><Suspense fallback={<PageLoader />}><Contact /></Suspense></PageWrapper>} />
+        <Route path="/gallery" element={<PageWrapper><Suspense fallback={<PageLoader />}><Gallery /></Suspense></PageWrapper>} />
+        <Route path="/schedule" element={<PageWrapper><Suspense fallback={<PageLoader />}><Schedule /></Suspense></PageWrapper>} />
+        <Route path="/team" element={<PageWrapper><Suspense fallback={<PageLoader />}><Team /></Suspense></PageWrapper>} />
+        <Route path="/devteam" element={<PageWrapper><Suspense fallback={<PageLoader />}><DevTeam /></Suspense></PageWrapper>} />
+        <Route path="/event/:eventId" element={<PageWrapper><Suspense fallback={<PageLoader />}><EventDetails /></Suspense></PageWrapper>} />
+        <Route path="/workshop/:workshopSlug" element={<PageWrapper><Suspense fallback={<PageLoader />}><WorkshopDetails /></Suspense></PageWrapper>} />
       </Routes>
     </AnimatePresence>
   );
