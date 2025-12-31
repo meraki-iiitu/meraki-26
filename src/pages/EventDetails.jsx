@@ -209,7 +209,7 @@ const EventDetails = () => {
                         {/* Text Info */}
                         <div className="text-center relative z-10 flex-1 flex flex-col justify-center">
                           <p className="font-pixel text-yellow-400 text-lg sm:text-xl md:text-2xl mb-1 drop-shadow-md">{sponsor.name}</p>
-                          {sponsor.institution && (
+                          {sponsor.institution && sponsor.institution.trim() && (
                             <p className="font-terminal text-cyan-400 text-sm sm:text-base">{sponsor.institution}</p>
                           )}
                         </div>
