@@ -117,7 +117,7 @@ export const eventDetailsData = {
         buttonText: 'JOIN US',
         sponsors: [
             { name: "CAIR", institution: "IIT Mandi", logo: cairLogo, type: "Title Sponsor" },
-            { name: "AEROSTAR", institution: "", logo: aerostarLogo, type: "Co-Sponsor" },
+            { name: "AEROSTAR", logo: aerostarLogo, type: "Co-Sponsor" },
             { name: "Agastya Club", institution: "NIT Jalandhar", logo: agastyaLogo, type: "Event Patron" },
             { name: "Team Shakti", institution: "Chitkara University", logo: teamShaktiLogo, type: "Event Patron" }
         ]
