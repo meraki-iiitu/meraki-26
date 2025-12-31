@@ -71,13 +71,13 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageWrapper><Hero /></PageWrapper>} />
-        <Route path="/contact" element={<PageWrapper><Suspense fallback={<PageLoader />}><Contact /></Suspense></PageWrapper>} />
-        <Route path="/gallery" element={<PageWrapper><Suspense fallback={<PageLoader />}><Gallery /></Suspense></PageWrapper>} />
-        <Route path="/schedule" element={<PageWrapper><Suspense fallback={<PageLoader />}><Schedule /></Suspense></PageWrapper>} />
-        <Route path="/team" element={<PageWrapper><Suspense fallback={<PageLoader />}><Team /></Suspense></PageWrapper>} />
-        <Route path="/devteam" element={<PageWrapper><Suspense fallback={<PageLoader />}><DevTeam /></Suspense></PageWrapper>} />
-        <Route path="/event/:eventId" element={<PageWrapper><Suspense fallback={<PageLoader />}><EventDetails /></Suspense></PageWrapper>} />
-        <Route path="/workshop/:workshopSlug" element={<PageWrapper><Suspense fallback={<PageLoader />}><WorkshopDetails /></Suspense></PageWrapper>} />
+        <Route path="/contact" element={<Suspense fallback={<PageLoader />}><PageWrapper><Contact /></PageWrapper></Suspense>} />
+        <Route path="/gallery" element={<Suspense fallback={<PageLoader />}><PageWrapper><Gallery /></PageWrapper></Suspense>} />
+        <Route path="/schedule" element={<Suspense fallback={<PageLoader />}><PageWrapper><Schedule /></PageWrapper></Suspense>} />
+        <Route path="/team" element={<Suspense fallback={<PageLoader />}><PageWrapper><Team /></PageWrapper></Suspense>} />
+        <Route path="/devteam" element={<Suspense fallback={<PageLoader />}><PageWrapper><DevTeam /></PageWrapper></Suspense>} />
+        <Route path="/event/:eventId" element={<Suspense fallback={<PageLoader />}><PageWrapper><EventDetails /></PageWrapper></Suspense>} />
+        <Route path="/workshop/:workshopSlug" element={<Suspense fallback={<PageLoader />}><PageWrapper><WorkshopDetails /></PageWrapper></Suspense>} />
       </Routes>
     </AnimatePresence>
   );

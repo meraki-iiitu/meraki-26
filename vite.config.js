@@ -28,6 +28,7 @@ export default defineConfig({
           ],
           // Group page components by feature
           'pages-main': [
+            './src/components/Contact.jsx',
             './src/pages/Gallery.jsx',
             './src/pages/Schedule.jsx',
             './src/pages/Team.jsx',
@@ -40,8 +41,14 @@ export default defineConfig({
           // Constants/data chunks
           'data': [
             './src/constants/index.js',
+            './src/constants/aboutData.js',
+            './src/constants/devTeamData.js',
             './src/constants/eventsData.js',
+            './src/constants/expertTalkData.js',
+            './src/constants/faqData.js',
             './src/constants/galleryData.js',
+            './src/constants/linksData.js',
+            './src/constants/scheduleData.js',
             './src/constants/teamData.js',
             './src/constants/workshopsData.js',
           ],
