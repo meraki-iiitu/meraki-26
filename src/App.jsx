@@ -11,6 +11,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import CustomCursor from "./components/CustomCursor";
 import AnimatedRoutes from "./components/AnimatedRoutes";
 import Footer from "./components/Footer";
 import { handleHashNavigation } from "./utils/scrollToSection";
@@ -85,6 +86,7 @@ function App() {
 
   return (
     <Router>
+      <CustomCursor />
       <ScrollToHash />
       <Navbar />
       <AnimatedRoutes />
