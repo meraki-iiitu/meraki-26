@@ -189,33 +189,181 @@ const MerchandisePage = () => {
     const brandName = selectedBrand === "doon" ? "Doon Merchandise" : "Dopamine Store";
 
     return (
-        <div className="min-h-screen bg-black relative">
-            {/* Background texture */}
+        <div className="min-h-screen bg-black relative overflow-hidden">
+            {/* Base dark background with subtle white tones */}
             <div
-                className="absolute inset-0 opacity-20"
+                className="absolute inset-0"
                 style={{
-                    backgroundImage: `
-                        radial-gradient(circle at 20% 30%, rgba(139, 0, 0, 0.3) 0%, transparent 40%),
-                        radial-gradient(circle at 80% 70%, rgba(139, 0, 0, 0.2) 0%, transparent 40%)
+                    background: `
+                        radial-gradient(ellipse at 30% 20%, rgba(40, 40, 50, 0.4) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(30, 30, 40, 0.3) 0%, transparent 50%),
+                        linear-gradient(135deg, #0a0a0a 0%, #050505 25%, #0d0d0d 50%, #000000 75%, #080808 100%)
                     `,
                 }}
             />
 
-            {/* Marble/dark texture overlay */}
+            {/* White smoke/marble streaks */}
+            <div className="absolute inset-0 opacity-[0.08]">
+                <div
+                    className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl"
+                    style={{
+                        background: 'radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 60%)',
+                    }}
+                />
+                <div
+                    className="absolute top-1/3 right-1/4 w-80 h-80 rounded-full blur-3xl"
+                    style={{
+                        background: 'radial-gradient(circle, rgba(200, 200, 220, 0.3) 0%, transparent 70%)',
+                    }}
+                />
+                <div
+                    className="absolute bottom-1/4 left-1/3 w-64 h-64 rounded-full blur-3xl"
+                    style={{
+                        background: 'radial-gradient(circle, rgba(180, 180, 200, 0.25) 0%, transparent 65%)',
+                    }}
+                />
+            </div>
+
+            {/* Animated gradient orbs with white tints */}
+            <div className="absolute inset-0 opacity-15">
+                <div
+                    className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
+                    style={{
+                        background: 'radial-gradient(circle, rgba(100, 100, 120, 0.3) 0%, transparent 70%)',
+                        animation: 'pulse 8s ease-in-out infinite',
+                    }}
+                />
+                <div
+                    className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl"
+                    style={{
+                        background: 'radial-gradient(circle, rgba(80, 80, 100, 0.25) 0%, transparent 70%)',
+                        animation: 'pulse 10s ease-in-out infinite 2s',
+                    }}
+                />
+            </div>
+
+            {/* Marble texture with white veins */}
             <div
-                className="absolute inset-0 opacity-10"
+                className="absolute inset-0 opacity-[0.06]"
+                style={{
+                    backgroundImage: `
+                        linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 30%, rgba(255,255,255,0.05) 35%, transparent 35%),
+                        linear-gradient(-45deg, transparent 30%, rgba(255,255,255,0.04) 30%, rgba(255,255,255,0.04) 35%, transparent 35%),
+                        linear-gradient(90deg, transparent 45%, rgba(200,200,200,0.03) 45%, rgba(200,200,200,0.03) 55%, transparent 55%)
+                    `,
+                    backgroundSize: '100px 100px, 100px 100px, 80px 80px',
+                    backgroundPosition: '0 0, 50px 50px, 0 0',
+                }}
+            />
+
+            {/* Subtle white noise texture */}
+            <div
+                className="absolute inset-0 opacity-[0.04]"
+                style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill='%23ffffff' /%3E%3C/svg%3E")`,
+                }}
+            />
+
+            {/* Diagonal grid pattern with white lines */}
+            <div
+                className="absolute inset-0 opacity-[0.03]"
                 style={{
                     backgroundImage: `
                         repeating-linear-gradient(
                             45deg,
                             transparent,
-                            transparent 2px,
-                            rgba(255,255,255,0.03) 2px,
-                            rgba(255,255,255,0.03) 4px
+                            transparent 40px,
+                            rgba(255,255,255,0.04) 40px,
+                            rgba(255,255,255,0.04) 41px
+                        ),
+                        repeating-linear-gradient(
+                            -45deg,
+                            transparent,
+                            transparent 40px,
+                            rgba(255,255,255,0.04) 40px,
+                            rgba(255,255,255,0.04) 41px
                         )
                     `,
                 }}
             />
+
+            {/* White light streaks */}
+            <div className="absolute inset-0 opacity-[0.05]">
+                <div
+                    className="absolute top-0 left-0 w-full h-1"
+                    style={{
+                        background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)',
+                    }}
+                />
+                <div
+                    className="absolute bottom-0 right-0 w-full h-1"
+                    style={{
+                        background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)',
+                    }}
+                />
+            </div>
+
+            {/* Top gradient fade with white tint */}
+            <div
+                className="absolute top-0 left-0 right-0 h-32 z-[1]"
+                style={{
+                    background: 'linear-gradient(to bottom, rgba(10,10,15,0.95), transparent)',
+                }}
+            />
+
+            {/* Bottom gradient fade */}
+            <div
+                className="absolute bottom-0 left-0 right-0 h-32 z-[1]"
+                style={{
+                    background: 'linear-gradient(to top, rgba(5,5,10,0.9), transparent)',
+                }}
+            />
+
+            {/* Decorative corner accents with white highlights */}
+            <div className="absolute top-0 left-0 w-64 h-64 opacity-10">
+                <div
+                    className="absolute top-0 left-0 w-full h-full"
+                    style={{
+                        background: 'linear-gradient(135deg, rgba(180, 180, 200, 0.3) 0%, transparent 70%)',
+                    }}
+                />
+            </div>
+            <div className="absolute bottom-0 right-0 w-64 h-64 opacity-10">
+                <div
+                    className="absolute bottom-0 right-0 w-full h-full"
+                    style={{
+                        background: 'linear-gradient(-45deg, rgba(160, 160, 180, 0.25) 0%, transparent 70%)',
+                    }}
+                />
+            </div>
+
+            {/* Subtle white glow around edges */}
+            <div className="absolute inset-0 opacity-[0.06]">
+                <div
+                    className="absolute top-0 left-0 right-0 h-2"
+                    style={{
+                        background: 'linear-gradient(to bottom, rgba(255,255,255,0.15), transparent)',
+                    }}
+                />
+                <div
+                    className="absolute bottom-0 left-0 right-0 h-2"
+                    style={{
+                        background: 'linear-gradient(to top, rgba(255,255,255,0.15), transparent)',
+                    }}
+                />
+                <div
+                    className="absolute top-0 left-0 bottom-0 w-2"
+                    style={{
+                        background: 'linear-gradient(to right, rgba(255,255,255,0.15), transparent)',
+                    }}
+                />
+                <div
+                    className="absolute top-0 right-0 bottom-0 w-2"
+                    style={{
+                        background: 'linear-gradient(to left, rgba(255,255,255,0.15), transparent)',
+                    }}
+                />
+            </div>
 
             {/* Brand Selection Popup */}
             <AnimatePresence>
@@ -323,8 +471,8 @@ const MerchandisePage = () => {
                                                     whileHover={{ scale: 1.02 }}
                                                     whileTap={{ scale: 0.98 }}
                                                     className={`block w-full py-3 text-center font-minecraft text-white tracking-widest uppercase ${selectedBrand === "doon"
-                                                            ? "bg-cyan-600 hover:bg-cyan-500"
-                                                            : "bg-red-700 hover:bg-red-600"
+                                                        ? "bg-cyan-600 hover:bg-cyan-500"
+                                                        : "bg-red-700 hover:bg-red-600"
                                                         } transition-colors duration-300`}
                                                 >
                                                     BUY
