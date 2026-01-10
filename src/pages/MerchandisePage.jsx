@@ -11,6 +11,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation } from "react-router-dom";
 import { appleSlideUp, sectionTransition } from "../utils/motion";
 
 // Merchandise images from public folder
@@ -135,22 +136,22 @@ const ProductCard = ({ product, brandColor }) => {
                 <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-32 object-contain p-2 group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-64 object-contain p-4 group-hover:scale-110 transition-transform duration-300"
                 />
-                <div className="absolute top-2 left-2">
-                    <span className="font-terminal text-[10px] text-white/60 uppercase tracking-wider">
+                <div className="absolute top-4 left-4">
+                    <span className="font-terminal text-xs text-white/60 uppercase tracking-wider">
                         {product.type}
                     </span>
                 </div>
-                <div className="absolute top-2 right-2">
-                    <span className={`font-minecraft text-xs ${brandColor} uppercase tracking-wide`}>
+                <div className="absolute top-4 right-4">
+                    <span className={`font-minecraft text-sm ${brandColor} uppercase tracking-wide`}>
                         BUY
                     </span>
                 </div>
             </div>
-            <div className="p-3 border-t border-neutral-700">
-                <p className="text-white/60 font-terminal text-xs mb-1">{product.price}</p>
-                <h4 className="font-minecraft text-white text-xs tracking-wide uppercase truncate">
+            <div className="p-5 border-t border-neutral-700">
+                <p className="text-white/60 font-terminal text-sm mb-2">{product.price}</p>
+                <h4 className="font-minecraft text-white text-lg tracking-wide uppercase truncate">
                     {product.name}
                 </h4>
             </div>
@@ -162,10 +163,17 @@ const ProductCard = ({ product, brandColor }) => {
  * Merchandise Page Component
  */
 const MerchandisePage = () => {
+    const location = useLocation();
     const [showPopup, setShowPopup] = useState(true);
     const [selectedBrand, setSelectedBrand] = useState(null);
     const [featuredProduct, setFeaturedProduct] = useState(null);
     const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        if (location.state?.brand) {
+            handleSelectBrand(location.state.brand);
+        }
+    }, [location.state]);
 
     const handleSelectBrand = (brand) => {
         setSelectedBrand(brand);
@@ -178,11 +186,6 @@ const MerchandisePage = () => {
             setProducts(dopamineProducts);
             setFeaturedProduct(dopamineProducts.find(p => p.featured));
         }
-    };
-
-    const switchBrand = () => {
-        const newBrand = selectedBrand === "doon" ? "dopamine" : "doon";
-        handleSelectBrand(newBrand);
     };
 
     const brandColor = selectedBrand === "doon" ? "text-cyan-400" : "text-red-400";
@@ -402,18 +405,7 @@ const MerchandisePage = () => {
                                 </p>
                             </motion.div>
 
-                            {/* Brand Switcher */}
-                            <motion.button
-                                variants={appleSlideUp(0.2)}
-                                initial="hidden"
-                                animate="show"
-                                onClick={switchBrand}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="px-6 py-2 border border-neutral-600 text-white/70 font-terminal text-sm tracking-wide hover:border-cyan-400 hover:text-white transition-all duration-300"
-                            >
-                                Switch to {selectedBrand === "doon" ? "Dopamine Store" : "Doon Merchandise"}
-                            </motion.button>
+
                         </div>
                     </div>
 
@@ -489,7 +481,7 @@ const MerchandisePage = () => {
                                 initial="hidden"
                                 animate="show"
                             >
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-2 gap-16">
                                     {products.filter(p => !p.featured).map((product, index) => (
                                         <motion.div
                                             key={product.id}

@@ -106,23 +106,23 @@ const Merchandise = () => {
                             className="w-full lg:w-[30%] flex flex-col items-center"
                         >
                             {/* Store Header */}
-                            <div className="flex items-center gap-2 mb-2 bg-transparent">
-                                <h3 className="font-minecraft text-white text-base sm:text-lg md:text-xl tracking-wide uppercase text-center leading-tight drop-shadow-[2px_2px_0_rgba(0,0,0,0.8)]">
-                                    Doon<br />Merchandise
-                                </h3>
+                            <div className="flex flex-col items-center gap-2 mb-4 bg-transparent">
                                 <motion.img
                                     src={skullIcon}
                                     alt="Skull Icon"
-                                    className="w-12 h-12 md:w-16 md:h-16"
+                                    className="w-12 h-12 md:w-16 md:h-16 mb-2"
                                     style={{ imageRendering: "pixelated" }}
                                     whileHover={{ rotate: 360 }}
                                     transition={{ duration: 0.5 }}
                                 />
+                                <h3 className="font-minecraft text-white text-base sm:text-lg md:text-xl tracking-wide uppercase text-center leading-tight drop-shadow-[2px_2px_0_rgba(0,0,0,0.8)]">
+                                    Doon Merchandise
+                                </h3>
                             </div>
 
                             {/* Hoodie Image */}
                             <motion.div
-                                className="relative w-full max-w-[280px] md:max-w-[320px]"
+                                className="relative w-full max-w-[280px] md:max-w-[320px] mb-6"
                                 whileHover={{ scale: 1.03 }}
                                 transition={{ type: "spring", stiffness: 200 }}
                             >
@@ -135,6 +135,17 @@ const Merchandise = () => {
                                     }}
                                 />
                             </motion.div>
+
+                            {/* Visit Button */}
+                            <Link to="/merchandise" state={{ brand: "doon" }}>
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="px-6 py-2 border border-cyan-400/40 bg-black/30 backdrop-blur-sm text-cyan-400 font-minecraft text-sm uppercase hover:bg-cyan-400/10 transition-colors"
+                                >
+                                    Visit Store
+                                </motion.button>
+                            </Link>
                         </motion.div>
 
                         {/* Center Card - Promo Text */}
@@ -205,23 +216,23 @@ const Merchandise = () => {
                             className="w-full lg:w-[30%] flex flex-col items-center"
                         >
                             {/* Store Header */}
-                            <div className="flex items-center gap-2 mb-2 bg-transparent">
+                            <div className="flex flex-col items-center gap-2 mb-4 bg-transparent">
                                 <motion.img
                                     src={skullIcon}
                                     alt="Skull Icon"
-                                    className="w-12 h-12 md:w-16 md:h-16"
+                                    className="w-12 h-12 md:w-16 md:h-16 mb-2"
                                     style={{ imageRendering: "pixelated" }}
                                     whileHover={{ rotate: -360 }}
                                     transition={{ duration: 0.5 }}
                                 />
                                 <h3 className="font-minecraft text-white text-base sm:text-lg md:text-xl tracking-wide uppercase text-center leading-tight drop-shadow-[2px_2px_0_rgba(0,0,0,0.8)]">
-                                    Dopamine<br />Store
+                                    Dopamine Store
                                 </h3>
                             </div>
 
                             {/* Hoodie Image */}
                             <motion.div
-                                className="relative w-full max-w-[280px] md:max-w-[320px]"
+                                className="relative w-full max-w-[280px] md:max-w-[320px] mb-6"
                                 whileHover={{ scale: 1.03 }}
                                 transition={{ type: "spring", stiffness: 200 }}
                             >
@@ -234,6 +245,17 @@ const Merchandise = () => {
                                     }}
                                 />
                             </motion.div>
+
+                            {/* Visit Button */}
+                            <Link to="/merchandise" state={{ brand: "dopamine" }}>
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="px-6 py-2 border border-red-500/40 bg-black/30 backdrop-blur-sm text-red-500 font-minecraft text-sm uppercase hover:bg-red-500/10 transition-colors"
+                                >
+                                    Visit Store
+                                </motion.button>
+                            </Link>
                         </motion.div>
                     </div>
                 </motion.div>
