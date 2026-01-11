@@ -15,9 +15,9 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { Link } from "react-router-dom";
 import { appleSlideUp, sectionTransition } from "../utils/motion";
 
-// Merchandise images from public folder
-const doonHoodie = "/merchendise/doon.webp";
-const dopamineHoodie = "/merchendise/dopamine.webp";
+// Merchandise images from public folder (background removed)
+const doonHoodie = "/merchendise/doom bg removed.png";
+const dopamineHoodie = "/merchendise/dopamine-bg removed.png";
 const skullIcon = "/merchendise/skull.png";
 const doonMerchLogo = "/doonmerch.webp";
 
@@ -132,14 +132,12 @@ const Merchandise = () => {
                             {/* Hoodie Image - Links to internal merchandise page */}
                             <Link to="/merchandise" state={{ brand: "doon" }}>
                                 <motion.div
-                                    className="relative w-full max-w-[340px] md:max-w-[400px] mb-6 cursor-pointer group"
-                                    whileHover={{ scale: 1.03 }}
-                                    transition={{ type: "spring", stiffness: 200 }}
+                                    className="relative w-[420px] h-[420px] md:w-[500px] md:h-[500px] mb-6 cursor-pointer group flex items-center justify-center -translate-x-8 md:-translate-x-16"
                                 >
                                     <img
                                         src={doonHoodie}
                                         alt="Doon Merchandise Hoodie"
-                                        className="w-full h-auto object-contain"
+                                        className="max-w-full max-h-full object-contain"
                                         style={{
                                             filter: "drop-shadow(4px 4px 8px rgba(0,0,0,0.5))"
                                         }}
@@ -242,14 +240,14 @@ const Merchandise = () => {
                             {/* Hoodie Image - Links to internal merchandise page */}
                             <Link to="/merchandise" state={{ brand: "dopamine" }}>
                                 <motion.div
-                                    className="relative w-full max-w-[280px] md:max-w-[320px] mb-6 cursor-pointer group"
+                                    className="relative w-[420px] h-[420px] md:w-[500px] md:h-[500px] mb-6 cursor-pointer group flex items-center justify-center"
                                     whileHover={{ scale: 1.03 }}
                                     transition={{ type: "spring", stiffness: 200 }}
                                 >
                                     <img
                                         src={dopamineHoodie}
                                         alt="Dopamine Store Hoodie"
-                                        className="w-full h-auto object-contain"
+                                        className="max-w-full max-h-full object-contain"
                                         style={{
                                             filter: "drop-shadow(4px 4px 8px rgba(0,0,0,0.5))"
                                         }}
