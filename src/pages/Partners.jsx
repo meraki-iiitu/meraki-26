@@ -6,8 +6,8 @@
  * interactive 3D particle effects.
  */
 
-import React, { useEffect, useState, useRef } from "react";
-import { motion, useSpring, useMotionValue, useTransform } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import wallBg from "../assets/sponsors_minecraft_bg.webp";
 import { appleSlideUp, appleScaleIn } from "../utils/motion";
@@ -40,8 +40,11 @@ const abhibusLogo = "/abhibus.png";
 const plutoDronesLogo = "/pluto drones.webp";
 
 const goldPartners = [
-    { name: "Abhibus", firm: "Abhibus", designation: "Gold Partner", logo: abhibusLogo, url: "https://www.abhibus.com/" },
-    { name: "Pluto Drones", firm: "Pluto Drones", designation: "Gold Partner", logo: plutoDronesLogo, url: "https://www.plutodrones.com/", whiteBg: true }
+    { name: "Pluto Drones", firm: "Pluto Drones", designation: "Gold Sponsor", logo: plutoDronesLogo, url: "https://www.plutodrones.com/", whiteBg: true }
+];
+
+const travelPartners = [
+    { name: "Abhibus", firm: "Abhibus", designation: "Travel Partner", logo: abhibusLogo, url: "https://www.abhibus.com/" }
 ];
 
 const merchLifestylePartners = [
@@ -167,6 +170,14 @@ const getFrameStyles = (tier) => {
                 pinGradient: "radial-gradient(circle at 30% 30%, #fff 0%, #11998e 100%)",
                 bgColor: "rgba(17, 153, 142, 0.05)"
             };
+        case 'travel':
+            return {
+                border: "linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%)",
+                shadow: "0 0 25px rgba(255, 126, 95, 0.3)",
+                innerBorder: "#ff7e5f",
+                pinGradient: "radial-gradient(circle at 30% 30%, #fff 0%, #ff7e5f 100%)",
+                bgColor: "rgba(255, 126, 95, 0.05)"
+            };
         default:
             return {
                 border: "linear-gradient(145deg, #8B6914 0%, #654321 50%, #3D2914 100%)",
@@ -181,35 +192,8 @@ const getFrameStyles = (tier) => {
 /**
  * Minecraft-styled Poster Frame Component with 3D Tilt
  */
-const PartnerCard = ({ partner, index, size = "medium", tier = "wood" }) => {
-    const cardRef = useRef(null);
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-
-    const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
-    const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
-
-    const rotateX = useTransform(mouseY, [-0.5, 0.5], ["15deg", "-15deg"]);
-    const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-15deg", "15deg"]);
-    const glareX = useTransform(mouseX, [-0.5, 0.5], ["0%", "100%"]);
-    const glareY = useTransform(mouseY, [-0.5, 0.5], ["0%", "100%"]);
-
-    const handleMouseMove = (e) => {
-        const rect = cardRef.current.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseXVal = e.clientX - rect.left;
-        const mouseYVal = e.clientY - rect.top;
-        const xPct = mouseXVal / width - 0.5;
-        const yPct = mouseYVal / height - 0.5;
-        x.set(xPct);
-        y.set(yPct);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
+const PartnerCard = ({ partner, index, size = "default", tier = "wood" }) => {
+    // Removed 3D tilt/wobble logic (useMotionValue, useSpring, useTransform, onMouseMove, etc.)
 
     const handleClick = () => {
         if (partner.url) {
@@ -219,42 +203,31 @@ const PartnerCard = ({ partner, index, size = "medium", tier = "wood" }) => {
 
     const styles = getFrameStyles(tier);
     const sizeClasses = {
-        large: "w-64 h-64 sm:w-80 sm:h-80",
-        medium: "w-48 h-48 sm:w-60 sm:h-60",
-        small: "w-36 h-36 sm:w-44 sm:h-44"
+        default: "w-44 h-44 sm:w-52 sm:h-52"
     };
 
     return (
         <motion.div
-            ref={cardRef}
             className="relative cursor-pointer group"
             variants={appleScaleIn(index * 0.1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-50px" }}
-            style={{
-                perspective: 1000,
-                rotateX,
-                rotateY,
-                transformStyle: "preserve-3d"
-            }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
             onClick={handleClick}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
         >
             {/* Glow Effect */}
             <div
                 className="absolute inset-0 blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none"
-                style={{ background: styles.innerBorder, transform: "translateZ(-20px)" }}
+                style={{ background: styles.innerBorder }}
             />
 
             {/* Frame Structure */}
-            <motion.div
+            <div
                 className={`relative ${sizeClasses[size]} overflow-hidden`}
                 style={{
                     boxShadow: styles.shadow,
-                    transformStyle: "preserve-3d",
-                    transform: "translateZ(20px)"
                 }}
             >
                 {/* Frame Border Material */}
@@ -291,7 +264,6 @@ const PartnerCard = ({ partner, index, size = "medium", tier = "wood" }) => {
                     {/* Logo */}
                     <div
                         className="w-[75%] h-[75%] flex items-center justify-center relative z-20 transition-transform duration-500 group-hover:scale-110"
-                        style={{ transform: "translateZ(30px)" }}
                     >
                         <img
                             src={partner.logo}
@@ -301,19 +273,19 @@ const PartnerCard = ({ partner, index, size = "medium", tier = "wood" }) => {
                     </div>
                 </div>
 
-                {/* Interactive Glint/Sheen */}
-                <motion.div
+                {/* Interactive Glint/Sheen - Simplified */}
+                <div
                     className="absolute inset-0 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                     style={{
                         background: `radial-gradient(
-                            circle at ${glareX} ${glareY}, 
+                            circle at center, 
                             rgba(255,255,255,0.3) 0%, 
                             transparent 60%
                         )`,
                         mixBlendMode: "overlay"
                     }}
                 />
-            </motion.div>
+            </div>
 
             {/* Pin/Nail Detail */}
             <div
@@ -322,7 +294,6 @@ const PartnerCard = ({ partner, index, size = "medium", tier = "wood" }) => {
                     background: styles.pinGradient,
                     boxShadow: "0 2px 4px rgba(0,0,0,0.8)",
                     border: '1px solid rgba(255,255,255,0.2)',
-                    transform: "translateZ(25px)"
                 }}
             />
         </motion.div>
@@ -407,20 +378,32 @@ const Partners = () => {
                     <SectionHeading title="Platinum Partners" color="text-cyan-300" icon="❖" />
                     <div className="flex flex-wrap justify-center gap-16 sm:gap-24 relative z-10">
                         {platinumPartners.map((p, i) => (
-                            <PartnerCard key={i} partner={p} index={i} size="large" tier="platinum" />
+                            <PartnerCard key={i} partner={p} index={i} size="default" tier="platinum" />
                         ))}
                     </div>
                 </div>
                 */}
 
-                {/* Gold Tier - Abhibus, Pluto Drones */}
+                {/* Gold Tier - Pluto Drones */}
                 <div className="mb-32 relative">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-yellow-500/5 blur-[100px] rounded-full pointer-events-none" />
 
-                    <SectionHeading title="Gold Partners" color="text-yellow-400" icon="◈" />
+                    <SectionHeading title="Gold Sponsors" color="text-yellow-400" icon="◈" />
                     <div className="flex flex-wrap justify-center gap-12 sm:gap-20 relative z-10">
                         {goldPartners.map((p, i) => (
-                            <PartnerCard key={i} partner={p} index={i} size="medium" tier="gold" />
+                            <PartnerCard key={i} partner={p} index={i} size="default" tier="gold" />
+                        ))}
+                    </div>
+                </div>
+
+                {/* Travel Partner - Abhibus */}
+                <div className="mb-32 relative">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-orange-500/5 blur-[100px] rounded-full pointer-events-none" />
+
+                    <SectionHeading title="Travel Partner" color="text-orange-400" icon="✈" />
+                    <div className="flex flex-wrap justify-center gap-12 sm:gap-20 relative z-10">
+                        {travelPartners.map((p, i) => (
+                            <PartnerCard key={i} partner={p} index={i} size="default" tier="travel" />
                         ))}
                     </div>
                 </div>
@@ -431,7 +414,7 @@ const Partners = () => {
                     <SectionHeading title="Merchandise & Lifestyle" color="text-red-400" icon="⚡" />
                     <div className="flex flex-wrap justify-center gap-16 relative z-10">
                         {merchLifestylePartners.map((p, i) => (
-                            <PartnerCard key={i} partner={p} index={i} size="medium" tier="merch" />
+                            <PartnerCard key={i} partner={p} index={i} size="default" tier="merch" />
                         ))}
                     </div>
                 </div>
@@ -442,7 +425,7 @@ const Partners = () => {
                     <SectionHeading title="Platform Partners" color="text-blue-400" icon="⌬" />
                     <div className="flex flex-wrap justify-center gap-12 sm:gap-16 relative z-10">
                         {platformPartners.map((p, i) => (
-                            <PartnerCard key={i} partner={p} index={i} size="medium" tier="platform" />
+                            <PartnerCard key={i} partner={p} index={i} size="default" tier="platform" />
                         ))}
                     </div>
                 </div>
@@ -452,7 +435,7 @@ const Partners = () => {
                     <SectionHeading title="Silver Sponsors" color="text-slate-300" icon="◇" />
                     <div className="flex flex-wrap justify-center gap-10 sm:gap-16">
                         {silverPartners.map((p, i) => (
-                            <PartnerCard key={i} partner={p} index={i} size="small" tier="silver" />
+                            <PartnerCard key={i} partner={p} index={i} size="default" tier="silver" />
                         ))}
                     </div>
                 </div>
@@ -462,7 +445,7 @@ const Partners = () => {
                     <SectionHeading title="Other Partners" color="text-emerald-400" icon="✳" />
                     <div className="flex flex-wrap justify-center gap-10 sm:gap-16">
                         {otherPartners.map((p, i) => (
-                            <PartnerCard key={i} partner={p} index={i} size="small" tier="other" />
+                            <PartnerCard key={i} partner={p} index={i} size="default" tier="other" />
                         ))}
                     </div>
                 </div>
