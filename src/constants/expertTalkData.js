@@ -8,7 +8,7 @@
  * @module constants/expertTalkData
  */
 
-import colSubhajeetImg from "../assets/experts/ColSubhajeetNahaRetd.jpg";
+// import colSubhajeetImg from "../assets/experts/ColSubhajeetNahaRetd.jpg";
 import drAmitShuklaImg from "../assets/experts/DrAmitShukla.jpg";
 import skPandeyImg from "../assets/experts/ShShyamKrishnaPandey.jpg";
 
@@ -25,18 +25,18 @@ import skPandeyImg from "../assets/experts/ShShyamKrishnaPandey.jpg";
  * @property {string[]} highlights - Bullet points shown on hover
  */
 export const expertTalks = [
-    {
-        id: 1,
-        name: "Col. Subhajeet Naha (Retd)",
-        title: "Founder & CTO, Protecte Technologies",
-        image: colSubhajeetImg,
-        highlights: [
-            "Indian Army (26+ years)",
-            "Anti-Drone Warfare Expert",
-            "Electronic Warfare Expert",
-            "Blockchain, AI & Cybersecurity"
-        ]
-    },
+    // {
+    //     id: 1,
+    //     name: "Col. Subhajeet Naha (Retd)",
+    //     title: "Founder & CTO, Protecte Technologies",
+    //     image: colSubhajeetImg,
+    //     highlights: [
+    //         "Indian Army (26+ years)",
+    //         "Anti-Drone Warfare Expert",
+    //         "Electronic Warfare Expert",
+    //         "Blockchain, AI & Cybersecurity"
+    //     ]
+    // },
     {
         id: 2,
         name: "Dr. Amit Shukla",
