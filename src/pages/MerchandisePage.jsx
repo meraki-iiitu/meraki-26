@@ -82,7 +82,7 @@ const BrandSelectionPopup = ({ onSelectBrand, onClose }) => {
                             Choose Your Store
                         </h2>
                     </div>
-                    <p className="font-playball text-white/70 text-lg md:text-xl italic">
+                    <p className="font-terminal text-white/60 text-sm md:text-base tracking-wider uppercase">
                         Select a merchandise brand to explore
                     </p>
                 </div>
@@ -106,7 +106,7 @@ const BrandSelectionPopup = ({ onSelectBrand, onClose }) => {
                                 Doon Merchandise
                             </h3>
                         </div>
-                        <p className="font-playball text-cyan-400 text-base italic">
+                        <p className="font-terminal text-cyan-400 text-sm tracking-wide">
                             Explore Collection →
                         </p>
                     </motion.button>
@@ -128,7 +128,7 @@ const BrandSelectionPopup = ({ onSelectBrand, onClose }) => {
                                 Dopamine Store
                             </h3>
                         </div>
-                        <p className="font-playball text-red-400 text-base italic">
+                        <p className="font-terminal text-red-400 text-sm tracking-wide">
                             Explore Collection →
                         </p>
                     </motion.button>
@@ -395,27 +395,93 @@ const MerchandisePage = () => {
                     transition={{ duration: 0.5 }}
                     className="relative z-10 pt-20 pb-16 px-4 md:px-8 lg:px-16"
                 >
-                    {/* Header */}
-                    <div className="max-w-7xl mx-auto mb-8">
-                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                            <motion.div
-                                variants={appleSlideUp(0.1)}
-                                initial="hidden"
-                                animate="show"
-                            >
-                                <div className="flex items-center gap-3 mb-2">
-                                    <span className="text-cyan-400 text-xl">▶</span>
-                                    <h1 className="font-minecraft text-white text-2xl md:text-4xl tracking-wider uppercase">
-                                        Merchandise
-                                    </h1>
+                    {/* Header - Minecraft Wooden Sign Style */}
+                    <div className="max-w-7xl mx-auto mb-12">
+                        <motion.div
+                            variants={appleSlideUp(0.1)}
+                            initial="hidden"
+                            animate="show"
+                            className="flex flex-col items-center"
+                        >
+                            {/* Minecraft-style Hanging Sign */}
+                            <div className="relative">
+                                {/* Rope/Chain Links */}
+                                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 flex gap-1">
+                                    <div className="w-2 h-8 bg-gradient-to-b from-amber-800 via-amber-700 to-amber-800 rounded-sm" />
+                                    <div className="w-2 h-8 bg-gradient-to-b from-amber-800 via-amber-600 to-amber-800 rounded-sm" />
                                 </div>
-                                <p className={`font-playball ${brandColor} text-xl md:text-2xl italic`}>
-                                    {brandName}
-                                </p>
-                            </motion.div>
 
+                                {/* Wooden Sign Board */}
+                                <div
+                                    className="relative px-8 md:px-16 py-6 md:py-8"
+                                    style={{
+                                        background: 'linear-gradient(180deg, #8B6914 0%, #654321 15%, #5D3A1A 50%, #4A2E15 85%, #3D2512 100%)',
+                                        border: '4px solid',
+                                        borderColor: '#A67C00 #3D2914 #2D1F0A #8B6914',
+                                        boxShadow: `
+                                            inset 0 2px 0 rgba(255,255,255,0.1),
+                                            inset 0 -2px 0 rgba(0,0,0,0.3),
+                                            0 8px 30px rgba(0,0,0,0.6),
+                                            0 4px 0 #2D1F0A
+                                        `,
+                                    }}
+                                >
+                                    {/* Wood grain lines */}
+                                    <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
+                                        <div className="absolute top-1/4 left-0 right-0 h-[1px] bg-black/30" />
+                                        <div className="absolute top-2/4 left-0 right-0 h-[2px] bg-black/20" />
+                                        <div className="absolute top-3/4 left-0 right-0 h-[1px] bg-black/30" />
+                                    </div>
 
-                        </div>
+                                    {/* Corner screws/nails */}
+                                    <div className="absolute top-3 left-3 w-2 h-2 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border border-gray-700" />
+                                    <div className="absolute top-3 right-3 w-2 h-2 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border border-gray-700" />
+                                    <div className="absolute bottom-3 left-3 w-2 h-2 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border border-gray-700" />
+                                    <div className="absolute bottom-3 right-3 w-2 h-2 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border border-gray-700" />
+
+                                    {/* Brand Name Text */}
+                                    <div className="relative z-10 text-center">
+                                        <h1
+                                            className={`font-minecraft text-3xl md:text-5xl lg:text-6xl tracking-widest uppercase ${selectedBrand === "doon" ? "text-cyan-300" : "text-red-400"
+                                                }`}
+                                            style={{
+                                                textShadow: `
+                                                    2px 2px 0 rgba(0,0,0,0.8),
+                                                    -1px -1px 0 rgba(0,0,0,0.4),
+                                                    0 4px 8px rgba(0,0,0,0.5)
+                                                `,
+                                            }}
+                                        >
+                                            {brandName}
+                                        </h1>
+
+                                        {/* Decorative pixel brackets */}
+                                        <div className="flex items-center justify-center gap-4 mt-3">
+                                            <span className="text-amber-500/60 font-pixel text-sm">[ ◆ ]</span>
+                                            <span className="text-white/40 font-terminal text-xs tracking-[0.3em] uppercase">
+                                                Official Store
+                                            </span>
+                                            <span className="text-amber-500/60 font-pixel text-sm">[ ◆ ]</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Bottom shadow strip */}
+                                <div
+                                    className="absolute -bottom-2 left-2 right-2 h-2 bg-black/40 blur-sm"
+                                />
+                            </div>
+
+                            {/* Switch Brand Button */}
+                            <motion.button
+                                onClick={() => setShowPopup(true)}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="mt-8 px-6 py-2 border-2 border-white/20 bg-white/5 backdrop-blur-sm font-terminal text-white/60 text-sm tracking-widest uppercase hover:border-white/40 hover:text-white/80 transition-all duration-300"
+                            >
+                                ◄ Switch Store ►
+                            </motion.button>
+                        </motion.div>
                     </div>
 
                     {/* Main Content Grid */}
