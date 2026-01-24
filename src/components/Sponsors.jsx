@@ -41,7 +41,6 @@ const codechefLogo = "/codechef.jpeg";
 const partners = [
   // Gold Partners
   { name: "Abhibus", firm: "Abhibus", designation: "Gold Partner", logo: abhibusLogo, url: "https://www.abhibus.com/" },
-  { name: "Pluto Drones", firm: "Pluto Drones", designation: "Gold Partner", logo: plutoDronesLogo, url: "https://www.plutodrones.com/", whiteBg: true },
   // Merch Lifestyle Partners
   { name: "Dopamine Store", firm: "Dopamine Store", designation: "Merchandise Partner", logo: dopamineStoreLogo, url: "https://thedopaminestore.in" },
   { name: "Doon Merchandise", firm: "Doon Merchandise", designation: "Merchandise Partner", logo: doonLogo, url: "/merchandise", whiteBg: true },
@@ -340,7 +339,7 @@ export default function Sponsors() {
                 </div>
               ))}
             </motion.div>
-            
+
             {/* Fade gradients for smooth edges */}
             <div className="absolute inset-y-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-black/80 to-transparent pointer-events-none z-10" />
             <div className="absolute inset-y-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-black/80 to-transparent pointer-events-none z-10" />
@@ -368,7 +367,7 @@ export default function Sponsors() {
                 </div>
               ))}
             </motion.div>
-            
+
             {/* Fade gradients for smooth edges */}
             <div className="absolute inset-y-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-black/80 to-transparent pointer-events-none z-10" />
             <div className="absolute inset-y-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-black/80 to-transparent pointer-events-none z-10" />

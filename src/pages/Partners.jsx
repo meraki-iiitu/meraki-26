@@ -40,7 +40,7 @@ const abhibusLogo = "/abhibus.png";
 const plutoDronesLogo = "/pluto drones.webp";
 
 const goldPartners = [
-    { name: "Pluto Drones", firm: "Pluto Drones", designation: "Gold Sponsor", logo: plutoDronesLogo, url: "https://www.plutodrones.com/", whiteBg: true }
+    // Removed: Pluto Drones
 ];
 
 const travelPartners = [
@@ -384,17 +384,7 @@ const Partners = () => {
                 </div>
                 */}
 
-                {/* Gold Tier - Pluto Drones */}
-                <div className="mb-32 relative">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-yellow-500/5 blur-[100px] rounded-full pointer-events-none" />
-
-                    <SectionHeading title="Gold Sponsors" color="text-yellow-400" icon="◈" />
-                    <div className="flex flex-wrap justify-center gap-12 sm:gap-20 relative z-10">
-                        {goldPartners.map((p, i) => (
-                            <PartnerCard key={i} partner={p} index={i} size="default" tier="gold" />
-                        ))}
-                    </div>
-                </div>
+                {/* Gold Tier - Removed (no sponsors currently) */}
 
                 {/* Travel Partner - Abhibus */}
                 <div className="mb-32 relative">
