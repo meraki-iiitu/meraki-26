@@ -12,62 +12,15 @@ import { Link } from "react-router-dom";
 import wallBg from "../assets/sponsors_minecraft_bg.webp";
 import { appleSlideUp, appleScaleIn } from "../utils/motion";
 
-// Import logos
-import iiituLogo from '../assets/sponsors/iiitu_logo.webp';
-import interviewBuddyLogo from '../assets/sponsors/interview_buddy.webp';
-import unstopLogo from '../assets/sponsors/unstop_logo.svg';
-import aerostarLogo from '../assets/sponsors/aerostar.webp';
-import devfolioLogo from '../assets/sponsors/devfolio_logo.webp';
-import whosNextLogo from '../assets/sponsors/whosnext.webp';
-import mioartaiLogo from '../assets/mioartai.jpg';
-import dopamineStoreLogo from '../assets/dopamine_store.avif';
-import ethindiaLogo from '../assets/ethindia.svg';
-
-// Placeholder for missing logos
-const placeholderLogo = iiituLogo;
-const doonLogo = "/doonmerch.webp";
-const gfgLogo = "/gfg-gg-logo.svg";
-const codechefLogo = "/codechef.jpeg";
-
-// Partner Data with Categories
-
-// PLATINUM PARTNERS - Commented out as requested
-// const platinumPartners = [
-//     { name: "Platinum 1", firm: "Platinum Firm", designation: "Title Sponsor", logo: placeholderLogo, url: "#" }
-// ];
-
-const abhibusLogo = "/abhibus.png";
-const plutoDronesLogo = "/pluto drones.webp";
-
-const goldPartners = [
-    { name: "Pluto Drones", firm: "Pluto Drones", designation: "Gold Sponsor", logo: plutoDronesLogo, url: "https://www.plutodrones.com/", whiteBg: true }
-];
-
-const travelPartners = [
-    { name: "Abhibus", firm: "Abhibus", designation: "Travel Partner", logo: abhibusLogo, url: "https://www.abhibus.com/" }
-];
-
-const merchLifestylePartners = [
-    { name: "Dopamine Store", firm: "Dopamine Store", designation: "Merchandise Partner", logo: dopamineStoreLogo, url: "https://thedopaminestore.in" },
-    { name: "Doon Merchandise", firm: "Doon Merchandise", designation: "Merchandise Partner", logo: doonLogo, url: "/merchandise", whiteBg: true }
-];
-
-const platformPartners = [
-    { name: "Unstop", firm: "Unstop", designation: "Platform Partner", logo: unstopLogo, url: "https://unstop.com" },
-    { name: "GeeksforGeeks", firm: "GeeksforGeeks", designation: "Platform Partner", logo: gfgLogo, url: "https://www.geeksforgeeks.org/" },
-    { name: "CodeChef", firm: "CodeChef", designation: "Platform Partner", logo: codechefLogo, url: "https://www.codechef.com/" },
-    { name: "Devfolio", firm: "Devfolio", designation: "Platform Partner", logo: devfolioLogo, url: "https://devfolio.co" }
-];
-
-const silverPartners = [
-    { name: "InterviewBuddy", firm: "InterviewBuddy", designation: "Silver Sponsor", logo: interviewBuddyLogo, url: "https://interviewbuddy.net" },
-    { name: "ETHindia", firm: "ETHindia", designation: "Silver Sponsor", logo: ethindiaLogo, url: "https://www.instagram.com/ethindiaco/" }
-];
-
-const otherPartners = [
-    { name: "mioArtAI", firm: "mioArtAI", designation: "Theme Partner", logo: mioartaiLogo, url: "https://www.instagram.com/mioartai/" },
-    { name: "AEROSTAR", firm: "AEROSTAR", designation: "Technology Partner", logo: aerostarLogo, url: "https://www.instagram.com/aerostar007/" }
-];
+// Import shared partner data
+import {
+    goldPartners,
+    travelPartners,
+    merchLifestylePartners,
+    platformPartners,
+    silverPartners,
+    otherPartners
+} from "../constants/partnersData";
 
 /**
  * Floating Particles Effect
@@ -384,12 +337,11 @@ const Partners = () => {
                 </div>
                 */}
 
-                {/* Gold Tier - Pluto Drones */}
+                {/* Gold Tier */}
                 <div className="mb-32 relative">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-yellow-500/5 blur-[100px] rounded-full pointer-events-none" />
-
-                    <SectionHeading title="Gold Sponsors" color="text-yellow-400" icon="◈" />
-                    <div className="flex flex-wrap justify-center gap-12 sm:gap-20 relative z-10">
+                    <div className="absolute inset-0 bg-yellow-500/10 blur-[100px] rounded-full pointer-events-none" />
+                    <SectionHeading title="Gold Partners" color="text-yellow-400" icon="◆" />
+                    <div className="flex flex-wrap justify-center gap-16 relative z-10">
                         {goldPartners.map((p, i) => (
                             <PartnerCard key={i} partner={p} index={i} size="default" tier="gold" />
                         ))}

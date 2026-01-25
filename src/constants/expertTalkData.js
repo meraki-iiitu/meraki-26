@@ -8,9 +8,9 @@
  * @module constants/expertTalkData
  */
 
-// import colSubhajeetImg from "../assets/experts/ColSubhajeetNahaRetd.jpg";
-import drAmitShuklaImg from "../assets/experts/DrAmitShukla.jpg";
-import skPandeyImg from "../assets/experts/ShShyamKrishnaPandey.jpg";
+import drAmitShuklaImg from "../assets/experts/amit.jpg";
+import colNidhishImg from "../assets/experts/nidhish.jpg";
+import wcSonikaImg from "../assets/experts/sonika.jpg";
 
 /**
  * Expert talks array for speaker cards.
@@ -25,20 +25,32 @@ import skPandeyImg from "../assets/experts/ShShyamKrishnaPandey.jpg";
  * @property {string[]} highlights - Bullet points shown on hover
  */
 export const expertTalks = [
-    // {
-    //     id: 1,
-    //     name: "Col. Subhajeet Naha (Retd)",
-    //     title: "Founder & CTO, Protecte Technologies",
-    //     image: colSubhajeetImg,
-    //     highlights: [
-    //         "Indian Army (26+ years)",
-    //         "Anti-Drone Warfare Expert",
-    //         "Electronic Warfare Expert",
-    //         "Blockchain, AI & Cybersecurity"
-    //     ]
-    // },
+    {
+        id: 1,
+        name: "Colonel Nidhish Bhatnagar",
+        title: "Indian Army",
+        image: colNidhishImg,
+        highlights: [
+            "30+ Years in Emerging Tech & Cybersecurity",
+            "AI-Powered Big Data Analytics",
+            "Space, Defense & Homeland Security",
+            "Startup Mentor & Strategic Advisor"
+        ]
+    },
     {
         id: 2,
+        name: "Wing Commander Sonika Tanwar",
+        title: "Founder and CEO, DigiTruce.ai",
+        image: wcSonikaImg,
+        highlights: [
+            "14 Years in IAF Information Security",
+            "InfoSec Entrepreneur & Consultant",
+            "Ex-Amazon Manager",
+            "Leadership Coach & Public Speaker"
+        ]
+    },
+    {
+        id: 3,
         name: "Dr. Amit Shukla",
         title: "Chairperson, CAIR, IIT Mandi",
         image: drAmitShuklaImg,
@@ -49,15 +61,5 @@ export const expertTalks = [
             "Cyber Security & Electric Vehicles",
         ]
     },
-    {
-        id: 3,
-        name: "Shri SK Pandey",
-        title: "Scientist/Engineer - SG, ISTRAC ISRO",
-        image: skPandeyImg,
-        highlights: [
-            "Satcom",
-            "TTC Ground Stations",
-            "Control Engineering"
-        ]
-    },
 ];
+
