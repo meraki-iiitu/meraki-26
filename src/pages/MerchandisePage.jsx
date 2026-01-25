@@ -1,181 +1,138 @@
 /**
- * @fileoverview Merchandise store page with brand selection popup.
+ * @fileoverview Merchandise store page with modern premium aesthetic.
  * 
- * Displays a merchandise catalog with featured product display and product grid.
- * On initial load, shows a popup for users to choose between Doon Merchandise
- * and Dopamine Store brands.
+ * Displays a merchandise catalog with brand selection and product grid.
+ * Features a sleek dark theme with glassmorphism and neon accents.
  * 
- * @see DOCS.md#animation-system for motion variants
  * @component
  */
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
-import { appleSlideUp, sectionTransition } from "../utils/motion";
+import { appleSlideUp, appleScaleIn } from "../utils/motion";
 
-// Merchandise images from public folder
-const doonHoodie = "/merchendise/doom bg removed.png";
-const dopamineHoodie = "/merchendise/dopamine-bg removed.png";
-const skullIcon = "/merchendise/skull.png";
+import { STORE_ASSETS, DOON_PRODUCTS, DOPAMINE_PRODUCTS } from "../constants/merchandiseData";
 
-// Doon product images from public/merchendise/doon/
-const blackHoodieImg = "/merchendise/doon/Meraki Official Black Hoodie.webp";
-const whiteHoodieImg = "/merchendise/doon/Meraki Official White Hoodie.webp";
-const blackTeeImg = "/merchendise/doon/Meraki Official Black T-Shirt.webp";
-const whiteTeeImg = "/merchendise/doon/Meraki Official White T-Shirt.webp";
-const oversizedTeeImg = "/merchendise/doon/404 Not Found Oversized T-Shirt.webp";
-
-// Product data for Doon Merchandise - All hoodies and t-shirts from doonmerch.odoo.com
-const doonProducts = [
-    { id: 1, name: "Meraki Official Black Hoodie", type: "PREMIUM HOODIE", price: "₹1,299", image: blackHoodieImg, featured: true, buyLink: "https://doonmerch.odoo.com/shop/meraki-iiit-una-17/meraki-official-black-hoodie-132" },
-    { id: 2, name: "Meraki Official White Hoodie", type: "PREMIUM HOODIE", price: "₹1,299", image: whiteHoodieImg, buyLink: "https://doonmerch.odoo.com/shop/meraki-iiit-una-17/meraki-official-white-hoodie-133" },
-    { id: 3, name: "Meraki Official Black T-Shirt", type: "PREMIUM TEE", price: "₹549", image: blackTeeImg, buyLink: "https://doonmerch.odoo.com/shop/meraki-iiit-una-17/meraki-official-black-t-shirt-111" },
-    { id: 4, name: "Meraki Official White T-Shirt", type: "PREMIUM TEE", price: "₹549", image: whiteTeeImg, buyLink: "https://doonmerch.odoo.com/shop/meraki-iiit-una-17/meraki-official-white-t-shirt-130" },
-    { id: 5, name: "404 Not Found Oversized T-Shirt", type: "OVERSIZED TEE", price: "₹649", image: oversizedTeeImg, buyLink: "https://doonmerch.odoo.com/shop/meraki-iiit-una-17/404-not-found-oversized-t-shirt-134" },
-];
-
-// Dopamine product images from public/merchendise/dopamine/
-const isItOverHoodieImg = "/merchendise/dopamine/it-is-over-hoodie.webp";
-const gridHoodieImg = "/merchendise/dopamine/meraki-grid.webp";
-const gameIsOnHoodieImg = "/merchendise/dopamine/gameison-hoodiestogo.webp";
-const beezyBeeCopyImg = "/merchendise/dopamine/beezy-bee-210-gsm-copy.webp";
-const beezyBeeImg = "/merchendise/dopamine/beezy-bee.webp";
-const gameIsOnTeeImg = "/merchendise/dopamine/gameison-240gsm.webp";
-
-// Product data for Dopamine Store - All products from thedopaminestore.in/collections/iiit-una
-const dopamineProducts = [
-    { id: 1, name: "MERAKI - IS IT OVER - Hoodie", type: "HOODIES TO GO", image: isItOverHoodieImg, featured: true, buyLink: "https://thedopaminestore.in/products/iiit-una-meraki-grid-hoodies-to-go-copy" },
-    { id: 2, name: "MERAKI - GRID - Hoodie", type: "HOODIES TO GO", image: gridHoodieImg, buyLink: "https://thedopaminestore.in/products/iiit-una-meraki-game-is-on-hoodies-to-go-copy" },
-    { id: 3, name: "MERAKI - GAME IS ON - Hoodie", type: "HOODIES TO GO", image: gameIsOnHoodieImg, buyLink: "https://thedopaminestore.in/products/iiit-una-meraki-game-is-on-240-gsm-copy" },
-    { id: 4, name: "MERAKI - BEEZY BEE", type: "240 GSM (Copy)", image: beezyBeeCopyImg, buyLink: "https://thedopaminestore.in/products/iiit-una-meraki-beezy-bee-240-gsm-copy" },
-    { id: 5, name: "MERAKI - BEEZY BEE", type: "240 GSM", image: beezyBeeImg, buyLink: "https://thedopaminestore.in/products/iiit-una-meraki-game-is-on-240-gsm" },
-    { id: 6, name: "MERAKI - GAME IS ON", type: "240 GSM", image: gameIsOnTeeImg, buyLink: "https://thedopaminestore.in/products/iiit-una-meraki-240-gsm" },
-];
+// Store images utilized from constants
 
 /**
- * Brand Selection Popup Component
+ * Modern Glassmorphism Product Card
  */
-const BrandSelectionPopup = ({ onSelectBrand, onClose }) => {
+const ProductCard = ({ product, onClick, isSelected, brandColor }) => {
+    const accentColor = brandColor === 'cyan' ? 'border-cyan-500 shadow-cyan-500/20' : 'border-red-500 shadow-red-500/20';
+    const textColor = brandColor === 'cyan' ? 'text-cyan-400' : 'text-red-400';
+    const bgHover = brandColor === 'cyan' ? 'group-hover:bg-cyan-950/30' : 'group-hover:bg-red-950/30';
+
     return (
         <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md"
+            onClick={onClick}
+            whileHover={{ y: -5 }}
+            whileTap={{ scale: 0.98 }}
+            className={`
+                relative cursor-pointer group rounded-xl overflow-hidden transition-all duration-300
+                bg-white/5 border backdrop-blur-sm
+                ${isSelected
+                    ? `border-2 ${accentColor} shadow-[0_0_30px_rgba(0,0,0,0.3)] bg-white/10`
+                    : 'border-white/10 hover:border-white/20'
+                }
+            `}
         >
-            <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
-                transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                className="bg-neutral-900 border-4 border-neutral-700 p-8 md:p-12 max-w-3xl w-full mx-4"
-                style={{
-                    boxShadow: "0 0 0 2px rgba(0,0,0,0.8), 0 20px 60px rgba(0,0,0,0.8)",
-                }}
-            >
-                {/* Popup Header */}
-                <div className="text-center mb-8">
-                    <div className="flex items-center justify-center gap-3 mb-4">
-                        <span className="text-cyan-400 text-2xl">▶</span>
-                        <h2 className="font-minecraft text-white text-2xl md:text-3xl tracking-wider uppercase">
-                            Choose Your Store
-                        </h2>
-                    </div>
-                    <p className="font-terminal text-white/60 text-sm md:text-base tracking-wider uppercase">
-                        Select a merchandise brand to explore
-                    </p>
-                </div>
-
-                {/* Brand Options */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Doon Merchandise Option */}
-                    <motion.button
-                        onClick={() => onSelectBrand("doon")}
-                        whileHover={{ scale: 1.03, borderColor: "rgba(34, 211, 238, 0.8)" }}
-                        whileTap={{ scale: 0.98 }}
-                        className="bg-neutral-800 border-2 border-neutral-600 p-6 text-center transition-all duration-300 hover:bg-neutral-700/50 cursor-pointer group"
-                    >
-                        <img
-                            src={doonHoodie}
-                            alt="Doon Merchandise"
-                            className="w-full h-48 object-contain mb-4 group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="flex items-center justify-center gap-2 mb-2">
-                            <h3 className="font-minecraft text-white text-lg tracking-wide uppercase">
-                                Doon Merchandise
-                            </h3>
-                        </div>
-                        <p className="font-terminal text-cyan-400 text-sm tracking-wide">
-                            Explore Collection →
-                        </p>
-                    </motion.button>
-
-                    {/* Dopamine Store Option */}
-                    <motion.button
-                        onClick={() => onSelectBrand("dopamine")}
-                        whileHover={{ scale: 1.03, borderColor: "rgba(34, 211, 238, 0.8)" }}
-                        whileTap={{ scale: 0.98 }}
-                        className="bg-neutral-800 border-2 border-neutral-600 p-6 text-center transition-all duration-300 hover:bg-neutral-700/50 cursor-pointer group"
-                    >
-                        <img
-                            src={dopamineHoodie}
-                            alt="Dopamine Store"
-                            className="w-full h-48 object-contain mb-4 group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="flex items-center justify-center gap-2 mb-2">
-                            <h3 className="font-minecraft text-white text-lg tracking-wide uppercase">
-                                Dopamine Store
-                            </h3>
-                        </div>
-                        <p className="font-terminal text-red-400 text-sm tracking-wide">
-                            Explore Collection →
-                        </p>
-                    </motion.button>
-                </div>
-            </motion.div>
-        </motion.div>
-    );
-};
-
-/**
- * Product Card Component
- */
-const ProductCard = ({ product, brandColor }) => {
-    return (
-        <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-neutral-800/50 border border-neutral-700 overflow-hidden group cursor-pointer"
-        >
-            <div className="relative overflow-hidden">
+            {/* Image Container */}
+            <div className={`
+                relative aspect-square p-4 flex items-center justify-center 
+                transition-colors duration-500 ${bgHover}
+            `}>
                 <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-64 object-contain p-4 group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-contain drop-shadow-2xl transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
                 />
-                <div className="absolute top-4 left-4">
-                    <span className="font-terminal text-xs text-white/60 uppercase tracking-wider">
+
+                {/* Type Badge */}
+                <div className="absolute top-3 left-3">
+                    <span className="font-terminal text-[10px] sm:text-xs px-2 py-1 rounded bg-black/60 backdrop-blur-md text-white/80 border border-white/10 uppercase tracking-widest">
                         {product.type}
                     </span>
                 </div>
             </div>
-            <div className="p-5 border-t border-neutral-700">
-                <h4 className="font-minecraft text-white text-lg tracking-wide uppercase truncate">
+
+            {/* Content */}
+            <div className="p-4 bg-black/40 border-t border-white/5">
+                <h4 className="font-minecraft text-white text-sm sm:text-base tracking-wide uppercase line-clamp-2 min-h-[2.5em] mb-2 leading-relaxed">
                     {product.name}
                 </h4>
+                <div className="flex items-center justify-end">
+                    <span className="font-terminal text-xs text-white/40 group-hover:text-white/80 transition-colors uppercase tracking-wider">
+                        View Details →
+                    </span>
+                </div>
             </div>
         </motion.div>
     );
 };
 
 /**
- * Merchandise Page Component
+ * Modern Store Selection Card
+ */
+const StoreCard = ({ name, image, accentColor, onClick }) => {
+    const isCyan = accentColor === 'cyan';
+    const gradient = isCyan
+        ? 'from-cyan-950/50 to-transparent hover:from-cyan-900/60'
+        : 'from-red-950/50 to-transparent hover:from-red-900/60';
+    const border = isCyan ? 'hover:border-cyan-500/50' : 'hover:border-red-500/50';
+    const btnColor = isCyan ? 'bg-cyan-500 group-hover:bg-cyan-400' : 'bg-red-600 group-hover:bg-red-500';
+
+    return (
+        <motion.button
+            onClick={onClick}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className={`
+                relative w-full overflow-hidden rounded-2xl border border-white/10 
+                bg-gradient-to-br ${gradient} backdrop-blur-xl p-0
+                transition-all duration-500 ${border} group text-left flex flex-col h-auto sm:h-full
+            `}
+        >
+            <div className="relative h-40 sm:h-64 md:h-72 w-full flex items-center justify-center p-4 sm:p-6 bg-black/20 shrink-0">
+                <div className={`
+                    absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60
+                `} />
+                <img
+                    src={image}
+                    alt={name}
+                    className="w-full h-full object-contain filter drop-shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3"
+                />
+            </div>
+
+            <div className="p-4 sm:p-6 relative z-10 flex flex-col flex-grow bg-black/40 border-t border-white/5">
+                <h3 className="font-minecraft text-white text-xl sm:text-3xl tracking-widest uppercase mb-1 sm:mb-2">
+                    {name}
+                </h3>
+                <p className="font-terminal text-white/60 text-xs sm:text-sm mb-4 sm:mb-6 flex-grow">
+                    Explore the exclusive {isCyan ? 'Doon' : 'Dopamine'} collection
+                </p>
+
+                <div className={`
+                    w-full py-3 sm:py-4 rounded-lg font-minecraft text-center text-white tracking-widest uppercase text-sm sm:text-base
+                    transform transition-all duration-300 shadow-lg ${btnColor} bg-opacity-90
+                `}>
+                    Enter Store
+                </div>
+            </div>
+        </motion.button>
+    );
+};
+
+/**
+ * Main Merchandise Page
  */
 const MerchandisePage = () => {
     const location = useLocation();
     const [showPopup, setShowPopup] = useState(true);
     const [selectedBrand, setSelectedBrand] = useState(null);
-    const [featuredProduct, setFeaturedProduct] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -187,387 +144,192 @@ const MerchandisePage = () => {
     const handleSelectBrand = (brand) => {
         setSelectedBrand(brand);
         setShowPopup(false);
-
-        if (brand === "doon") {
-            setProducts(doonProducts);
-            setFeaturedProduct(doonProducts.find(p => p.featured));
-        } else {
-            setProducts(dopamineProducts);
-            setFeaturedProduct(dopamineProducts.find(p => p.featured));
-        }
+        const productList = brand === "doon" ? DOON_PRODUCTS : DOPAMINE_PRODUCTS;
+        setProducts(productList);
+        setSelectedProduct(productList.find(p => p.featured) || productList[0]);
     };
 
-    const brandColor = selectedBrand === "doon" ? "text-cyan-400" : "text-red-400";
-    const brandName = selectedBrand === "doon" ? "Doon Merchandise" : "Dopamine Store";
+    const isCyan = selectedBrand === "doon";
+    const brandColor = isCyan ? "cyan" : "red";
+    const brandName = isCyan ? "Doon Merchandise" : "Dopamine Store";
+    const accentText = isCyan ? 'text-cyan-400' : 'text-red-500';
 
     return (
-        <div className="min-h-screen bg-black relative overflow-hidden">
-            {/* Base dark background with subtle white tones */}
-            <div
-                className="absolute inset-0"
-                style={{
-                    background: `
-                        radial-gradient(ellipse at 30% 20%, rgba(40, 40, 50, 0.4) 0%, transparent 50%),
-                        radial-gradient(ellipse at 70% 80%, rgba(30, 30, 40, 0.3) 0%, transparent 50%),
-                        linear-gradient(135deg, #0a0a0a 0%, #050505 25%, #0d0d0d 50%, #000000 75%, #080808 100%)
-                    `,
-                }}
-            />
-
-            {/* White smoke/marble streaks */}
-            <div className="absolute inset-0 opacity-[0.08]">
-                <div
-                    className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl"
-                    style={{
-                        background: 'radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 60%)',
-                    }}
-                />
-                <div
-                    className="absolute top-1/3 right-1/4 w-80 h-80 rounded-full blur-3xl"
-                    style={{
-                        background: 'radial-gradient(circle, rgba(200, 200, 220, 0.3) 0%, transparent 70%)',
-                    }}
-                />
-                <div
-                    className="absolute bottom-1/4 left-1/3 w-64 h-64 rounded-full blur-3xl"
-                    style={{
-                        background: 'radial-gradient(circle, rgba(180, 180, 200, 0.25) 0%, transparent 65%)',
-                    }}
-                />
+        <div className="min-h-screen bg-black text-white relative selection:bg-cyan-500/30">
+            {/* Abstract Background */}
+            <div className="fixed inset-0 z-0">
+                <div className="absolute inset-0 bg-neutral-950" />
+                <div className={`
+                    absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full blur-[120px] opacity-20
+                    ${isCyan ? 'bg-cyan-600' : 'bg-red-600'}
+                `} />
+                <div className="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full blur-[150px] bg-purple-900/20" />
+                <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
             </div>
 
-            {/* Animated gradient orbs with white tints */}
-            <div className="absolute inset-0 opacity-15">
-                <div
-                    className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
-                    style={{
-                        background: 'radial-gradient(circle, rgba(100, 100, 120, 0.3) 0%, transparent 70%)',
-                        animation: 'pulse 8s ease-in-out infinite',
-                    }}
-                />
-                <div
-                    className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl"
-                    style={{
-                        background: 'radial-gradient(circle, rgba(80, 80, 100, 0.25) 0%, transparent 70%)',
-                        animation: 'pulse 10s ease-in-out infinite 2s',
-                    }}
-                />
-            </div>
-
-            {/* Marble texture with white veins */}
-            <div
-                className="absolute inset-0 opacity-[0.06]"
-                style={{
-                    backgroundImage: `
-                        linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 30%, rgba(255,255,255,0.05) 35%, transparent 35%),
-                        linear-gradient(-45deg, transparent 30%, rgba(255,255,255,0.04) 30%, rgba(255,255,255,0.04) 35%, transparent 35%),
-                        linear-gradient(90deg, transparent 45%, rgba(200,200,200,0.03) 45%, rgba(200,200,200,0.03) 55%, transparent 55%)
-                    `,
-                    backgroundSize: '100px 100px, 100px 100px, 80px 80px',
-                    backgroundPosition: '0 0, 50px 50px, 0 0',
-                }}
-            />
-
-            {/* Subtle white noise texture */}
-            <div
-                className="absolute inset-0 opacity-[0.04]"
-                style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill='%23ffffff' /%3E%3C/svg%3E")`,
-                }}
-            />
-
-            {/* Diagonal grid pattern with white lines */}
-            <div
-                className="absolute inset-0 opacity-[0.03]"
-                style={{
-                    backgroundImage: `
-                        repeating-linear-gradient(
-                            45deg,
-                            transparent,
-                            transparent 40px,
-                            rgba(255,255,255,0.04) 40px,
-                            rgba(255,255,255,0.04) 41px
-                        ),
-                        repeating-linear-gradient(
-                            -45deg,
-                            transparent,
-                            transparent 40px,
-                            rgba(255,255,255,0.04) 40px,
-                            rgba(255,255,255,0.04) 41px
-                        )
-                    `,
-                }}
-            />
-
-            {/* White light streaks */}
-            <div className="absolute inset-0 opacity-[0.05]">
-                <div
-                    className="absolute top-0 left-0 w-full h-1"
-                    style={{
-                        background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)',
-                    }}
-                />
-                <div
-                    className="absolute bottom-0 right-0 w-full h-1"
-                    style={{
-                        background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)',
-                    }}
-                />
-            </div>
-
-            {/* Top gradient fade with white tint */}
-            <div
-                className="absolute top-0 left-0 right-0 h-32 z-[1]"
-                style={{
-                    background: 'linear-gradient(to bottom, rgba(10,10,15,0.95), transparent)',
-                }}
-            />
-
-            {/* Bottom gradient fade */}
-            <div
-                className="absolute bottom-0 left-0 right-0 h-32 z-[1]"
-                style={{
-                    background: 'linear-gradient(to top, rgba(5,5,10,0.9), transparent)',
-                }}
-            />
-
-            {/* Decorative corner accents with white highlights */}
-            <div className="absolute top-0 left-0 w-64 h-64 opacity-10">
-                <div
-                    className="absolute top-0 left-0 w-full h-full"
-                    style={{
-                        background: 'linear-gradient(135deg, rgba(180, 180, 200, 0.3) 0%, transparent 70%)',
-                    }}
-                />
-            </div>
-            <div className="absolute bottom-0 right-0 w-64 h-64 opacity-10">
-                <div
-                    className="absolute bottom-0 right-0 w-full h-full"
-                    style={{
-                        background: 'linear-gradient(-45deg, rgba(160, 160, 180, 0.25) 0%, transparent 70%)',
-                    }}
-                />
-            </div>
-
-            {/* Subtle white glow around edges */}
-            <div className="absolute inset-0 opacity-[0.06]">
-                <div
-                    className="absolute top-0 left-0 right-0 h-2"
-                    style={{
-                        background: 'linear-gradient(to bottom, rgba(255,255,255,0.15), transparent)',
-                    }}
-                />
-                <div
-                    className="absolute bottom-0 left-0 right-0 h-2"
-                    style={{
-                        background: 'linear-gradient(to top, rgba(255,255,255,0.15), transparent)',
-                    }}
-                />
-                <div
-                    className="absolute top-0 left-0 bottom-0 w-2"
-                    style={{
-                        background: 'linear-gradient(to right, rgba(255,255,255,0.15), transparent)',
-                    }}
-                />
-                <div
-                    className="absolute top-0 right-0 bottom-0 w-2"
-                    style={{
-                        background: 'linear-gradient(to left, rgba(255,255,255,0.15), transparent)',
-                    }}
-                />
-            </div>
-
-            {/* Brand Selection Popup */}
+            {/* Brand Selection Screen */}
             <AnimatePresence>
                 {showPopup && (
-                    <BrandSelectionPopup
-                        onSelectBrand={handleSelectBrand}
-                        onClose={() => setShowPopup(false)}
-                    />
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 overflow-y-auto bg-black/90 backdrop-blur-xl"
+                    >
+                        <div className="min-h-full flex items-center justify-center p-4 sm:p-8">
+                            <motion.div
+                                initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                                animate={{ scale: 1, opacity: 1, y: 0 }}
+                                exit={{ scale: 0.95, opacity: 0 }}
+                                className="relative z-10 w-full max-w-5xl my-8 sm:my-0"
+                            >
+                                <div className="text-center mb-8 sm:mb-12">
+                                    <h1 className="font-minecraft text-3xl sm:text-4xl md:text-6xl text-white mb-2 sm:mb-4 tracking-wider">
+                                        SELECT STORE
+                                    </h1>
+                                    <p className="font-terminal text-white/50 tracking-widest uppercase text-xs sm:text-sm md:text-base">
+                                        Choose your preferred merchandise partner
+                                    </p>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-12">
+                                    <StoreCard
+                                        name="Doon Store"
+                                        image={STORE_ASSETS.doon.hoodie}
+                                        accentColor="cyan"
+                                        onClick={() => handleSelectBrand("doon")}
+                                    />
+                                    <StoreCard
+                                        name="Dopamine"
+                                        image={STORE_ASSETS.dopamine.hoodie}
+                                        accentColor="red"
+                                        onClick={() => handleSelectBrand("dopamine")}
+                                    />
+                                </div>
+                            </motion.div>
+                        </div>
+                    </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* Main Content - Only show after brand selection */}
+            {/* Main Shop Content */}
             {selectedBrand && (
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="relative z-10 pt-20 pb-16 px-4 md:px-8 lg:px-16"
+                    className="relative z-10 min-h-screen pt-24 pb-20 px-4 sm:px-8 max-w-[1600px] mx-auto"
                 >
-                    {/* Header - Minecraft Wooden Sign Style */}
-                    <div className="max-w-7xl mx-auto mb-12">
-                        <motion.div
-                            variants={appleSlideUp(0.1)}
-                            initial="hidden"
-                            animate="show"
-                            className="flex flex-col items-center"
-                        >
-                            {/* Minecraft-style Hanging Sign */}
-                            <div className="relative">
-                                {/* Rope/Chain Links */}
-                                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 flex gap-1">
-                                    <div className="w-2 h-8 bg-gradient-to-b from-amber-800 via-amber-700 to-amber-800 rounded-sm" />
-                                    <div className="w-2 h-8 bg-gradient-to-b from-amber-800 via-amber-600 to-amber-800 rounded-sm" />
-                                </div>
-
-                                {/* Wooden Sign Board */}
-                                <div
-                                    className="relative px-8 md:px-16 py-6 md:py-8"
-                                    style={{
-                                        background: 'linear-gradient(180deg, #8B6914 0%, #654321 15%, #5D3A1A 50%, #4A2E15 85%, #3D2512 100%)',
-                                        border: '4px solid',
-                                        borderColor: '#A67C00 #3D2914 #2D1F0A #8B6914',
-                                        boxShadow: `
-                                            inset 0 2px 0 rgba(255,255,255,0.1),
-                                            inset 0 -2px 0 rgba(0,0,0,0.3),
-                                            0 8px 30px rgba(0,0,0,0.6),
-                                            0 4px 0 #2D1F0A
-                                        `,
-                                    }}
-                                >
-                                    {/* Wood grain lines */}
-                                    <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
-                                        <div className="absolute top-1/4 left-0 right-0 h-[1px] bg-black/30" />
-                                        <div className="absolute top-2/4 left-0 right-0 h-[2px] bg-black/20" />
-                                        <div className="absolute top-3/4 left-0 right-0 h-[1px] bg-black/30" />
-                                    </div>
-
-                                    {/* Corner screws/nails */}
-                                    <div className="absolute top-3 left-3 w-2 h-2 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border border-gray-700" />
-                                    <div className="absolute top-3 right-3 w-2 h-2 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border border-gray-700" />
-                                    <div className="absolute bottom-3 left-3 w-2 h-2 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border border-gray-700" />
-                                    <div className="absolute bottom-3 right-3 w-2 h-2 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border border-gray-700" />
-
-                                    {/* Brand Name Text */}
-                                    <div className="relative z-10 text-center">
-                                        <h1
-                                            className={`font-minecraft text-3xl md:text-5xl lg:text-6xl tracking-widest uppercase ${selectedBrand === "doon" ? "text-cyan-300" : "text-red-400"
-                                                }`}
-                                            style={{
-                                                textShadow: `
-                                                    2px 2px 0 rgba(0,0,0,0.8),
-                                                    -1px -1px 0 rgba(0,0,0,0.4),
-                                                    0 4px 8px rgba(0,0,0,0.5)
-                                                `,
-                                            }}
-                                        >
-                                            {brandName}
-                                        </h1>
-
-                                        {/* Decorative pixel brackets */}
-                                        <div className="flex items-center justify-center gap-4 mt-3">
-                                            <span className="text-amber-500/60 font-pixel text-sm">[ ◆ ]</span>
-                                            <span className="text-white/40 font-terminal text-xs tracking-[0.3em] uppercase">
-                                                Official Store
-                                            </span>
-                                            <span className="text-amber-500/60 font-pixel text-sm">[ ◆ ]</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Bottom shadow strip */}
-                                <div
-                                    className="absolute -bottom-2 left-2 right-2 h-2 bg-black/40 blur-sm"
-                                />
-                            </div>
-
-                            {/* Switch Brand Button */}
-                            <motion.button
-                                onClick={() => setShowPopup(true)}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="mt-8 px-6 py-2 border-2 border-white/20 bg-white/5 backdrop-blur-sm font-terminal text-white/60 text-sm tracking-widest uppercase hover:border-white/40 hover:text-white/80 transition-all duration-300"
-                            >
-                                ◄ Switch Store ►
-                            </motion.button>
-                        </motion.div>
-                    </div>
-
-                    {/* Main Content Grid */}
-                    <div className="max-w-7xl mx-auto">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
-                            {/* Left - Featured Product */}
+                    {/* Header */}
+                    <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 border-b border-white/10 pb-8">
+                        <div>
                             <motion.div
-                                variants={appleSlideUp(0.2)}
-                                initial="hidden"
-                                animate="show"
-                                className="relative"
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                className="flex items-center gap-3 mb-2"
                             >
-                                {/* Decorative elements */}
-                                <div className="absolute -left-4 top-1/4 font-terminal text-white/20 text-sm tracking-widest transform -rotate-90 origin-left">
-                                    できる
-                                </div>
+                                <span className={`w-3 h-3 rounded-full ${isCyan ? 'bg-cyan-500' : 'bg-red-500'}`} />
+                                <span className="font-terminal text-white/60 text-sm tracking-[0.2em] uppercase">
+                                    Official Meraki 2026 Collection
+                                </span>
+                            </motion.div>
+                            <h1 className="font-minecraft text-4xl md:text-6xl text-white uppercase tracking-wider">
+                                {brandName}
+                            </h1>
+                        </div>
 
-                                {/* Featured Product Display */}
-                                <div className="flex flex-col items-center justify-center min-h-[400px] md:min-h-[500px]">
-                                    {featuredProduct && (
-                                        <>
-                                            <motion.img
-                                                key={featuredProduct.id}
-                                                initial={{ opacity: 0, scale: 0.9 }}
-                                                animate={{ opacity: 1, scale: 1 }}
-                                                transition={{ duration: 0.5 }}
-                                                src={featuredProduct.image}
-                                                alt={featuredProduct.name}
-                                                className="w-full max-w-md h-auto object-contain drop-shadow-2xl"
-                                            />
+                        <motion.button
+                            onClick={() => setShowPopup(true)}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="px-6 py-3 border border-white/20 bg-white/5 hover:bg-white/10 
+                                     backdrop-blur-sm rounded-lg font-terminal text-white/80 
+                                     text-xs tracking-widest uppercase transition-all"
+                        >
+                            Switch Store
+                        </motion.button>
+                    </header>
 
-                                            {/* Product Info Bar */}
-                                            <div className="mt-8 w-full max-w-md">
-                                                <div className="flex items-end justify-between mb-4">
+                    {/* Content Grid */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 icon-grid">
+
+                        {/* Featured Sidebar (Desktop) / Top Section (Mobile) */}
+                        <div className="lg:col-span-5 order-2 lg:order-1">
+                            <AnimatePresence mode="wait">
+                                {selectedProduct && (
+                                    <motion.div
+                                        key={selectedProduct.id}
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.95 }}
+                                        className="lg:sticky lg:top-32"
+                                    >
+                                        <div className={`
+                                            relative rounded-2xl overflow-hidden border bg-gradient-to-b
+                                            ${isCyan
+                                                ? 'border-cyan-500/30 from-cyan-950/20 to-black/40'
+                                                : 'border-red-500/30 from-red-950/20 to-black/40'
+                                            } backdrop-blur-xl
+                                        `}>
+                                            <div className="p-8 md:p-12 flex items-center justify-center bg-[url('/grid.png')] bg-repeat opacity-90">
+                                                <img
+                                                    src={selectedProduct.image}
+                                                    alt={selectedProduct.name}
+                                                    className="w-full max-w-sm drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform hover:scale-105 transition-transform duration-500"
+                                                />
+                                            </div>
+
+                                            <div className="p-8 border-t border-white/10 bg-black/40">
+                                                <div className="flex items-start justify-between gap-4 mb-4">
                                                     <div>
-                                                        <p className="font-terminal text-white/60 text-sm uppercase tracking-wider mb-1">
-                                                            {featuredProduct.type}
-                                                        </p>
-                                                        <h2 className="font-minecraft text-white text-xl md:text-2xl tracking-wide uppercase">
-                                                            {featuredProduct.name}
+                                                        <span className="inline-block px-3 py-1 rounded bg-white/10 text-white/60 text-xs font-terminal uppercase tracking-widest mb-3">
+                                                            {selectedProduct.type}
+                                                        </span>
+                                                        <h2 className="font-minecraft text-2xl md:text-3xl text-white leading-tight uppercase">
+                                                            {selectedProduct.name}
                                                         </h2>
                                                     </div>
                                                 </div>
 
-                                                {/* Buy Button */}
-                                                <motion.button
-                                                    onClick={() => {
-                                                        if (featuredProduct.buyLink) {
-                                                            window.open(featuredProduct.buyLink, '_blank', 'noopener,noreferrer');
+                                                <a
+                                                    href={selectedProduct.buyLink}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className={`
+                                                        block w-full py-5 rounded-xl font-minecraft text-xl text-center uppercase tracking-widest text-white shadow-lg
+                                                        transform transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]
+                                                        ${isCyan
+                                                            ? 'bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-500 hover:to-cyan-400 shadow-cyan-900/20'
+                                                            : 'bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 shadow-red-900/20'
                                                         }
-                                                    }}
-                                                    whileHover={{ scale: 1.02 }}
-                                                    whileTap={{ scale: 0.98 }}
-                                                    className={`block w-full py-3 text-center font-minecraft text-white tracking-widest uppercase cursor-pointer ${selectedBrand === "doon"
-                                                        ? "bg-cyan-600 hover:bg-cyan-500"
-                                                        : "bg-red-700 hover:bg-red-600"
-                                                        } transition-colors duration-300`}
+                                                    `}
                                                 >
-                                                    BUY
-                                                </motion.button>
+                                                    Buy Now
+                                                </a>
                                             </div>
-                                        </>
-                                    )}
-                                </div>
-                            </motion.div>
-
-                            {/* Right - Product Grid */}
-                            <motion.div
-                                variants={sectionTransition}
-                                initial="hidden"
-                                animate="show"
-                            >
-                                <div className="grid grid-cols-2 gap-16">
-                                    {products.map((product, index) => (
-                                        <motion.div
-                                            key={product.id}
-                                            variants={appleSlideUp(0.1 * index)}
-                                            onClick={() => setFeaturedProduct(product)}
-                                        >
-                                            <ProductCard product={product} brandColor={brandColor} />
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </motion.div>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
+
+                        {/* Product Grid */}
+                        <div className="lg:col-span-7 order-1 lg:order-2">
+                            <h3 className="font-terminal text-white/40 text-sm uppercase tracking-widest mb-6">
+                                Available Products ({products.length})
+                            </h3>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                                {products.map((product) => (
+                                    <ProductCard
+                                        key={product.id}
+                                        product={product}
+                                        onClick={() => setSelectedProduct(product)}
+                                        isSelected={selectedProduct?.id === product.id}
+                                        brandColor={brandColor}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+
                     </div>
                 </motion.div>
             )}
