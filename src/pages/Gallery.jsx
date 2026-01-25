@@ -10,7 +10,7 @@
 
 import React, { useState, useRef, useMemo, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import galleryBg from "../assets/gallery.webp";
+import galleryBg from "../assets/gallery_bg.png";
 import openingPlaceholder from "../assets/gallery/opening/IMG_1212-2.webp";
 import workshopPlaceholder from "../assets/gallery/workshop/IMG_0039.webp";
 import softwarePlaceholder from "../assets/gallery/software/IMG_2418.webp";

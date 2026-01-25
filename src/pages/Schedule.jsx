@@ -11,7 +11,7 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
-import dashboardBg from "../assets/dashboard.webp";
+import scheduleBg from "../assets/schedule_bg.png";
 import avatarImg from "../assets/avatar_pixel.webp";
 import minecraftSignComingSoon from "../assets/minecraft_sign_coming_soon.webp";
 import { scheduleData, showSchedule } from "../constants";
@@ -92,7 +92,7 @@ const Schedule = () => {
       ref={containerRef}
       className="min-h-screen relative text-white pt-20 sm:pt-24 pb-12 sm:pb-16"
       style={{
-        backgroundImage: `url(${dashboardBg})`,
+        backgroundImage: `url(${scheduleBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "scroll",
