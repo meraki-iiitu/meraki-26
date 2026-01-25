@@ -11,10 +11,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { appleSlideUp, appleScaleIn } from "../utils/motion";
-
 import { STORE_ASSETS, DOON_PRODUCTS, DOPAMINE_PRODUCTS } from "../constants/merchandiseData";
-
-// Store images utilized from constants
 
 /**
  * Modern Glassmorphism Product Card
@@ -75,6 +72,7 @@ const ProductCard = ({ product, onClick, isSelected, brandColor }) => {
 
 /**
  * Modern Store Selection Card
+ * Optimized for full-screen fit without scrolling
  */
 const StoreCard = ({ name, image, accentColor, onClick }) => {
     const isCyan = accentColor === 'cyan';
@@ -87,35 +85,37 @@ const StoreCard = ({ name, image, accentColor, onClick }) => {
     return (
         <motion.button
             onClick={onClick}
-            whileHover={{ scale: 1.02 }}
+            whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.98 }}
             className={`
-                relative w-full overflow-hidden rounded-2xl border border-white/10 
+                relative w-full h-full overflow-hidden rounded-2xl border border-white/10 
                 bg-gradient-to-br ${gradient} backdrop-blur-xl p-0
-                transition-all duration-500 ${border} group text-left flex flex-col h-auto sm:h-full
+                transition-all duration-300 ${border} group text-left flex flex-col
             `}
         >
-            <div className="relative h-40 sm:h-64 md:h-72 w-full flex items-center justify-center p-4 sm:p-6 bg-black/20 shrink-0">
+            {/* Flexible Image Container - Shrinks to fit available space */}
+            <div className="relative flex-1 min-h-0 w-full flex items-center justify-center p-4 bg-black/20">
                 <div className={`
                     absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60
                 `} />
                 <img
                     src={image}
                     alt={name}
-                    className="w-full h-full object-contain filter drop-shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3"
+                    className="w-full h-full object-contain filter drop-shadow-2xl transition-transform duration-500 group-hover:scale-105 group-hover:-rotate-3"
                 />
             </div>
 
-            <div className="p-4 sm:p-6 relative z-10 flex flex-col flex-grow bg-black/40 border-t border-white/5">
-                <h3 className="font-minecraft text-white text-xl sm:text-3xl tracking-widest uppercase mb-1 sm:mb-2">
+            {/* Fixed Height Content - Always visible at bottom */}
+            <div className="flex-shrink-0 p-4 sm:p-6 relative z-10 flex flex-col bg-black/40 border-t border-white/5">
+                <h3 className="font-minecraft text-white text-lg sm:text-2xl tracking-widest uppercase mb-1">
                     {name}
                 </h3>
-                <p className="font-terminal text-white/60 text-xs sm:text-sm mb-4 sm:mb-6 flex-grow">
-                    Explore the exclusive {isCyan ? 'Doon' : 'Dopamine'} collection
+                <p className="font-terminal text-white/60 text-[10px] sm:text-xs mb-3">
+                    Exclusive {isCyan ? 'Doon' : 'Dopamine'} Collection
                 </p>
 
                 <div className={`
-                    w-full py-3 sm:py-4 rounded-lg font-minecraft text-center text-white tracking-widest uppercase text-sm sm:text-base
+                    w-full py-3 rounded-lg font-minecraft text-center text-white tracking-widest uppercase text-xs sm:text-sm
                     transform transition-all duration-300 shadow-lg ${btnColor} bg-opacity-90
                 `}>
                     Enter Store
@@ -167,46 +167,41 @@ const MerchandisePage = () => {
                 <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
             </div>
 
-            {/* Brand Selection Screen */}
+            {/* Brand Selection Screen - Full Screen No Scroll */}
             <AnimatePresence>
                 {showPopup && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 overflow-y-auto bg-black/90 backdrop-blur-xl"
+                        className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex flex-col overflow-hidden"
                     >
-                        <div className="min-h-full flex items-center justify-center p-4 sm:p-8">
-                            <motion.div
-                                initial={{ scale: 0.95, opacity: 0, y: 20 }}
-                                animate={{ scale: 1, opacity: 1, y: 0 }}
-                                exit={{ scale: 0.95, opacity: 0 }}
-                                className="relative z-10 w-full max-w-5xl my-8 sm:my-0"
-                            >
-                                <div className="text-center mb-8 sm:mb-12">
-                                    <h1 className="font-minecraft text-3xl sm:text-4xl md:text-6xl text-white mb-2 sm:mb-4 tracking-wider">
-                                        SELECT STORE
-                                    </h1>
-                                    <p className="font-terminal text-white/50 tracking-widest uppercase text-xs sm:text-sm md:text-base">
-                                        Choose your preferred merchandise partner
-                                    </p>
-                                </div>
+                        <div className="flex-1 flex flex-col p-4 w-full h-full max-w-7xl mx-auto">
+                            {/* Header */}
+                            <div className="flex-shrink-0 text-center mb-4 sm:mb-8 pt-2 sm:pt-4">
+                                <h1 className="font-minecraft text-2xl sm:text-4xl md:text-5xl text-white mb-2 tracking-wider">
+                                    SELECT STORE
+                                </h1>
+                                <p className="font-terminal text-white/50 tracking-widest uppercase text-[10px] sm:text-sm">
+                                    Choose your preferred merchandise partner
+                                </p>
+                            </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-12">
-                                    <StoreCard
-                                        name="Doon Store"
-                                        image={STORE_ASSETS.doon.hoodie}
-                                        accentColor="cyan"
-                                        onClick={() => handleSelectBrand("doon")}
-                                    />
-                                    <StoreCard
-                                        name="Dopamine"
-                                        image={STORE_ASSETS.dopamine.hoodie}
-                                        accentColor="red"
-                                        onClick={() => handleSelectBrand("dopamine")}
-                                    />
-                                </div>
-                            </motion.div>
+                            {/* Split Screen Grid */}
+                            <div className="flex-1 grid grid-rows-2 md:grid-rows-1 md:grid-cols-2 gap-4 min-h-0 pb-4">
+                                <StoreCard
+                                    name="Doon Store"
+                                    image={STORE_ASSETS.doon.hoodie}
+                                    accentColor="cyan"
+                                    onClick={() => handleSelectBrand("doon")}
+                                />
+                                <StoreCard
+                                    name="Dopamine"
+                                    image={STORE_ASSETS.dopamine.hoodie}
+                                    accentColor="red"
+                                    onClick={() => handleSelectBrand("dopamine")}
+                                />
+                            </div>
                         </div>
                     </motion.div>
                 )}
