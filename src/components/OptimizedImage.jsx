@@ -137,6 +137,7 @@ export const OptimizedBackground = ({
                 alt=""
                 loading={priority ? 'eager' : 'lazy'}
                 onLoad={() => setIsLoaded(true)}
+                onError={() => setIsLoaded(true)}
                 className="sr-only"
                 aria-hidden="true"
             />
