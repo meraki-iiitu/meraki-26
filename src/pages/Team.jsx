@@ -10,7 +10,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import coordinatorsBg from "../assets/coordinators.webp";
+import teamBg from "../assets/team_bg.png";
 import avatarImg from "../assets/avatar_pixel.webp";
 import { coordinators, coreCoordinators, dayCoordinators, departmentHeads } from "../constants";
 
@@ -55,7 +55,7 @@ const Team = () => {
     <div
       className="min-h-screen relative text-white pt-20 sm:pt-24 pb-12 sm:pb-16"
       style={{
-        backgroundImage: `url(${coordinatorsBg})`,
+        backgroundImage: `url(${teamBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "scroll",

@@ -14,7 +14,7 @@ import React, { useState, useRef, useMemo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import flagshipBg from "../assets/elite_minecraft_bg.webp";
-import { events } from "../constants";
+import { getEliteEvents, getShortDescription } from "../constants/eventsData";
 import { appleSlideUp, sectionTransition } from "../utils/motion";
 
 /**
@@ -25,8 +25,8 @@ import { appleSlideUp, sectionTransition } from "../utils/motion";
  * @state activeTab - Currently selected event ID
  */
 function FlagshipEvent() {
-  // Filter to show only flagship events based on the isElite flag
-  const flagshipEvents = useMemo(() => events.filter(event => event.isElite), []);
+  // Get flagship events from single source of truth
+  const flagshipEvents = useMemo(() => getEliteEvents(), []);
 
   const [activeTab, setActiveTab] = useState(flagshipEvents[0]?.id || null);
   const navigate = useNavigate();

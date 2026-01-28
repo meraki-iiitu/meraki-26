@@ -4,30 +4,27 @@
  * @page /event/:eventId
  */
 
-import React, { useState, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useParams } from "react-router-dom";
 import eventDetailBg from "../assets/event_detail.webp";
 import minecraftSignComingSoon from "../assets/minecraft_sign_coming_soon.webp";
-import { eventDetailsData, events } from "../constants";
+import { eventsData, getEventBySlug } from "../constants/eventsData";
 
 /**
  * Event details page component.
  * @params eventId - URL parameter matching event slug
- * @state showMore - Toggles between short and full description
  */
 const EventDetails = () => {
   const { eventId } = useParams();
-  const [showMore, setShowMore] = useState(false);
 
-  // Event data lookup with fallback
-  const eventData = eventDetailsData[eventId] || {
+  // Get event data from single source of truth
+  const eventData = getEventBySlug(eventId) || {
     title: "Event Not Found",
     price: "₹0/-",
     tags: [],
     badge: "EVENT",
     description: "Event details not available.",
-    fullDescription: "Event details not available.",
     eventDate: "TBA",
     teamSize: "TBA",
     venue: "TBA",
@@ -35,8 +32,7 @@ const EventDetails = () => {
     registerLink: "#",
   };
 
-  const eventInfo = events.find(e => e.slug === eventId);
-  const eventImage = eventInfo?.image;
+  const eventImage = eventData?.image;
 
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -98,7 +94,7 @@ const EventDetails = () => {
         </motion.div>
 
         {/* Conditional Content: Coming Soon Wireframe vs Real Content */}
-        {eventInfo?.comingSoon ? (
+        {eventData?.comingSoon ? (
           /* Coming Soon Skeleton UI */
           <div className="relative min-h-[50vh]">
             {/* Floating "Coming Soon" Badge */}
@@ -159,7 +155,7 @@ const EventDetails = () => {
 
               {/* Info */}
               <div className="space-y-4 sm:space-y-6 order-2">
-                {eventInfo?.isElite && <div className="inline-block bg-blue-600/20 border-2 border-blue-500 px-4 py-2 mt-2"><span className="font-pixel text-blue-400 text-sm sm:text-base tracking-wider flex items-center gap-2"><span className="animate-pulse">★</span> FLAGSHIP EVENT</span></div>}
+                {eventData?.isElite && <div className="inline-block bg-blue-600/20 border-2 border-blue-500 px-4 py-2 mt-2"><span className="font-pixel text-blue-400 text-sm sm:text-base tracking-wider flex items-center gap-2"><span className="animate-pulse">★</span> FLAGSHIP EVENT</span></div>}
                 {eventData.price && <div className="flex items-center gap-2 sm:gap-3"><span className="text-2xl sm:text-3xl md:text-4xl">💰</span><span className="font-pixel text-xl sm:text-2xl md:text-3xl text-yellow-400">{eventData.price}</span></div>}
                 <div className="flex flex-wrap gap-2 sm:gap-3">{eventData.tags.map((tag, index) => <span key={index} className="bg-gray-800 border border-gray-600 text-white font-terminal text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2">{tag}</span>)}</div>
                 <div className="flex flex-col gap-3 sm:gap-4">
@@ -236,8 +232,7 @@ const EventDetails = () => {
               <h2 className="font-pixel text-lg sm:text-xl md:text-2xl text-white mb-4 sm:mb-6">DETAILS</h2>
               <div className="mb-4 sm:mb-6">
                 <h3 className="font-pixel text-sm sm:text-base text-cyan-400 mb-2 sm:mb-3">DESCRIPTION</h3>
-                <AnimatePresence mode="wait"><motion.p key={showMore ? "full" : "short"} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="font-terminal text-sm sm:text-base text-gray-300 leading-relaxed mb-2 sm:mb-3 whitespace-pre-line">{showMore ? eventData.fullDescription : eventData.description}</motion.p></AnimatePresence>
-                <button onClick={() => setShowMore(!showMore)} className="font-terminal text-sm text-cyan-400 hover:text-cyan-300 flex items-center gap-2 min-h-[44px]">{showMore ? "Show less ▲" : "Show more ▼"}</button>
+                <p className="font-terminal text-sm sm:text-base text-gray-300 leading-relaxed mb-2 sm:mb-3 whitespace-pre-line">{eventData.description}</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8">
                 <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">EVENT DATE</h4><p className="font-terminal text-sm sm:text-base text-gray-400">{eventData.eventDate}</p></div>
