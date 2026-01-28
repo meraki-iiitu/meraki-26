@@ -175,9 +175,10 @@ const DevTeam = () => {
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5 }}
-                                className="font-terminal text-cyan-400/70 text-sm uppercase tracking-[0.2em] mb-8 text-center"
+                                className="font-minecraft text-cyan-400 text-xl sm:text-2xl uppercase tracking-wider mb-8 text-center"
+                                style={{ textShadow: '2px 2px 0px #000, -1px -1px 0px rgba(0,0,0,0.3)' }}
                             >
-                                Coordinators
+                                ⚔ Coordinators ⚔
                             </motion.h3>
                             <div className="flex flex-wrap justify-center gap-6">
                                 {tier1.map((member, index) => (
@@ -196,9 +197,10 @@ const DevTeam = () => {
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
-                                className="font-terminal text-cyan-400/70 text-sm uppercase tracking-[0.2em] mb-8 text-center"
+                                className="font-minecraft text-emerald-400 text-xl sm:text-2xl uppercase tracking-wider mb-8 text-center"
+                                style={{ textShadow: '2px 2px 0px #000, -1px -1px 0px rgba(0,0,0,0.3)' }}
                             >
-                                Core Team
+                                ⛏ Core Team ⛏
                             </motion.h3>
                             <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
                                 {tier2.map((member, index) => (
@@ -217,9 +219,10 @@ const DevTeam = () => {
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: 0.4 }}
-                                className="font-terminal text-cyan-400/70 text-sm uppercase tracking-[0.2em] mb-8 text-center"
+                                className="font-minecraft text-amber-400 text-xl sm:text-2xl uppercase tracking-wider mb-8 text-center"
+                                style={{ textShadow: '2px 2px 0px #000, -1px -1px 0px rgba(0,0,0,0.3)' }}
                             >
-                                Contributors
+                                ★ Contributors ★
                             </motion.h3>
                             <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
                                 {tier3.map((member, index) => (

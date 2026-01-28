@@ -1,59 +1,54 @@
 /**
  * @fileoverview Event schedule data organized by day.
- * 
- * Contains the multi-day event schedule with timing, event names,
- * and links to event detail pages.
+ * Uses eventsData as the single source of truth.
  * 
  * @module constants/scheduleData
  */
 
-import minecraftimg from "../assets/minecraft_dungeons_placeholder.webp";
+import { eventsData } from './eventsData';
 
 /**
  * Feature flag to show/hide schedule.
- * Set to true when schedule data is finalized and ready for display.
- * When false, Schedule page shows "Coming Soon" message.
- * 
  * @constant
  * @type {boolean}
  */
-export const showSchedule = false;
+export const showSchedule = true;
 
 /**
- * Event schedule organized by day number.
- * Keys are day numbers (1, 2, 3), values are arrays of scheduled events.
+ * Schedule entries with event references.
+ * Each entry links to eventsData via slug.
  * 
  * @constant
  * @type {Object<number, Array<Object>>}
- * 
- * @property {string} time - Event start time (e.g., "10:00 AM")
- * @property {string} event - Event display name
- * @property {string} icon - Emoji icon for visual identification
- * @property {string} slug - URL-friendly identifier for event details link
- * @property {string} eventId - Unique event instance ID
- * @property {string} image - Event thumbnail image path
- * 
- * @example
- * // Day 1 first event
- * scheduleData[1][0]
- * // { time: '10:00 AM', event: 'DRONE EVENT', slug: 'drone-event', ... }
  */
 export const scheduleData = {
     1: [
-        { time: '10:00 AM', event: 'DRONE EVENT', icon: '🚁', slug: 'drone-event', eventId: 'EVT-101', image: minecraftimg },
-        { time: '11:30 AM', event: 'ROBO DRIVE', icon: '🤖', slug: 'robo-drive', eventId: 'EVT-102', image: minecraftimg },
-        { time: '2:00 PM', event: 'TECH CHALLENGE', icon: '💻', slug: 'tech-challenge', eventId: 'EVT-103', image: minecraftimg },
-        { time: '4:00 PM', event: 'INNOVATION QUEST', icon: '💡', slug: 'innovation-quest', eventId: 'EVT-104', image: minecraftimg },
+        { time: '10:00 AM', slug: 'skycircuit', eventId: 'EVT-101' },
+        { time: '11:30 AM', slug: 'robodrive', eventId: 'EVT-102' },
+        { time: '2:00 PM', slug: 'hack-the-throne', eventId: 'EVT-103' },
+        { time: '4:00 PM', slug: 'arenax', eventId: 'EVT-104' },
     ],
     2: [
-        { time: '9:00 AM', event: 'ROBO DRIVE', icon: '🤖', slug: 'robo-drive', eventId: 'EVT-201', image: minecraftimg },
-        { time: '11:00 AM', event: 'TECH CHALLENGE', icon: '💻', slug: 'tech-challenge', eventId: 'EVT-202', image: minecraftimg },
-        { time: '2:00 PM', event: 'DRONE EVENT', icon: '🚁', slug: 'drone-event', eventId: 'EVT-203', image: minecraftimg },
-        { time: '4:30 PM', event: 'INNOVATION QUEST', icon: '💡', slug: 'innovation-quest', eventId: 'EVT-204', image: minecraftimg },
+        { time: '9:00 AM', slug: 'robodrive', eventId: 'EVT-201' },
+        { time: '11:00 AM', slug: 'hack-the-throne', eventId: 'EVT-202' },
+        { time: '2:00 PM', slug: 'skycircuit', eventId: 'EVT-203' },
+        { time: '4:30 PM', slug: 'arenax', eventId: 'EVT-204' },
     ],
     3: [
-        { time: '10:00 AM', event: 'DRONE EVENT', icon: '🚁', slug: 'drone-event', eventId: 'EVT-301', image: minecraftimg },
-        { time: '1:00 PM', event: 'ROBO DRIVE', icon: '🤖', slug: 'robo-drive', eventId: 'EVT-302', image: minecraftimg },
-        { time: '3:00 PM', event: 'TECH CHALLENGE', icon: '💻', slug: 'tech-challenge', eventId: 'EVT-303', image: minecraftimg },
+        { time: '10:00 AM', slug: 'skycircuit', eventId: 'EVT-301' },
+        { time: '1:00 PM', slug: 'robodrive', eventId: 'EVT-302' },
+        { time: '3:00 PM', slug: 'hack-the-throne', eventId: 'EVT-303' },
     ]
+};
+
+/**
+ * Get enriched schedule data with full event details.
+ * @param {number} day - Day number (1, 2, or 3)
+ * @returns {Array<Object>} Schedule with event details
+ */
+export const getScheduleForDay = (day) => {
+    return (scheduleData[day] || []).map(entry => ({
+        ...entry,
+        event: eventsData[entry.slug] || null
+    }));
 };

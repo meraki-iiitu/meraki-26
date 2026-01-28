@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import scheduleBg from "../assets/schedule_bg.png";
 import avatarImg from "../assets/avatar_pixel.webp";
 import minecraftSignComingSoon from "../assets/minecraft_sign_coming_soon.webp";
-import { scheduleData, showSchedule } from "../constants";
+import { getScheduleForDay, showSchedule } from "../constants";
 
 /**
  * Schedule page component with day tabs.
@@ -303,9 +303,9 @@ const Schedule = () => {
                   animate="show"
                   className="space-y-2 sm:space-y-3"
                 >
-                  {scheduleData[activeDay]?.map((item, index) => (
+                  {getScheduleForDay(activeDay).map((item, index) => (
                     <Link
-                      key={index}
+                      key={item.eventId || index}
                       to={`/event/${item.slug}`}
                       className="block"
                     >
@@ -317,25 +317,28 @@ const Schedule = () => {
                       >
                         {/* Event Thumbnail */}
                         <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gray-700 overflow-hidden border-2 border-gray-600 shrink-0 group-hover:border-cyan-400 transition-colors">
-                          <img
-                            src={item.image}
-                            alt={item.event}
-                            className="w-full h-full object-cover"
-                          />
+                          {item.event?.image && (
+                            <img
+                              src={item.event.image}
+                              alt={item.event.title}
+                              className="w-full h-full object-cover"
+                            />
+                          )}
                         </div>
 
-                        {/* Icon Badge */}
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-cyan-400 flex items-center justify-center text-lg sm:text-xl border-2 border-cyan-600 shrink-0 group-hover:scale-110 transition-transform">
-                          {item.icon}
+                        {/* Badge with first letter or tag */}
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-cyan-400 flex items-center justify-center text-lg sm:text-xl font-bold text-black border-2 border-cyan-600 shrink-0 group-hover:scale-110 transition-transform">
+                          {item.event?.title?.charAt(0) || '?'}
                         </div>
 
                         {/* Event Info */}
                         <div className="flex-1 min-w-0">
                           <p className="font-pixel text-xs sm:text-sm md:text-base text-white mb-0.5 sm:mb-1 truncate group-hover:text-cyan-400 transition-colors">
-                            {item.event}
+                            {item.event?.title || 'Unknown Event'}
                           </p>
                           <p className="font-terminal text-[10px] sm:text-xs text-gray-400">
-                            Event ID: {item.eventId}
+                            {item.event?.badge && <span className="text-cyan-400 mr-2">{item.event.badge}</span>}
+                            ID: {item.eventId}
                           </p>
                         </div>
 
