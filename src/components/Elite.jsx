@@ -14,7 +14,7 @@ import React, { useState, useRef, useMemo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import eliteBg from "../assets/elite_minecraft_bg.webp";
-import { events } from "../constants";
+import { getEliteEvents, getShortDescription } from "../constants/eventsData";
 import { appleSlideUp, sectionTransition } from "../utils/motion";
 
 /**
@@ -25,8 +25,8 @@ import { appleSlideUp, sectionTransition } from "../utils/motion";
  * @state activeTab - Currently selected event ID
  */
 function Elite() {
-  // Filter to show only elite (featured) events
-  const eliteEvents = useMemo(() => events.filter(event => event.isElite), []);
+  // Get elite (featured) events from single source of truth
+  const eliteEvents = useMemo(() => getEliteEvents(), []);
 
   const [activeTab, setActiveTab] = useState(eliteEvents[0]?.id || null);
   const navigate = useNavigate();

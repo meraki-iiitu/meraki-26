@@ -5,7 +5,7 @@
  * convenient import throughout the application.
  * 
  * @example
- * import { events, workshops, faqData, galleryData } from "../constants";
+ * import { eventsData, getAllEvents, getEliteEvents } from "../constants";
  * 
  * @module constants
  */
