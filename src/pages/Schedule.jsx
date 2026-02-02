@@ -11,10 +11,10 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
-import dashboardBg from "../assets/dashboard.webp";
+import scheduleBg from "../assets/schedule_bg.png";
 import avatarImg from "../assets/avatar_pixel.webp";
 import minecraftSignComingSoon from "../assets/minecraft_sign_coming_soon.webp";
-import { scheduleData, showSchedule } from "../constants";
+import { getScheduleForDay, showSchedule } from "../constants";
 
 /**
  * Schedule page component with day tabs.
@@ -92,7 +92,7 @@ const Schedule = () => {
       ref={containerRef}
       className="min-h-screen relative text-white pt-20 sm:pt-24 pb-12 sm:pb-16"
       style={{
-        backgroundImage: `url(${dashboardBg})`,
+        backgroundImage: `url(${scheduleBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "scroll",
@@ -253,43 +253,45 @@ const Schedule = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="flex gap-2 sm:gap-3 mb-6 sm:mb-8 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0"
+                className="flex gap-3 sm:gap-4 mb-8 sm:mb-10 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0"
               >
                 {[1, 2, 3].map((day) => (
                   <motion.button
                     key={day}
                     onClick={() => setActiveDay(day)}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`font-pixel px-5 sm:px-6 md:px-8 py-3 sm:py-4 text-xs sm:text-sm border-2 sm:border-4 transition-all relative whitespace-nowrap snap-start shrink-0 min-w-[100px] sm:min-w-[120px] ${activeDay === day
-                      ? "bg-gray-700 text-white border-gray-600"
-                      : "bg-gray-900/80 text-gray-400 border-gray-800 hover:border-gray-600 hover:text-white active:bg-gray-800"
-                      }`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`font-minecraft px-6 sm:px-8 py-4 sm:py-5 text-sm sm:text-base border-[3px] border-b-[6px] transition-all relative whitespace-nowrap snap-start shrink-0 min-w-[120px] sm:min-w-[160px] shadow-lg ${
+                      activeDay === day
+                        ? "bg-gray-700 text-white border-gray-500 border-b-gray-400"
+                        : "bg-gray-800 text-gray-400 border-gray-700 border-b-gray-900 hover:bg-gray-750 hover:text-gray-200 hover:border-gray-600"
+                    }`}
                   >
-                    <span className="relative z-10">Day {day}</span>
+                    <span className="relative z-10 drop-shadow-md">Day {day}</span>
                     {activeDay === day && (
-                      <motion.div
-                        className="absolute bottom-0 left-0 right-0 h-1 bg-cyan-400"
-                        layoutId="activeDay"
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                      />
+                       <div className="absolute top-1 right-1 w-2 h-2 bg-green-500 animate-pulse"></div>
                     )}
                   </motion.button>
                 ))}
               </motion.div>
 
-              {/* Active Day Label */}
+              {/* Active Day Label - Styled */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeDay}
-                  initial={{ opacity: 0, x: 20 }}
+                  initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
+                  exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.3 }}
-                  className="mb-4 sm:mb-6"
+                  className="mb-8 flex items-center justify-between"
                 >
-                  <div className="bg-cyan-400 text-black font-pixel py-2 sm:py-3 px-4 sm:px-6 inline-block border-2 sm:border-4 border-cyan-600 shadow-lg text-xs sm:text-sm">
-                    &gt; DAY {activeDay} SCHEDULE
+                  <div className="bg-cyan-400 text-black font-minecraft py-2 px-4 border-[3px] border-b-[6px] border-cyan-800 shadow-xl inline-flex items-center gap-2">
+                    <span className="animate-pulse">_</span>
+                    <span>DAY {activeDay} LOGS</span>
+                  </div>
+                  
+                  <div className="hidden sm:block font-terminal text-gray-500 text-xs">
+                     // SYNCED AT {new Date().toLocaleTimeString()}
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -301,52 +303,88 @@ const Schedule = () => {
                   variants={containerVariants}
                   initial="hidden"
                   animate="show"
-                  className="space-y-2 sm:space-y-3"
+                  className="space-y-4 sm:space-y-6 relative ml-2 sm:ml-4"
                 >
-                  {scheduleData[activeDay]?.map((item, index) => (
+                   {/* Vertical Timeline Bar */}
+                   <div className="absolute left-2.5 sm:left-4 top-2 bottom-2 w-0.5 sm:w-1 bg-gray-700/50"></div>
+
+                  {getScheduleForDay(activeDay).map((item, index) => (
                     <Link
-                      key={index}
-                      to={`/event/${item.slug}`}
-                      className="block"
+                      key={item.eventId || index}
+                      to={item.event?.slug ? `/event/${item.event.slug}` : '#'}
+                      className="block relative pl-8 sm:pl-12"
                     >
+                      {/* Timeline Dot */}
+                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 sm:w-8 sm:h-8 bg-gray-900 border-2 sm:border-4 border-cyan-400 rounded-none z-10 flex items-center justify-center">
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-cyan-400"></div>
+                      </div>
+
                       <motion.div
                         variants={itemVariants}
-                        whileHover={{ scale: 1.01, x: 4 }}
+                        whileHover={{ scale: 1.01, x: 5 }}
                         whileTap={{ scale: 0.99 }}
-                        className="bg-gray-800/90 backdrop-blur-sm border-2 border-gray-700 hover:border-cyan-400 transition-all p-3 sm:p-4 flex items-center gap-3 sm:gap-4 group cursor-pointer"
+                        className="bg-gray-800/80 backdrop-blur-md border-[3px] border-b-[6px] border-gray-700 hover:border-cyan-400 hover:border-b-cyan-600 transition-all p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 group cursor-pointer shadow-lg relative overflow-hidden"
                       >
-                        {/* Event Thumbnail */}
-                        <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gray-700 overflow-hidden border-2 border-gray-600 shrink-0 group-hover:border-cyan-400 transition-colors">
-                          <img
-                            src={item.image}
-                            alt={item.event}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
+                         {/* Subtle grid pattern overlay */}
+                         <div className="absolute inset-0 opacity-10 pointer-events-none" 
+                              style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '20px 20px' }}
+                         ></div>
 
-                        {/* Icon Badge */}
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-cyan-400 flex items-center justify-center text-lg sm:text-xl border-2 border-cyan-600 shrink-0 group-hover:scale-110 transition-transform">
-                          {item.icon}
+                        {/* Event Thumbnail */}
+                        <div className="w-full sm:w-20 md:w-24 aspect-video sm:aspect-square bg-gray-900 overflow-hidden border-2 border-gray-600 shrink-0 group-hover:border-cyan-400 transition-colors relative shadow-inner">
+                          {item.event?.image ? (
+                            <img
+                              src={item.event.image}
+                              alt={item.event.title}
+                              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-gray-700 font-pixel text-xs">NO IMG</div>
+                          )}
+                           {/* Scanline effect */}
+                           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/10 to-transparent opacity-0 group-hover:opacity-100 animate-scanline pointer-events-none"></div>
                         </div>
 
                         {/* Event Info */}
-                        <div className="flex-1 min-w-0">
-                          <p className="font-pixel text-xs sm:text-sm md:text-base text-white mb-0.5 sm:mb-1 truncate group-hover:text-cyan-400 transition-colors">
-                            {item.event}
-                          </p>
-                          <p className="font-terminal text-[10px] sm:text-xs text-gray-400">
-                            Event ID: {item.eventId}
-                          </p>
+                        <div className="flex-1 min-w-0 w-full relative z-10">
+                          <div className="flex items-center gap-2 mb-1">
+                             <div className="px-2 py-0.5 bg-gray-900 border border-gray-600 text-[10px] text-cyan-400 font-terminal tracking-wider">
+                                {item.eventId}
+                             </div>
+                             {item.event?.category === 'elimination' && (
+                                <div className="px-2 py-0.5 bg-red-900/50 border border-red-500/50 text-[10px] text-red-400 font-terminal tracking-wider animate-pulse">
+                                   ELIMINATION
+                                </div>
+                             )}
+                          </div>
+                          
+                          <h3 className="font-minecraft text-lg sm:text-xl text-white mb-2 truncate group-hover:text-cyan-400 transition-colors drop-shadow-sm">
+                            {item.event?.title || 'Unknown Event'}
+                          </h3>
+                          
+                          <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs sm:text-sm text-gray-400 font-terminal">
+                            {item.event?.venue && (
+                                <div className="flex items-center gap-1.5">
+                                    <span className="text-cyan-600">📍</span>
+                                    <span>{item.event.venue}</span>
+                                </div>
+                            )}
+                             {item.event?.studentCoordinator && (
+                                <div className="flex items-center gap-1.5">
+                                    <span className="text-cyan-600">👤</span>
+                                    <span className="truncate max-w-[150px] sm:max-w-none">{item.event.studentCoordinator.split(',')[0]}</span>
+                                </div>
+                            )}
+                          </div>
                         </div>
 
-                        {/* Time Badge */}
-                        <div className="font-terminal text-[10px] sm:text-xs md:text-sm text-cyan-400 bg-gray-900 px-2 sm:px-3 md:px-4 py-1 sm:py-2 border border-gray-700 shrink-0">
-                          {item.time}
+                        {/* Time Badge - Prominent */}
+                        <div className="w-full sm:w-auto mt-2 sm:mt-0 relative z-10">
+                           <div className="font-pixel text-xs sm:text-sm text-black bg-cyan-400 px-4 py-2 border-2 border-cyan-600 shadow-[4px_4px_0px_rgba(0,0,0,0.5)] text-center whitespace-nowrap group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
+                              {item.time}
+                           </div>
                         </div>
-
-                        <div className="text-gray-500 group-hover:text-cyan-400 transition-colors hidden sm:block">
-                          →
-                        </div>
+                        
                       </motion.div>
                     </Link>
                   ))}

@@ -14,16 +14,7 @@ import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { appleSlideUp, sectionTransition } from "../utils/motion";
-
-// Merchandise images from public folder (background removed)
-const doonHoodie = "/merchendise/doom bg removed.png";
-const dopamineHoodie = "/merchendise/dopamine-bg removed.png";
-const skullIcon = "/merchendise/skull.png";
-const doonMerchLogo = "/merchendise/Doon Merchandise New Logo With BG.png";
-
-// External store links
-const doonStoreLink = "https://doonmerch.odoo.com/shop/category/meraki-iiit-una-17";
-const dopamineStoreLink = "https://thedopaminestore.in/collections/iiit-una";
+import { STORE_ASSETS, STORE_LINKS } from "../constants/merchandiseData";
 
 /**
  * Merchandise section with scroll-linked animations.
@@ -119,7 +110,7 @@ const Merchandise = () => {
                                     transition={{ duration: 0.3 }}
                                 >
                                     <img
-                                        src={doonMerchLogo}
+                                        src={STORE_ASSETS.doon.logo}
                                         alt="Doon Merchandise Logo"
                                         className="w-full h-full object-contain"
                                     />
@@ -130,21 +121,21 @@ const Merchandise = () => {
                             </div>
 
                             {/* Hoodie Image - Links to internal merchandise page */}
-                            <Link to="/merchandise" state={{ brand: "doon" }}>
+                            <Link to="/merchandise" state={{ brand: "doon" }} className="w-full flex justify-center">
                                 <motion.div
-                                    className="relative w-[420px] h-[420px] md:w-[500px] md:h-[500px] mb-6 cursor-pointer group flex items-center justify-center -translate-x-8 md:-translate-x-16"
+                                    className="relative w-full max-w-[420px] aspect-square md:max-w-[500px] mb-6 cursor-pointer group flex items-center justify-center lg:-translate-x-16"
                                 >
                                     <img
-                                        src={doonHoodie}
+                                        src={STORE_ASSETS.doon.hoodie}
                                         alt="Doon Merchandise Hoodie"
-                                        className="max-w-full max-h-full object-contain"
+                                        className="w-full h-full object-contain"
                                         style={{
                                             filter: "drop-shadow(4px 4px 8px rgba(0,0,0,0.5))"
                                         }}
                                     />
                                     {/* Floating Explore Button */}
                                     <a
-                                        href={doonStoreLink}
+                                        href={STORE_LINKS.doon}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         onClick={(e) => e.stopPropagation()}
@@ -167,36 +158,36 @@ const Merchandise = () => {
                                     boxShadow: "inset 0 0 0 3px rgba(80,80,80,0.5), 0 8px 32px rgba(0,0,0,0.5)",
                                 }}
                             >
-                                <p className="font-playball text-white text-lg md:text-xl lg:text-2xl tracking-wide italic mb-3">
+                                <p className="font-minecraft text-white text-lg md:text-xl lg:text-2xl tracking-wide mb-3">
                                     The official
                                 </p>
-                                <h3 className="font-playball text-white text-3xl md:text-4xl lg:text-5xl tracking-wide mb-3">
+                                <h3 className="font-minecraft text-white text-3xl md:text-4xl lg:text-5xl tracking-wide mb-3">
                                     MERCH
                                 </h3>
-                                <p className="font-playball text-white text-lg md:text-xl tracking-wide mb-2">
+                                <p className="font-minecraft text-white text-lg md:text-xl tracking-wide mb-2">
                                     for
                                 </p>
-                                <p className="font-playball text-white text-2xl md:text-3xl lg:text-4xl tracking-wide mb-2">
+                                <p className="font-minecraft text-white text-2xl md:text-3xl lg:text-4xl tracking-wide mb-2">
                                     MERAKI
                                 </p>
-                                <p className="font-playball text-white text-lg md:text-xl tracking-wide mb-6">
+                                <p className="font-minecraft text-white text-lg md:text-xl tracking-wide mb-6">
                                     is out
                                 </p>
 
                                 <div className="pt-4">
-                                    <p className="font-playball text-white text-base md:text-lg tracking-wide mb-1">
+                                    <p className="font-minecraft text-white text-base md:text-lg tracking-wide mb-1">
                                         From
                                     </p>
-                                    <p className="font-playball text-red-500 text-xl md:text-2xl tracking-wide italic mb-1">
+                                    <p className="font-minecraft text-red-500 text-xl md:text-2xl tracking-wide mb-1">
                                         Pixels
                                     </p>
-                                    <p className="font-playball text-white text-base md:text-lg tracking-wide mb-1">
+                                    <p className="font-minecraft text-white text-base md:text-lg tracking-wide mb-1">
                                         to
                                     </p>
-                                    <p className="font-playball text-red-500 text-xl md:text-2xl tracking-wide italic mb-3">
+                                    <p className="font-minecraft text-red-500 text-xl md:text-2xl tracking-wide mb-3">
                                         Reality
                                     </p>
-                                    <p className="font-playball text-yellow-400 text-lg md:text-xl tracking-wider italic mb-6">
+                                    <p className="font-minecraft text-yellow-400 text-lg md:text-xl tracking-wider mb-6">
                                         Spawn Your Style
                                     </p>
                                 </div>
@@ -225,7 +216,7 @@ const Merchandise = () => {
                             {/* Store Header */}
                             <div className="flex flex-col items-center gap-2 mb-4 bg-transparent">
                                 <motion.img
-                                    src={skullIcon}
+                                    src={STORE_ASSETS.dopamine.icon}
                                     alt="Skull Icon"
                                     className="w-16 h-16 md:w-20 md:h-20 mb-2"
                                     style={{ imageRendering: "pixelated" }}
@@ -238,23 +229,23 @@ const Merchandise = () => {
                             </div>
 
                             {/* Hoodie Image - Links to internal merchandise page */}
-                            <Link to="/merchandise" state={{ brand: "dopamine" }}>
+                            <Link to="/merchandise" state={{ brand: "dopamine" }} className="w-full flex justify-center">
                                 <motion.div
-                                    className="relative w-[420px] h-[420px] md:w-[500px] md:h-[500px] mb-6 cursor-pointer group flex items-center justify-center"
+                                    className="relative w-full max-w-[420px] aspect-square md:max-w-[500px] mb-6 cursor-pointer group flex items-center justify-center"
                                     whileHover={{ scale: 1.03 }}
                                     transition={{ type: "spring", stiffness: 200 }}
                                 >
                                     <img
-                                        src={dopamineHoodie}
+                                        src={STORE_ASSETS.dopamine.hoodie}
                                         alt="Dopamine Store Hoodie"
-                                        className="max-w-full max-h-full object-contain"
+                                        className="w-full h-full object-contain"
                                         style={{
                                             filter: "drop-shadow(4px 4px 8px rgba(0,0,0,0.5))"
                                         }}
                                     />
                                     {/* Floating Explore Button */}
                                     <a
-                                        href={dopamineStoreLink}
+                                        href={STORE_LINKS.dopamine}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         onClick={(e) => e.stopPropagation()}
@@ -289,13 +280,13 @@ const Merchandise = () => {
                             <h3 className="font-minecraft text-white text-xl text-center mb-6">Choose Store</h3>
                             <div className="flex flex-col gap-4">
                                 <a
-                                    href={doonStoreLink}
+                                    href={STORE_LINKS.doon}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-4 p-4 border border-cyan-400/40 bg-black/50 hover:bg-cyan-400/10 transition-colors rounded-lg"
                                 >
                                     <div className="w-12 h-12 bg-white rounded-lg p-1 flex-shrink-0">
-                                        <img src={doonMerchLogo} alt="Doon" className="w-full h-full object-contain" />
+                                        <img src={STORE_ASSETS.doon.logo} alt="Doon" className="w-full h-full object-contain" />
                                     </div>
                                     <div>
                                         <p className="font-minecraft text-cyan-400 text-sm">Doon Merchandise</p>
@@ -304,13 +295,13 @@ const Merchandise = () => {
                                     <span className="ml-auto text-cyan-400">↗</span>
                                 </a>
                                 <a
-                                    href={dopamineStoreLink}
+                                    href={STORE_LINKS.dopamine}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-4 p-4 border border-red-500/40 bg-black/50 hover:bg-red-500/10 transition-colors rounded-lg"
                                 >
                                     <div className="w-12 h-12 flex-shrink-0">
-                                        <img src={skullIcon} alt="Dopamine" className="w-full h-full object-contain" style={{ imageRendering: 'pixelated' }} />
+                                        <img src={STORE_ASSETS.dopamine.icon} alt="Dopamine" className="w-full h-full object-contain" style={{ imageRendering: 'pixelated' }} />
                                     </div>
                                     <div>
                                         <p className="font-minecraft text-red-500 text-sm">Dopamine Store</p>

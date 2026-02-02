@@ -15,7 +15,7 @@ import emailjs from "@emailjs/browser";
 import { externalLinks } from "../constants";
 import { slideIn, staggerContainer } from "../utils/motion";
 
-import pageBackground from "../assets/faq_section_bg.webp";
+import contactBg from "../assets/contact_bg.png";
 import avatarPixel from "../assets/hero.webp";
 
 /**
@@ -127,9 +127,9 @@ export default function ContactMinecraft() {
        */}
       <div
         aria-hidden="true"
-        className="fixed inset-0 -z-30"
+        className="fixed inset-0 z-0"
         style={{
-          backgroundImage: `url(${pageBackground})`,
+          backgroundImage: `url(${contactBg})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center center",
