@@ -1,13 +1,10 @@
 /**
  * @fileoverview Expert Talk section with Minecraft-themed speaker cards.
- * 
- * Displays expert speakers in a responsive card grid with Minecraft-themed styling.
- * Cards feature speaker photos with expanding hover overlays that reveal
- * detailed speaker highlights.
- * 
- * @see DOCS.md#animation-system for motion variants
- * @see DOCS.md#responsive-breakpoints for layout
- * @component
+ *
+ * Fixes:
+ * - Auto-centers cards when only 1 or 2 speakers exist
+ * - No empty grid columns
+ * - Preserves all animations & hover effects
  */
 
 import React, { useRef } from "react";
@@ -16,237 +13,178 @@ import workshopsBg from "../assets/elite_minecraft_bg.webp";
 import { expertTalks } from "../constants";
 import { appleSlideUp, sectionTransition } from "../utils/motion";
 
-/**
- * Expert Talk section component with speaker card grid.
- * 
- * @returns {JSX.Element} Expert Talk section with animated speaker cards
- * 
- * @animation
- * - Scroll-linked entrance from bottom
- * - Staggered card animations on view
- * - Smooth hover state transitions with expanding overlay
- */
 function ExpertTalk() {
-    const sectionRef = useRef(null);
+  const sectionRef = useRef(null);
 
-    /**
-     * Scroll-based animation tracking.
-     * 
-     * @offset ["start end", "end start"]
-     * Animation begins when section enters viewport from bottom,
-     * ends when section exits viewport from top.
-     */
-    const { scrollYProgress } = useScroll({
-        target: sectionRef,
-        offset: ["start end", "end start"],
-    });
+  /* Scroll animations */
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
 
-    /**
-     * Scroll-linked transforms for content animations.
-     * 
-     * @contentY Slide up effect on enter
-     * @contentScale Subtle scale for depth
-     */
-    const contentY = useTransform(scrollYProgress, [0, 0.2], [60, 0]);
-    const contentScale = useTransform(scrollYProgress, [0, 0.2], [0.98, 1]);
+  const contentY = useTransform(scrollYProgress, [0, 0.2], [60, 0]);
+  const contentScale = useTransform(scrollYProgress, [0, 0.2], [0.98, 1]);
 
-    /**
-     * Speaker card component with Minecraft-themed frame and expanding hover overlay.
-     * 
-     * @param {Object} speaker - Speaker data object
-     * @param {number} index - Card index for stagger timing
-     * @returns {JSX.Element} Animated speaker card
-     */
-    const SpeakerCard = ({ speaker, index }) => {
-        return (
-            <motion.div
-                variants={appleSlideUp(index * 0.1)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, margin: "-50px" }}
-                whileHover={{ scale: 1.02, y: -2 }}
-                className="group relative cursor-pointer"
-            >
-                {/* Minecraft-style Card Container - FAQ Box style */}
-                <div
-                    className="relative w-full aspect-[3/4] bg-[#474747] transition-all duration-300"
-                    style={{
-                        /* 
-                         * Minecraft-style 3D bevel border (outer)
-                         * Asymmetric colors simulate light source from top-left
-                         */
-                        border: "3px solid",
-                        borderColor: "#888888 #1a1a1a #1a1a1a #666666",
-                    }}
-                >
-                    {/* Inner frame with inverted bevel - creates inset appearance */}
-                    <div
-                        className="relative w-full h-full bg-[#3a3a3a] overflow-hidden"
-                        style={{
-                            border: "2px solid",
-                            borderColor: "#2a2a2a #555555 #555555 #2a2a2a",
-                        }}
-                    >
-                        {/* Speaker Photo - Full card background */}
-                        <img
-                            src={speaker.image}
-                            alt={speaker.name}
-                            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                        />
-
-                        {/* Gradient overlay for text readability */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-
-                        {/* 
-                         * Default Bottom Bar - Shows name and title
-                         * Fades OUT on hover
-                         */}
-                        <div
-                            className="absolute bottom-0 left-0 right-0 bg-black/85 backdrop-blur-sm p-3 sm:p-4 transition-opacity duration-500 ease-in-out opacity-100 group-hover:opacity-0"
-                        >
-                            {/* Speaker Name */}
-                            <h3 className="font-minecraft text-white text-xs sm:text-sm md:text-base leading-tight tracking-wider uppercase line-clamp-2">
-                                {speaker.name}
-                            </h3>
-
-                            {/* Speaker Title */}
-                            <p className="font-minecraft text-cyan-400 text-[10px] sm:text-xs md:text-sm tracking-wide mt-1">
-                                {"{" + speaker.title + "}"}
-                            </p>
-                        </div>
-
-                        {/* 
-                     * Full Overlay - Shows name, title, and highlights
-                     * Fades IN on hover
-                     */}
-                        <div
-                            className="absolute inset-0 bg-black/85 backdrop-blur-sm p-3 sm:p-4 transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100 flex flex-col justify-start"
-                        >
-                            {/* Speaker Name */}
-                            <h3 className="font-minecraft text-white text-xs sm:text-sm md:text-base leading-tight tracking-wider uppercase">
-                                {speaker.name}
-                            </h3>
-
-                            {/* Speaker Title */}
-                            <p className="font-minecraft text-cyan-400 text-[10px] sm:text-xs md:text-sm tracking-wide mt-1">
-                                {"{" + speaker.title + "}"}
-                            </p>
-
-                            {/* Highlight Points */}
-                            <ul className="mt-4 sm:mt-5 space-y-2 sm:space-y-2.5">
-                                {speaker.highlights.map((highlight, idx) => (
-                                    <li
-                                        key={idx}
-                                        className="font-minecraft text-gray-300 text-[10px] sm:text-xs md:text-sm flex items-start gap-1.5 sm:gap-2 leading-tight"
-                                    >
-                                        <span className="text-cyan-400 flex-shrink-0">•</span>
-                                        <span className="break-words">{highlight}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Pixelated corner accents for Minecraft frame feel */}
-                        <div className="absolute top-0 left-0 w-2 h-2 sm:w-3 sm:h-3 bg-[#5a5a5a] pointer-events-none z-20" />
-                        <div className="absolute top-0 right-0 w-2 h-2 sm:w-3 sm:h-3 bg-[#5a5a5a] pointer-events-none z-20" />
-                        <div className="absolute bottom-0 left-0 w-2 h-2 sm:w-3 sm:h-3 bg-[#1a1a1a] pointer-events-none z-20" />
-                        <div className="absolute bottom-0 right-0 w-2 h-2 sm:w-3 sm:h-3 bg-[#1a1a1a] pointer-events-none z-20" />
-                    </div>
-                </div>
-            </motion.div>
-        );
-    };
-
-    return (
-        <section
-            id="expert-talk"
-            ref={sectionRef}
-            className="relative w-full min-h-screen text-white overflow-hidden flex flex-col"
-            style={{ paddingTop: "var(--navbar-height, 5rem)" }}
+  /* Speaker Card */
+  const SpeakerCard = ({ speaker, index }) => (
+    <motion.div
+      variants={appleSlideUp(index * 0.1)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-50px" }}
+      whileHover={{ scale: 1.02, y: -2 }}
+      className="group relative cursor-pointer w-full"
+      style={{
+        maxWidth: expertTalks.length <= 2 ? "320px" : "100%",
+      }}
+    >
+      <div
+        className="relative w-full aspect-[3/4] bg-[#474747]"
+        style={{
+          border: "3px solid",
+          borderColor: "#888888 #1a1a1a #1a1a1a #666666",
+        }}
+      >
+        <div
+          className="relative w-full h-full bg-[#3a3a3a] overflow-hidden"
+          style={{
+            border: "2px solid",
+            borderColor: "#2a2a2a #555555 #555555 #2a2a2a",
+          }}
         >
-            {/* Background Layer */}
-            <motion.div className="absolute inset-0 z-0">
-                <img
-                    src={workshopsBg}
-                    alt="Background"
-                    className="w-full h-full object-cover object-top"
-                />
-                {/* 
-         * Gradient Blending - Section Transitions
-         * 
-         * Top gradient blends from the previous About section (#080808)
-         * Bottom gradient blends to the next FlagshipEvent section (#080808)
-         * 
-         * @see DOCS.md#gradient-blending
-         */}
-                <div
-                    className="absolute top-0 left-0 right-0 h-[30vh] z-[1]"
-                    style={{
-                        background: "linear-gradient(to bottom, #080808, transparent)",
-                    }}
-                />
-                <div
-                    className="absolute bottom-0 left-0 right-0 h-[30vh] z-[1]"
-                    style={{
-                        background: "linear-gradient(to top, #080808, transparent)",
-                    }}
-                />
-                {/* Dark overlay for text contrast */}
-                <div className="absolute inset-0 bg-black/30 z-[0]" />
-            </motion.div>
+          {/* Image */}
+          <img
+            src={speaker.image}
+            alt={speaker.name}
+            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+          />
 
-            {/* Content Container with scroll-linked transforms */}
-            <motion.div
-                style={{ y: contentY, scale: contentScale }}
-                className="relative z-10 flex-1 flex flex-col px-4 sm:px-6 md:px-8 py-8 justify-center"
-            >
-                {/* Section Header */}
-                <motion.div
-                    className="w-full max-w-7xl mx-auto mb-8 md:mb-12 flex justify-start"
-                    variants={appleSlideUp(0)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: "-50px" }}
-                >
-                    <div className="flex items-center gap-3 md:gap-4">
-                        <span className="text-cyan-400 text-xl sm:text-2xl md:text-3xl">
-                            ▶
-                        </span>
-                        <h2 className="font-minecraft text-white text-xl sm:text-2xl md:text-4xl tracking-widest uppercase">
-                            EXPERT TALKS
-                        </h2>
-                    </div>
-                </motion.div>
+          {/* Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
-                {/* Speaker Cards Grid Container */}
-                <div className="flex justify-center items-center w-full">
-                    <motion.div
-                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center w-full max-w-7xl mx-auto gap-6 md:gap-8"
-                        variants={sectionTransition}
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{ once: true, amount: 0.05 }}
-                    >
-                        {expertTalks.map((speaker, index) => (
-                            <SpeakerCard key={speaker.id} speaker={speaker} index={index} />
-                        ))}
-                    </motion.div>
-                </div>
-            </motion.div>
+          {/* Default bottom bar */}
+          <div className="absolute bottom-0 left-0 right-0 bg-black/85 p-4 transition-opacity duration-500 group-hover:opacity-0">
+            <h3 className="font-minecraft text-white text-sm uppercase tracking-wider">
+              {speaker.name}
+            </h3>
+            <p className="font-minecraft text-cyan-400 text-xs mt-1">
+              {"{" + speaker.title + "}"}
+            </p>
+          </div>
 
-            {/* Decorative grid pattern - optional subtle background effect */}
-            <div className="absolute inset-0 pointer-events-none opacity-5 z-0">
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        backgroundImage:
-                            "linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05) 76%, transparent 77%, transparent)",
-                        backgroundSize: "50px 50px",
-                    }}
-                />
+          {/* Hover overlay */}
+          <div className="absolute inset-0 bg-black/85 p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100 flex flex-col">
+            <div>
+              <h3 className="font-minecraft text-white text-sm uppercase tracking-wider">
+                {speaker.name}
+              </h3>
+              <p className="font-minecraft text-cyan-400 text-xs mt-1">
+                {"{" + speaker.title + "}"}
+              </p>
             </div>
-        </section>
-    );
+
+            <ul className="mt-4 space-y-2 flex-1 overflow-y-auto">
+              {speaker.highlights.map((item, i) => (
+                <li
+                  key={i}
+                  className="font-minecraft text-gray-300 text-xs flex gap-2"
+                >
+                  <span className="text-cyan-400">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Pixel corners */}
+          <div className="absolute top-0 left-0 w-3 h-3 bg-[#5a5a5a]" />
+          <div className="absolute top-0 right-0 w-3 h-3 bg-[#5a5a5a]" />
+          <div className="absolute bottom-0 left-0 w-3 h-3 bg-[#1a1a1a]" />
+          <div className="absolute bottom-0 right-0 w-3 h-3 bg-[#1a1a1a]" />
+        </div>
+      </div>
+    </motion.div>
+  );
+
+  return (
+    <section
+      id="expert-talk"
+      ref={sectionRef}
+      className="relative min-h-screen text-white overflow-hidden"
+      style={{ paddingTop: "var(--navbar-height, 5rem)" }}
+    >
+      {/* Background */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={workshopsBg}
+          alt="Background"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
+      {/* Content */}
+      <motion.div
+        style={{ y: contentY, scale: contentScale }}
+        className="relative z-10 px-6 py-16"
+      >
+        {/* Header */}
+        <motion.div
+          className="max-w-7xl mx-auto mb-12 flex items-center gap-4"
+          variants={appleSlideUp(0)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          <span className="text-cyan-400 text-3xl">▶</span>
+          <h2 className="font-minecraft text-3xl md:text-4xl uppercase tracking-widest">
+            Expert Talks
+          </h2>
+        </motion.div>
+
+        {/* 🔥 FIXED: Dynamic grid based on number of speakers */}
+        <motion.div
+          className={`
+            max-w-6xl
+            mx-auto
+            ${expertTalks.length <= 2 
+              ? "flex flex-wrap justify-center gap-8" 
+              : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            }
+          `}
+          variants={sectionTransition}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          {expertTalks.map((speaker, index) => (
+            <SpeakerCard
+              key={speaker.id}
+              speaker={speaker}
+              index={index}
+            />
+          ))}
+        </motion.div>
+
+        {/* Optional: Add a message if you want to show more are coming */}
+        {expertTalks.length <= 2 && (
+          <motion.div
+            variants={appleSlideUp(0.3)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
+            <div className="flex justify-center items-center gap-4 mt-4">
+              <div className="h-[2px] w-16 bg-cyan-500/30" />
+              <span className="text-gray-400 text-sm">Stay Tuned</span>
+              <div className="h-[2px] w-16 bg-cyan-500/30" />
+            </div>
+          </motion.div>
+        )}
+      </motion.div>
+    </section>
+  );
 }
 
 export default ExpertTalk;
