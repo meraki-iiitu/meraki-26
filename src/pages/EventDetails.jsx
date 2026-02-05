@@ -4,12 +4,13 @@
  * @page /event/:eventId
  */
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useParams } from "react-router-dom";
 import eventDetailBg from "../assets/event_detail.webp";
 import minecraftSignComingSoon from "../assets/minecraft_sign_coming_soon.webp";
 import { eventsData, getEventByKey } from "../constants/eventsData";
+import ArenaXPopup from "../components/ArenaXPopup";
 
 /**
  * Event details page component.
@@ -17,6 +18,7 @@ import { eventsData, getEventByKey } from "../constants/eventsData";
  */
 const EventDetails = () => {
   const { eventId } = useParams();
+  const [isArenaXPopupOpen, setIsArenaXPopupOpen] = useState(false);
 
   // Get event data from single source of truth
   const eventData = getEventByKey(eventId) || {
@@ -39,7 +41,7 @@ const EventDetails = () => {
   const isIcon = !eventBanner && !!eventIcon;
 
   // Check if event is live to determine what to display
-  const isEventLive = eventData?.isLive ?? false;
+  const isEventLive = eventData?.isLive ?? true;
 
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -192,6 +194,16 @@ const EventDetails = () => {
                   {eventData.registrationLink && (
                     <motion.a href={eventData.registrationLink} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-block w-full sm:w-auto bg-gradient-to-r from-orange-600 to-orange-500 text-white font-pixel text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 border-orange-800 hover:from-orange-500 hover:to-orange-400 transition-all min-h-[48px] text-center">REGISTER NOW!</motion.a>
                   )}
+                  {eventData.subEvents && eventData.subEvents.length > 0 && (
+                    <motion.button
+                      onClick={() => setIsArenaXPopupOpen(true)}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="inline-block w-full sm:w-auto bg-gradient-to-r from-orange-600 to-orange-500 text-white font-pixel text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 border-orange-800 hover:from-orange-500 hover:to-orange-400 transition-all min-h-[48px] text-center"
+                    >
+                      REGISTER NOW!
+                    </motion.button>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -272,6 +284,11 @@ const EventDetails = () => {
           </>
         )}
       </motion.div>
+      <ArenaXPopup
+        isOpen={isArenaXPopupOpen}
+        onClose={() => setIsArenaXPopupOpen(false)}
+        subEvents={eventData.subEvents || []}
+      />
     </div >
   );
 };
