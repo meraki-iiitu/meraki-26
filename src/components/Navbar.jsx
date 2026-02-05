@@ -112,7 +112,7 @@ const Navbar = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${getNavBackground()}`}
+        className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${getNavBackground()}`}
       >
         <div className="flex justify-between items-center h-14 sm:h-16 lg:h-[72px] px-4 sm:px-6 lg:px-8 max-w-[1920px] mx-auto">
           {/* Logo/Brand */}
@@ -213,7 +213,7 @@ const Navbar = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={toggleMenu}
-              className="fixed inset-0 bg-dark/60 backdrop-blur-sm z-40 lg:hidden"
+              className="fixed inset-0 bg-dark/60 backdrop-blur-sm z-[9000] lg:hidden"
             />
 
             {/* 
@@ -227,7 +227,7 @@ const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
-              className="fixed top-0 right-0 h-full w-[280px] sm:w-[320px] bg-dark-100 z-40 lg:hidden shadow-2xl"
+              className="fixed top-0 right-0 h-full w-[280px] sm:w-[320px] bg-dark-100 z-[9001] lg:hidden shadow-2xl"
               style={{
                 borderLeft: "3px solid",
                 /* Cyan-to-purple gradient border */
