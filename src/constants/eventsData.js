@@ -10,11 +10,11 @@
  */
 
 import skyCircuitImg from "../assets/sky_circuit.webp";
-import skyCircuitImgLarge from "../assets/SkyCircuit.webp";
+import skyCircuitImgLarge from "../assets/sky_circuit.webp";
 import roboDriveImg from "../assets/robo_drive.webp";
-import roboDriveImgLarge from "../assets/Robodrive.webp";
+import roboDriveImgLarge from "../assets/robo_drive.webp";
 import hackTheThroneImg from "../assets/hack_the_throne.webp";
-import hackTheThroneImgLarge from "../assets/Hack The Throne.webp";
+import hackTheThroneImgLarge from "../assets/hack_the_throne.webp";
 import arenaXImg from "../assets/arena_x.webp";
 import cairLogo from "../assets/sponsors/iitlogo.webp";
 import aerostarLogo from "../assets/sponsors/aerostar.webp";
