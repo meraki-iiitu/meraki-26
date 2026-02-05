@@ -47,11 +47,11 @@ export const scheduleData = {
             { key: 'pixelforge', eventId: 'D2-003', time: '11:30 AM - 1:30 PM' },
             { key: 'hack-the-throne', eventId: 'D2-004', time: '12:00 PM - 5:00 PM' },
             { key: 'alumni-session', eventId: 'D2-005', time: '2:00 PM - 3:00 PM' },
-            { key: 'mentor-minds', eventId: 'D2-006', time: '2:00 PM - 3:00 PM' },
+
             { key: 'robo-trace', eventId: 'D2-007', time: '3:00 PM - 5:00 PM' },
             { key: 'kaggle-clash', eventId: 'D2-008', time: '5:00 PM - 7:30 PM' },
             { key: 'hackermaze', eventId: 'D2-009', time: '5:30 PM - 7:30 PM' },
-            { key: 'pro-night', eventId: 'D2-010', time: '7:30 PM - 9:00 PM' },
+
             { key: 'arenax', eventId: 'D2-011', time: '9:00 PM - 11:00 PM' }
         ]
     },
@@ -80,7 +80,7 @@ export const scheduleData = {
 export const getScheduleForDay = (day) => {
     const dayData = scheduleData[day];
     if (!dayData) return [];
-    
+
     return dayData.events.map(entry => ({
         ...entry,
         event: eventsData[entry.key] || null

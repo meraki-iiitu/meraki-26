@@ -27,12 +27,17 @@ const EventDetails = () => {
     eventDate: "TBA",
     time: "TBA",
     venue: "TBA",
-    registrationLink: "#",
+    registrationLink: "",
   };
 
-  // Use image2 for large display, fallback to image1 for thumbnails
-  const eventImage = eventData?.image2 || eventData?.image1;
-  
+  // Use banner if available, otherwise fallback to image2, then image1, then icon
+  const eventBanner = eventData?.banner || eventData?.image2 || eventData?.image1;
+  const eventIcon = eventData?.icon;
+
+  // Use eventBanner if exists, otherwise use eventIcon
+  const displayImage = eventBanner || eventIcon;
+  const isIcon = !eventBanner && !!eventIcon;
+
   // Check if event is live to determine what to display
   const isEventLive = eventData?.isLive ?? false;
 
@@ -151,20 +156,42 @@ const EventDetails = () => {
             {/* Content Grid */}
             <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.2 }}>
               {/* Image */}
-              <div className="border-3 sm:border-4 border-white bg-dark-100 order-1 overflow-hidden">
-                {eventImage ? <img src={eventImage} alt={eventData.title} className="w-full aspect-video object-cover object-top" /> : <div className="aspect-video bg-gradient-to-br from-amber-900 via-orange-800 to-yellow-900 flex items-center justify-center"><span className="text-5xl sm:text-6xl md:text-8xl">🎮</span></div>}
+              <div className={`border-3 sm:border-4 border-white order-1 overflow-hidden relative ${isIcon ? 'bg-[#1a1a1a] flex items-center justify-center' : 'bg-dark-100'}`}>
+                {/* Background Pattern for Icons */}
+                {isIcon && (
+                  <div className="absolute inset-0 opacity-20"
+                    style={{
+                      backgroundImage: 'radial-gradient(circle, #333 1px, transparent 1px)',
+                      backgroundSize: '20px 20px'
+                    }}>
+                  </div>
+                )}
+
+                {displayImage ? (
+                  <img
+                    src={displayImage}
+                    alt={eventData.title}
+                    className={`w-full aspect-video object-contain ${isIcon ? 'p-0 relative z-10 filter drop-shadow-xl' : 'p-0 bg-black/20'}`}
+                  />
+                ) : (
+                  <div className="aspect-video bg-gradient-to-br from-amber-900 via-orange-800 to-yellow-900 flex items-center justify-center">
+                    <span className="text-5xl sm:text-6xl md:text-8xl">🎮</span>
+                  </div>
+                )}
               </div>
 
               {/* Info */}
               <div className="space-y-4 sm:space-y-6 order-2">
                 {eventData?.isElite && <div className="inline-block bg-blue-600/20 border-2 border-blue-500 px-4 py-2 mt-2"><span className="font-pixel text-blue-400 text-sm sm:text-base tracking-wider flex items-center gap-2"><span className="animate-pulse">★</span> FLAGSHIP EVENT</span></div>}
                 {eventData.price && <div className="flex items-center gap-2 sm:gap-3"><span className="text-2xl sm:text-3xl md:text-4xl">💰</span><span className="font-pixel text-xl sm:text-2xl md:text-3xl text-yellow-400">{eventData.price}</span></div>}
-                <div className="flex flex-wrap gap-2 sm:gap-3">{eventData.tags.map((tag, index) => <span key={index} className="bg-gray-800 border border-gray-600 text-white font-terminal text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2">{tag}</span>)}</div>
+                <div className="flex flex-wrap gap-2 sm:gap-3">{(eventData.tags || []).map((tag, index) => <span key={index} className="bg-gray-800 border border-gray-600 text-white font-terminal text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2">{tag}</span>)}</div>
                 <div className="flex flex-col gap-3 sm:gap-4">
                   {eventData.brochure && (
                     <motion.a href={eventData.brochure} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-block w-full sm:w-auto bg-gradient-to-r from-cyan-600 to-cyan-500 text-white font-pixel text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 border-cyan-800 hover:from-cyan-500 hover:to-cyan-400 transition-all min-h-[48px] text-center">VIEW BROCHURE</motion.a>
                   )}
-                  <motion.a href={eventData.registrationLink || "#"} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-block w-full sm:w-auto bg-gradient-to-r from-orange-600 to-orange-500 text-white font-pixel text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 border-orange-800 hover:from-orange-500 hover:to-orange-400 transition-all min-h-[48px] text-center">REGISTER NOW!</motion.a>
+                  {eventData.registrationLink && (
+                    <motion.a href={eventData.registrationLink} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-block w-full sm:w-auto bg-gradient-to-r from-orange-600 to-orange-500 text-white font-pixel text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 border-orange-800 hover:from-orange-500 hover:to-orange-400 transition-all min-h-[48px] text-center">REGISTER NOW!</motion.a>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -237,10 +264,9 @@ const EventDetails = () => {
                 <p className="font-terminal text-sm sm:text-base text-gray-300 leading-relaxed mb-2 sm:mb-3 whitespace-pre-line">{eventData.description}</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8">
-                <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">EVENT DATE</h4><p className="font-terminal text-sm sm:text-base text-gray-400">{eventData.eventDate}</p></div>
+                <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">EVENT DATE</h4><p className="font-terminal text-sm sm:text-base text-gray-400">{eventData.eventDate || 'TBA'}</p></div>
                 <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">TIME</h4><p className="font-terminal text-sm sm:text-base text-gray-400">{eventData.time || 'TBA'}</p></div>
-                <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">VENUE</h4><p className="font-terminal text-sm sm:text-base text-gray-400">{eventData.venue}</p></div>
-                <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">COORDINATOR</h4><p className="font-terminal text-sm sm:text-base text-gray-400 break-all">{eventData.coordinators?.student || 'TBA'}</p></div>
+                <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">VENUE</h4><p className="font-terminal text-sm sm:text-base text-gray-400">{eventData.venue || 'TBA'}</p></div>
               </div>
             </motion.div>
           </>
