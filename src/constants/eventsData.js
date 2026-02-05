@@ -33,6 +33,13 @@ import roboDriveIcon from "../assets/eventImages/icons/robo-drive-sq.jpeg";
 import roboSoccerIcon from "../assets/eventImages/icons/robo-soccer-sq.jpeg";
 import roboTraceIcon from "../assets/eventImages/icons/robo-trace-sq.jpeg";
 import ucpcIcon from "../assets/eventImages/icons/ucpc-sq.jpeg";
+import inaugurationIcon from "../assets/eventImages/icons/inauguration-sq.jpeg";
+import innovationExpoIcon from "../assets/eventImages/icons/innovation-expo-sq.jpeg";
+import musicalNightIcon from "../assets/eventImages/icons/musical-night-sq.jpeg";
+import pixelforgeIcon from "../assets/eventImages/icons/pixelforge-sq.jpeg";
+import hackermazeIcon from "../assets/eventImages/icons/hackermaze-sq.jpeg";
+import codingCasinoIcon from "../assets/eventImages/icons/coding-casino-sq.jpeg";
+import framoramaIcon from "../assets/eventImages/icons/framorama-sq.jpeg";
 
 // Expert Talks Images
 import amitShuklaImg from "../assets/experts/amit.jpg";
@@ -144,6 +151,7 @@ export const eventsData = {
         registrationLink: '',
         brochure: '',
         price: '',
+        icon: inaugurationIcon,
         image1: '',
         image2: '',
         eventDate: '7th February 2026',
@@ -159,6 +167,7 @@ export const eventsData = {
         registrationLink: '',
         brochure: '',
         price: '',
+        icon: innovationExpoIcon,
         image1: '',
         image2: '',
         eventDate: '7th February 2026',
@@ -239,6 +248,7 @@ export const eventsData = {
         registrationLink: '',
         brochure: '',
         price: '',
+        icon: musicalNightIcon,
         image1: '',
         image2: '',
         eventDate: '7th February 2026',
@@ -289,6 +299,7 @@ export const eventsData = {
         registrationLink: 'https://unstop.com/p/pixelforge-indian-institute-of-information-technology-iiit-una-1628146',
         brochure: '',
         price: '',
+        icon: pixelforgeIcon,
         image1: '',
         image2: '',
         eventDate: '8th February 2026',
@@ -351,6 +362,7 @@ export const eventsData = {
         registrationLink: 'https://unstop.com/college-fests/meraki-2026-indian-institute-of-information-technology-iiit-una-430446',
         brochure: '',
         price: '',
+        icon: hackermazeIcon,
         image1: '',
         image2: '',
         eventDate: '8th February 2026',
@@ -387,6 +399,7 @@ export const eventsData = {
         registrationLink: 'https://unstop.com/college-fests/meraki-2026-indian-institute-of-information-technology-iiit-una-430446',
         brochure: '',
         price: '',
+        icon: codingCasinoIcon,
         image1: '',
         image2: '',
         eventDate: '9th February 2026',
@@ -434,6 +447,7 @@ export const eventsData = {
         registrationLink: 'https://unstop.com/college-fests/meraki-2026-indian-institute-of-information-technology-iiit-una-430446',
         brochure: '',
         price: '',
+        icon: framoramaIcon,
         image1: '',
         image2: '',
         eventDate: '9th February 2026',
