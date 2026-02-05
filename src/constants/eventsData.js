@@ -39,6 +39,105 @@ import sonikaTanwarImg from "../assets/experts/sonika.jpg";
 import rishavMishraImg from "../assets/experts/rishav-mishra.jpg";
 
 /**
+ * Flagship events specifically highlighted on the homepage.
+ * These are moved into a separate object but merged into eventsData for truth consistency.
+ * 
+ * @constant
+ * @type {Object<string, Object>}
+ */
+export const flagshipEvents = {
+    'hack-the-throne': {
+        id: 3,
+        slug: 'hack-the-throne',
+        title: 'HACK-THE-THRONE',
+        isElite: true,
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Hack-The-Throne is a national-level inter-college hackathon where students take ideas from problem identification to rapid prototyping, simulating real-world industry and startup environments. Participants build innovative solutions across the following domains:\n\nSustainability & Green Technology\n\nFinTech & Digital Innovation\n\nHealth Technology\n\nSmart Automation\n\nDigital Security Systems',
+        registrationLink: 'https://hack-the-throne.devfolio.co/overview',
+        brochure: hackathoneBrochure,
+        price: '₹48000/-',
+        image1: hackTheThroneImg,
+        image2: hackTheThroneImgLarge,
+        eventDate: '7th-8th February 2026',
+        time: 'Opening: 12:00 PM - 1:00 PM (Day 1), Judgement: 12:00 PM - 5:00 PM (Day 2)',
+        venue: 'Room No. 102, 103, 104, 227',
+        tags: ['Coding', 'Hackathon', 'Innovation', 'Tech', 'National Level'],
+        category: ['Day 1', 'Day 2']
+    },
+    'skycircuit': {
+        id: 4,
+        slug: 'skycircuit',
+        title: 'SKYCIRCUIT',
+        isElite: true,
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'The Drone Showcase & Innovation Expo is a high-impact technical exhibition designed to bring together institute drone teams, research groups, and drone technology startups on a single platform. The event aims to highlight the rapid advancements in UAV technology, foster knowledge exchange.',
+        registrationLink: 'mailto:meraki@iiitu.ac.in?subject=Sky Circuit Registration&body=Hello, I would like to showcase something cool at Sky Circuit event',
+        brochure: '',
+        price: '',
+        image1: skyCircuitImg,
+        image2: skyCircuitImgLarge,
+        eventDate: '7th February 2026',
+        time: '1:30 PM - 3:30 PM',
+        venue: 'Football Ground',
+        tags: ['Aeromodelling', 'Drones', 'Aircrafts', 'FPVs'],
+        category: ['Day 1'],
+        sponsors: [
+            { name: "CAIR", institution: "IIT Mandi", logo: cairLogo, type: "Title Sponsor" },
+            { name: "AEROSTAR", logo: aerostarLogo, type: "Co-Sponsor" },
+            { name: "Agastya Club", institution: "NIT Jalandhar", logo: agastyaLogo, type: "Event Patron" },
+            { name: "Team Shakti", institution: "Chitkara University", logo: teamShaktiLogo, type: "Event Patron" }
+        ]
+    },
+    'arenax': {
+        id: 8,
+        slug: 'arenax',
+        title: 'ARENAX SPORTS CARNIVAL',
+        isElite: true,
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Arena X Esports is a competitive esports tournament designed to test teamwork, strategy, and in-game skills across popular multiplayer titles. The event brings together skilled players to compete in structured qualifiers and matches under fair play and competitive conditions.',
+        registrationLink: 'BGMI: https://unstop.com/p/arenax-esports-carnival-bgmi-meraki-2026-indian-institute-of-information-technology-iiit-una-1627499 | Valorant: https://unstop.com/p/arenax-esports-carnival-valorant-meraki-2026-indian-institute-of-information-technology-iiit-una-1627521 | Clash Royale: https://unstop.com/p/arenax-esports-carnival-clash-royale-meraki-2026-indian-institute-of-information-technology-iiit-una-1627520',
+        brochure: '',
+        price: '₹12000/-',
+        image1: arenaXImg,
+        image2: arenaXImg,
+        eventDate: '7th-8th February 2026',
+        time: 'Day 1: 9:30 PM - 11:00 PM, Day 2: 9:00 PM - 11:00 PM',
+        venue: 'Room No. 204',
+        tags: ['Esports', 'Gaming', 'BGMI', 'Valorant'],
+        category: ['Day 1', 'Day 2']
+    },
+    'robodrive': {
+        id: 24,
+        slug: 'robodrive',
+        title: 'ROBODRIVE',
+        isElite: true,
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Robo Drive is a time-based robotics competition where participants design and manually control a robot car to complete a predefined track in the shortest possible time. The event emphasizes precision driving, speed control, and accurate obstacle navigation, with time penalties for errors such as touching track boundaries, missing checkpoints or collisions testing participants’ skills in robot design, motor control, Arduino fundamentals, and real-time decision-making.',
+        registrationLink: 'https://unstop.com/p/robodrive-meraki-2026-indian-institute-of-information-technology-iiit-una-1617278',
+        brochure: roboDriveBrochure,
+        price: '₹20000/-',
+        icon: roboDriveIcon,
+        image1: roboDriveImg,
+        image2: roboDriveImgLarge,
+        eventDate: '9th February 2026',
+        time: '5:00 PM - 8:30 PM',
+        venue: 'Assembly Point, Admin Block',
+        tags: ['Robotics', 'Engineering', 'Competition', 'Innovation'],
+        category: ['Day 3']
+    },
+};
+
+/**
+ * Array version of elite events for section-based rendering.
+ * @constant
+ */
+export const eliteEvents = Object.values(flagshipEvents);
+
+/**
  * Master events data object keyed by event key.
  * 
  * @constant
@@ -84,48 +183,10 @@ export const eventsData = {
         tags: ['Innovation', 'Exhibition'],
         category: ['Day 1']
     },
-    'hack-the-throne': {
-        id: 3,
-        title: 'HACK-THE-THRONE',
-        isElite: true,
-        isSpeakerSession: false,
-        isLive: true,
-        description: 'Hack-The-Throne is a national-level inter-college hackathon where students take ideas from problem identification to rapid prototyping, simulating real-world industry and startup environments. Participants build innovative solutions across the following domains:\n\nSustainability & Green Technology\n\nFinTech & Digital Innovation\n\nHealth Technology\n\nSmart Automation\n\nDigital Security Systems',
-        registrationLink: 'https://hack-the-throne.devfolio.co/overview',
-        brochure: hackathoneBrochure,
-        price: '₹48000/-',
-        image1: hackTheThroneImg,
-        image2: hackTheThroneImgLarge,
-        eventDate: '7th-8th February 2026',
-        time: 'Opening: 12:00 PM - 1:00 PM (Day 1), Judgement: 12:00 PM - 5:00 PM (Day 2)',
-        venue: 'Room No. 102, 103, 104, 227',
-        tags: ['Coding', 'Hackathon', 'Innovation', 'Tech', 'National Level'],
-        category: ['Day 1', 'Day 2']
-    },
-    'skycircuit': {
-        id: 4,
-        title: 'SKYCIRCUIT',
-        isElite: true,
-        isSpeakerSession: false,
-        isLive: true,
-        description: 'The Drone Showcase & Innovation Expo is a high-impact technical exhibition designed to bring together institute drone teams, research groups, and drone technology startups on a single platform. The event aims to highlight the rapid advancements in UAV technology, foster knowledge exchange.',
-        registrationLink: 'mailto:meraki@iiitu.ac.in?subject=Sky Circuit Registration&body=Hello, I would like to showcase something cool at Sky Circuit event',
-        brochure: '',
-        price: '',
-        image1: skyCircuitImg,
-        image2: skyCircuitImgLarge,
-        eventDate: '7th February 2026',
-        time: '1:30 PM - 3:30 PM',
-        venue: 'Football Ground',
-        tags: ['Aeromodelling', 'Drones', 'Aircrafts', 'FPVs'],
-        category: ['Day 1'],
-        sponsors: [
-            { name: "CAIR", institution: "IIT Mandi", logo: cairLogo, type: "Title Sponsor" },
-            { name: "AEROSTAR", logo: aerostarLogo, type: "Co-Sponsor" },
-            { name: "Agastya Club", institution: "NIT Jalandhar", logo: agastyaLogo, type: "Event Patron" },
-            { name: "Team Shakti", institution: "Chitkara University", logo: teamShaktiLogo, type: "Event Patron" }
-        ]
-    },
+
+    // Flagship events merged here
+    ...flagshipEvents,
+
     'defense-talk': {
         id: 5,
         title: 'DEFENSE TALK - Wg Cmdr Sonika Tanwar',
@@ -172,6 +233,7 @@ export const eventsData = {
         registrationLink: 'https://unstop.com/competitions/robo-soccer-meraki-2026-indian-institute-of-information-technology-iiit-una-1627487',
         brochure: '',
         price: '',
+        oslug: 'robo-soccer',
         icon: roboSoccerIcon,
         image1: '',
         image2: '',
@@ -180,24 +242,6 @@ export const eventsData = {
         venue: 'BasketBall Court',
         tags: ['Robotics', 'Competition', 'Soccer'],
         category: ['Day 1']
-    },
-    'arenax': {
-        id: 8,
-        title: 'ARENAX SPORTS CARNIVAL',
-        isElite: true,
-        isSpeakerSession: false,
-        isLive: true,
-        description: 'Arena X Esports is a competitive esports tournament designed to test teamwork, strategy, and in-game skills across popular multiplayer titles. The event brings together skilled players to compete in structured qualifiers and matches under fair play and competitive conditions.',
-        registrationLink: 'BGMI: https://unstop.com/p/arenax-esports-carnival-bgmi-meraki-2026-indian-institute-of-information-technology-iiit-una-1627499 | Valorant: https://unstop.com/p/arenax-esports-carnival-valorant-meraki-2026-indian-institute-of-information-technology-iiit-una-1627521 | Clash Royale: https://unstop.com/p/arenax-esports-carnival-clash-royale-meraki-2026-indian-institute-of-information-technology-iiit-una-1627520',
-        brochure: '',
-        price: '₹12000/-',
-        image1: arenaXImg,
-        image2: arenaXImg,
-        eventDate: '7th-8th February 2026',
-        time: 'Day 1: 9:30 PM - 11:00 PM, Day 2: 9:00 PM - 11:00 PM',
-        venue: 'Room No. 204',
-        tags: ['Esports', 'Gaming', 'BGMI', 'Valorant'],
-        category: ['Day 1', 'Day 2']
     },
 
     // =====================
@@ -446,25 +490,6 @@ export const eventsData = {
         time: '5:00 PM',
         venue: 'PIXCEL',
         tags: ['Photography', 'Creative'],
-        category: ['Day 3']
-    },
-    'robodrive': {
-        id: 24,
-        title: 'ROBODRIVE',
-        isElite: true,
-        isSpeakerSession: false,
-        isLive: true,
-        description: 'Robo Drive is a time-based robotics competition where participants design and manually control a robot car to complete a predefined track in the shortest possible time. The event emphasizes precision driving, speed control, and accurate obstacle navigation, with time penalties for errors such as touching track boundaries, missing checkpoints or collisions testing participants’ skills in robot design, motor control, Arduino fundamentals, and real-time decision-making.',
-        registrationLink: 'https://unstop.com/p/robodrive-meraki-2026-indian-institute-of-information-technology-iiit-una-1617278',
-        brochure: roboDriveBrochure,
-        price: '₹20000/-',
-        icon: roboDriveIcon,
-        image1: roboDriveImg,
-        image2: roboDriveImgLarge,
-        eventDate: '9th February 2026',
-        time: '5:00 PM - 8:30 PM',
-        venue: 'Assembly Point, Admin Block',
-        tags: ['Robotics', 'Engineering', 'Competition', 'Innovation'],
         category: ['Day 3']
     },
     'musical-night-closing': {
