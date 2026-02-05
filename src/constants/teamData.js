@@ -12,6 +12,7 @@ import pranavImg from '../assets/coordinators/pranav.webp';
 import rishavImg from '../assets/coordinators/Rishav.webp';
 import tanishqImg from '../assets/coordinators/Tanishq.webp';
 import avadhImg from '../assets/coordinators/Avadh.webp';
+import naitikImg from '../assets/coordinators/naitik.webp';
 import sheenaImg from '../assets/coordinators/sheena.webp';
 import adityaImg from '../assets/coordinators/AdityaPandey.webp';
 import aryanImg from '../assets/coordinators/Aryan.webp';
@@ -20,6 +21,7 @@ import ridhamImg from '../assets/coordinators/Ridham.webp';
 import purusharthImg from '../assets/coordinators/Purusharth Rana.webp';
 import vinitImg from '../assets/coordinators/Vinit.webp';
 import DeepuImg from '../assets/coordinators/Deepu.webp';
+import srikrishnaImg from '../assets/coordinators/srikrishna.webp';
 
 // Import faculty coordinator photos
 import directorImg from '../assets/coordinators/Director-iiitu.webp';
@@ -89,6 +91,8 @@ export const dayCoordinators = [
     { name: 'Jayani Srivastava', role: 'Co-Coordinator', image: jayaniImg },
     { name: 'Ridham', role: 'Co-Coordinator', image: ridhamImg },
     { name: 'Purusharth Rana', role: 'Co-Coordinator', image: purusharthImg },
+    { name: 'Srikrishna', role: 'Co-Coordinator', image: srikrishnaImg },
+    { name: 'Naitik', role: 'Co-Coordinator', image: naitikImg },
 ];
 
 /**
