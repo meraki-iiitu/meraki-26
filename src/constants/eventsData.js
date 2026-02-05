@@ -10,8 +10,11 @@
  */
 
 import skyCircuitImg from "../assets/sky_circuit.webp";
+import skyCircuitImgLarge from "../assets/SkyCircuit.webp";
 import roboDriveImg from "../assets/robo_drive.webp";
+import roboDriveImgLarge from "../assets/Robodrive.webp";
 import hackTheThroneImg from "../assets/hack_the_throne.webp";
+import hackTheThroneImgLarge from "../assets/Hack The Throne.webp";
 import arenaXImg from "../assets/arena_x.webp";
 import cairLogo from "../assets/sponsors/iitlogo.webp";
 import aerostarLogo from "../assets/sponsors/aerostar.webp";
@@ -26,515 +29,596 @@ import teamShaktiLogo from "../assets/team_shakti.webp";
  */
 export const eventsData = {
     // =====================
-    // PRE-FEST ELIMINATION ROUNDS
-    // =====================
-    'workshops': {
-        id: 1,
-        title: 'WORKSHOPS',
-        description: 'Pre-fest workshops to prepare participants for the main events.',
-        isElite: false,
-        comingSoon: false,
-        tags: ['Workshop', 'Learning'],
-        eventDate: '3rd February 2026',
-        time: '5:30 PM - 7:30 PM',
-        venue: 'Lab 221, 222',
-        facultyCoordinator: 'Avadh Agarwal, Aditya Pandey',
-        studentCoordinator: 'Shashi Bhushan Raj, Sri Krishna',
-        category: 'elimination'
-    },
-    'robo-drive-elimination': {
-        id: 2,
-        title: 'ROBO-DRIVE / ROBO-SOCCER (Elimination)',
-        description: 'Elimination round for Robo-Drive and Robo-Soccer competitions.',
-        isElite: false,
-        comingSoon: false,
-        tags: ['Robotics', 'Competition'],
-        eventDate: '4th February 2026',
-        time: '5:30 PM - 6:30 PM',
-        venue: 'Room No. 227',
-        facultyCoordinator: 'Manan Babbar, Mayank Joshi',
-        studentCoordinator: 'Pulkit Sujan, Shashi Bhushan Raj, Lokesh Agarwal',
-        category: 'elimination'
-    },
-    'bug-bash-elimination': {
-        id: 3,
-        title: 'BUG-BASH (Elimination)',
-        description: 'Elimination round for Bug-Bash debugging competition.',
-        isElite: false,
-        comingSoon: false,
-        tags: ['Coding', 'Debugging'],
-        eventDate: '4th February 2026',
-        time: '6:45 PM - 7:30 PM',
-        venue: 'Room No. 227',
-        facultyCoordinator: 'Kishan Rai',
-        studentCoordinator: 'Maharth Kharbanda',
-        category: 'elimination'
-    },
-    'robo-trace-elimination': {
-        id: 4,
-        title: 'ROBO-TRACE (Elimination)',
-        description: 'Elimination round for Line Follower Robot competition.',
-        isElite: false,
-        comingSoon: false,
-        tags: ['Robotics', 'Line Follower'],
-        eventDate: '5th February 2026',
-        time: '5:30 PM - 6:30 PM',
-        venue: 'Room No. 227',
-        facultyCoordinator: 'Avadh Agarwal, Abhishek Nishad',
-        studentCoordinator: 'Sheena, Aditya Pandey',
-        category: 'elimination'
-    },
-    'mystery-ops-elimination': {
-        id: 5,
-        title: 'MYSTERY OPS (Elimination)',
-        description: 'Elimination round for Mystery Ops event.',
-        isElite: false,
-        comingSoon: false,
-        tags: ['Mystery', 'Competition'],
-        eventDate: '5th February 2026',
-        time: '6:30 PM - 7:30 PM',
-        venue: 'Room No. 120',
-        facultyCoordinator: 'Sundaram Gupta',
-        studentCoordinator: 'Aayush Arya, Rishik',
-        category: 'elimination'
-    },
-    'ucpc-elimination': {
-        id: 6,
-        title: 'UCPC (Elimination)',
-        description: 'Elimination round for UCPC competitive programming contest.',
-        isElite: false,
-        comingSoon: false,
-        tags: ['Coding', 'Competitive Programming'],
-        eventDate: '6th February 2026',
-        time: '5:30 PM - 7:30 PM',
-        venue: 'Room No. 227',
-        facultyCoordinator: 'Purusharth Rana',
-        studentCoordinator: 'Saksham Sangwan, Parth Sharma',
-        category: 'elimination'
-    },
-
-    // =====================
     // MERAKI DAY 1 - 7th February 2026
     // =====================
     'inauguration': {
-        id: 7,
+        id: 1,
         title: 'MERAKI INAUGURATION / OPENING CEREMONY',
-        description: 'Grand opening ceremony of Meraki 2026.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Ceremony', 'Opening'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Grand opening ceremony of Meraki 2026.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '7th February 2026',
         time: '9:30 AM - 1:00 PM',
         venue: 'OAT',
-        facultyCoordinator: 'Rishav Raj',
-        studentCoordinator: 'Vineet Agrawal',
-        dayCoordinator: 'Avadh, Aditya Pandey, Sheena',
-        category: 'day1'
+        tags: ['Ceremony', 'Opening'],
+        coordinators: {
+            faculty: 'Rishav Raj',
+            student: 'Vineet Agrawal',
+            day: 'Avadh, Aditya Pandey, Sheena'
+        },
+        category: ['Day 1']
     },
     'innovation-expo': {
-        id: 8,
+        id: 2,
         title: 'INNOVATION EXPO',
-        description: 'Exhibition showcasing innovative projects and ideas.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Innovation', 'Exhibition'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Exhibition showcasing innovative projects and ideas.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '7th February 2026',
         time: '11:30 AM - 03:00 PM',
         venue: 'IIIT Una Campus',
-        facultyCoordinator: 'Rishav Raj',
-        studentCoordinator: 'Ayan Mishra, Sri Krishna, Yuvraj Singh Chouhan',
-        category: 'day1'
+        tags: ['Innovation', 'Exhibition'],
+        coordinators: {
+            faculty: 'Rishav Raj',
+            student: 'Ayan Mishra, Sri Krishna, Yuvraj Singh Chouhan',
+            day: ''
+        },
+        category: ['Day 1']
     },
     'hack-the-throne': {
-        id: 9,
+        id: 3,
         title: 'HACK-THE-THRONE',
-        image: hackTheThroneImg,
-        description: 'Hack-The-Throne is a national-level inter-college 24-hour hackathon organized under Meraki 2026, the Annual Tech Fest. It is exclusively designed for students who want to move beyond theoretical learning and apply their technical knowledge to solve real-world problems. The hackathon provides a structured and competitive environment where teams ideate, pitch, and build practical solutions under strict time and evaluation constraints, closely simulating real industry hackathons and startup ecosystems.\n\nHackathon Themes:\n• Sustainability & Green Technology\n• FinTech & Digital Innovation\n• Health Technology\n• Smart Automation\n• Digital Security Systems',
         isElite: true,
-        comingSoon: false,
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Hack-The-Throne is a national-level inter-college hackathon where students take ideas from problem identification to rapid prototyping, simulating real-world industry and startup environments. Participants build innovative solutions across the following domains:\n\nSustainability & Green Technology\n\nFinTech & Digital Innovation\n\nHealth Technology\n\nSmart Automation\n\nDigital Security Systems',
+        registrationLink: 'https://hack-the-throne.devfolio.co/overview',
+        brochure: '/brochures/hackathone.pdf',
         price: '₹48000/-',
-        tags: ['Coding', 'Hackathon', 'Innovation', 'Tech', 'National Level'],
+        image1: hackTheThroneImg,
+        image2: hackTheThroneImgLarge,
         eventDate: '7th-8th February 2026',
         time: 'Opening: 12:00 PM - 1:00 PM (Day 1), Judgement: 12:00 PM - 5:00 PM (Day 2)',
         venue: 'Room No. 102, 103, 104, 227',
-        facultyCoordinator: 'Pranav Garg',
-        studentCoordinator: 'Vansh Verma, Purusharth Rana, Ridham, Naitik Pal, Yuvraj Singh, Aditya Kumar',
-        contact: 'meraki@iiitu.ac.in | +91 9721234663',
-        brochureLink: '/brochures/hackathone.pdf',
-        registerLink: 'https://hack-the-throne.devfolio.co/overview',
-        category: 'day1'
+        tags: ['Coding', 'Hackathon', 'Innovation', 'Tech', 'National Level'],
+        coordinators: {
+            faculty: 'Pranav Garg',
+            student: 'Vansh Verma, Purusharth Rana, Ridham, Naitik Pal, Yuvraj Singh, Aditya Kumar',
+            day: ''
+        },
+        category: ['Day 1', 'Day 2']
     },
     'skycircuit': {
-        id: 10,
+        id: 4,
         title: 'SKYCIRCUIT',
-        image: skyCircuitImg,
-        description: 'SkyCircuit is a high-impact technical exhibition designed to bring together institute drone teams, research groups, and drone technology startups on a single platform. The event aims to highlight the rapid advancements in UAV technology, foster knowledge exchange between academia and industry, and inspire students through real-world applications of drones.',
         isElite: true,
-        comingSoon: false,
-        tags: ['Aeromodelling', 'Drones', 'Aircrafts', 'FPVs'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'The Drone Showcase & Innovation Expo is a high-impact technical exhibition designed to bring together institute drone teams, research groups, and drone technology startups on a single platform. The event aims to highlight the rapid advancements in UAV technology, foster knowledge exchange.',
+        registrationLink: 'mailto:meraki@iiitu.ac.in?subject=Sky Circuit Registration&body=Hello, I would like to showcase something cool at Sky Circuit event',
+        brochure: '',
+        price: '',
+        image1: skyCircuitImg,
+        image2: skyCircuitImgLarge,
         eventDate: '7th February 2026',
         time: '1:30 PM - 3:30 PM',
         venue: 'Football Ground',
-        facultyCoordinator: 'Tanishq Singh',
-        studentCoordinator: 'Deepu Vishwakarma',
-        contact: 'meraki@iiitu.ac.in | +91 7017488532',
-        registerLink: 'mailto:meraki@iiitu.ac.in?subject=Sky Circuit Registration&body=Hello, I would like to showcase something cool at Sky Circuit event',
-        buttonText: 'JOIN US',
+        tags: ['Aeromodelling', 'Drones', 'Aircrafts', 'FPVs'],
+        coordinators: {
+            faculty: 'Tanishq Singh',
+            student: 'Deepu Vishwakarma',
+            day: ''
+        },
+        category: ['Day 1'],
         sponsors: [
             { name: "CAIR", institution: "IIT Mandi", logo: cairLogo, type: "Title Sponsor" },
             { name: "AEROSTAR", logo: aerostarLogo, type: "Co-Sponsor" },
             { name: "Agastya Club", institution: "NIT Jalandhar", logo: agastyaLogo, type: "Event Patron" },
             { name: "Team Shakti", institution: "Chitkara University", logo: teamShaktiLogo, type: "Event Patron" }
-        ],
-        category: 'day1'
+        ]
     },
     'defense-talk': {
-        id: 11,
+        id: 5,
         title: 'DEFENSE TALK - Wg Cmdr Sonika Tanwar',
-        description: 'Inspiring defense talk by Wing Commander Sonika Tanwar.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Talk', 'Defense', 'Inspiration'],
+        isSpeakerSession: true,
+        isLive: true,
+        description: 'Inspiring defense talk by Wing Commander Sonika Tanwar.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '7th February 2026',
         time: '3:30 PM - 5:00 PM',
         venue: 'OAT',
-        facultyCoordinator: 'Tanishq Singh',
-        studentCoordinator: 'Rahul Chadak',
-        category: 'day1'
-    },
-    'mystery-ops-day1': {
-        id: 12,
-        title: 'MYSTERY OPS (Elimination)',
-        description: 'Mystery operations elimination round.',
-        isElite: false,
-        comingSoon: false,
-        tags: ['Mystery', 'Competition'],
-        eventDate: '7th February 2026',
-        time: '5:00 PM - 6:00 PM',
-        venue: 'Room No. 204',
-        studentCoordinator: 'Jayani, Aryan Raj, Ankush Sharma',
-        category: 'day1'
+        tags: ['Talk', 'Defense', 'Inspiration'],
+        coordinators: {
+            faculty: 'Tanishq Singh',
+            student: 'Rahul Chadak',
+            day: ''
+        },
+        category: ['Day 1']
     },
     'technical-talk-amit-shukla': {
-        id: 13,
+        id: 6,
         title: 'TECHNICAL TALK - Dr. Amit Shukla',
-        description: 'Technical talk by Dr. Amit Shukla.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Talk', 'Technical'],
+        isSpeakerSession: true,
+        isLive: true,
+        description: 'Technical talk by Dr. Amit Shukla.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '7th February 2026',
         time: '6:00 PM - 7:00 PM',
         venue: 'Room No. 227',
-        facultyCoordinator: 'Pranav Garg, Tanishq Singh',
-        studentCoordinator: 'Naitik Pal',
-        category: 'day1'
+        tags: ['Talk', 'Technical'],
+        coordinators: {
+            faculty: 'Pranav Garg, Tanishq Singh',
+            student: 'Naitik Pal',
+            day: ''
+        },
+        category: ['Day 1']
     },
     'robo-soccer': {
-        id: 14,
+        id: 7,
         title: 'ROBO-SOCCER',
-        description: 'Robotic soccer competition where robots battle it out on the field.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Robotics', 'Competition', 'Soccer'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'A robotics-based head-to-head arena where teams design, build, and operate an Arduino and Bluetooth-controlled RC robot within a compact field. Two teams enter the arena simultaneously with the objective of pushing a lightweight ball into the opponent’s goal. The challenge emphasizes real-time decision-making and precision under pressure, encouraging innovation, coordination, and competitive problem-solving in a dynamic environment.',
+        registrationLink: 'https://unstop.com/competitions/robo-soccer-meraki-2026-indian-institute-of-information-technology-iiit-una-1627487',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '7th February 2026',
         time: '7:30 PM - 9:00 PM',
         venue: 'BasketBall Court',
-        studentCoordinator: 'Shashi Bhushan Raj, Lokesh Agarwal',
-        category: 'day1'
+        tags: ['Robotics', 'Competition', 'Soccer'],
+        coordinators: {
+            faculty: '',
+            student: 'Shashi Bhushan Raj, Lokesh Agarwal',
+            day: ''
+        },
+        category: ['Day 1']
     },
-    'arenax-day1': {
-        id: 15,
-        title: 'ARENAX SPORTS CARNIVAL - I',
-        image: arenaXImg,
-        description: 'ArenaX Game Carnival is a high-energy esports event featuring competitive battles in BGMI, Clash Royale, and Valorant.',
+    'arenax': {
+        id: 8,
+        title: 'ARENAX SPORTS CARNIVAL',
         isElite: true,
-        comingSoon: false,
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Arena X Esports is a competitive esports tournament designed to test teamwork, strategy, and in-game skills across popular multiplayer titles. The event brings together skilled players to compete in structured qualifiers and matches under fair play and competitive conditions.',
+        registrationLink: '',
+        brochure: '',
         price: '₹12000/-',
-        tags: ['Esports', 'Gaming', 'BGMI', 'Valorant'],
-        eventDate: '7th February 2026',
-        time: '9:30 PM - 11:00 PM',
+        image1: arenaXImg,
+        image2: arenaXImg,
+        eventDate: '7th-8th February 2026',
+        time: 'Day 1: 9:30 PM - 11:00 PM, Day 2: 9:00 PM - 11:00 PM',
         venue: 'Room No. 204',
-        studentCoordinator: 'Mayank Gulshan, Yash Mishra',
-        category: 'day1'
+        tags: ['Esports', 'Gaming', 'BGMI', 'Valorant'],
+        coordinators: {
+            faculty: '',
+            student: 'Mayank Gulshan, Yash Mishra',
+            day: ''
+        },
+        category: ['Day 1', 'Day 2']
     },
 
     // =====================
     // MERAKI DAY 2 - 8th February 2026
     // =====================
-    'hack-the-throne-judgement': {
-        id: 16,
-        title: 'HACK-THE-THRONE (Judgement)',
-        image: hackTheThroneImg,
-        description: 'Hack-The-Throne hackathon judgement round - teams present their solutions to the judges.',
-        isElite: true,
-        comingSoon: false,
-        price: '₹48000/-',
-        tags: ['Coding', 'Hackathon', 'Innovation', 'Tech', 'National Level'],
-        eventDate: '8th February 2026',
-        time: '12:00 PM - 5:00 PM',
-        venue: 'Room No. 102, 103, 104, 227',
-        facultyCoordinator: 'Pranav Garg',
-        studentCoordinator: 'Vansh Verma, Purusharth Rana, Ridham, Naitik Pal, Aditya Kumar',
-        contact: 'meraki@iiitu.ac.in | +91 9721234663',
-        category: 'day2'
-    },
     'bug-bash': {
-        id: 17,
+        id: 9,
         title: 'BUG-BASH',
-        description: 'Debugging competition to find and fix bugs in code.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Coding', 'Debugging', 'Competition'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Bug Bash is a hands-on technical event based on the Arduino Uno platform, designed to test participants’ debugging, logical reasoning, and circuit-building skills. Teams will work collaboratively to analyze a given problem statement, identify faults in provided Arduino code, and correct both software and hardware errors to achieve the desired output within a limited time.The event emphasizes real-world embedded system troubleshooting and practical problem-solving under pressure.',
+        registrationLink: 'https://unstop.com/competitions/bug-bash-meraki-2026-indian-institute-of-information-technology-iiit-una-1627497',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '8th February 2026',
         time: '9:00 AM - 10:30 AM',
         venue: 'Room No. 222',
-        facultyCoordinator: 'Kishan Rai',
-        studentCoordinator: 'Maharth Kharbanda',
-        dayCoordinator: 'Aryan Raj, Jayani',
-        category: 'day2'
+        tags: ['Coding', 'Debugging', 'Competition'],
+        coordinators: {
+            faculty: 'Kishan Rai',
+            student: 'Maharth Kharbanda',
+            day: 'Aryan Raj, Jayani'
+        },
+        category: ['Day 2']
     },
     'talk-nidhish-bhatnagar': {
-        id: 18,
+        id: 10,
         title: 'TALK - Col. Nidhish Bhatnagar',
-        description: 'Talk by Colonel Nidhish Bhatnagar.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Talk', 'Defense', 'Inspiration'],
+        isSpeakerSession: true,
+        isLive: true,
+        description: 'Talk by Colonel Nidhish Bhatnagar.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '8th February 2026',
         time: '10:30 AM - 12:00 PM',
         venue: 'OAT',
-        facultyCoordinator: 'Tanishq Singh',
-        studentCoordinator: 'Rahul Chadak',
-        category: 'day2'
+        tags: ['Talk', 'Defense', 'Inspiration'],
+        coordinators: {
+            faculty: 'Tanishq Singh',
+            student: 'Rahul Chadak',
+            day: ''
+        },
+        category: ['Day 2']
     },
     'pixelforge': {
-        id: 19,
+        id: 11,
         title: 'PIXELFORGE',
-        description: 'Creative design and digital art competition.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Design', 'Art', 'Creative'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'PicxelForge is a multi-round, hands-on front-end web development event designed to test participants\' understanding of UI design, layout logic, and implementation skills. Participants will first analyze real-world UI components to understand how they are built, followed by a team-based challenge where they recreate a given UI design using HTML, CSS, and JavaScript. Accuracy, responsiveness, and clean implementation will determine the final winners.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '8th February 2026',
         time: '11:30 AM - 1:30 PM',
         venue: 'Room No. 006',
-        facultyCoordinator: 'Sundaram Gupta',
-        studentCoordinator: 'Aayush Arya, Rishik',
-        category: 'day2'
+        tags: ['Design', 'Art', 'Creative'],
+        coordinators: {
+            faculty: 'Sundaram Gupta',
+            student: 'Aayush Arya, Rishik',
+            day: ''
+        },
+        category: ['Day 2']
     },
     'alumni-session': {
-        id: 20,
+        id: 12,
         title: 'ALUMNI SESSION - Rishav Sir',
-        description: 'Alumni session and experience sharing.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Talk', 'Alumni'],
+        isSpeakerSession: true,
+        isLive: true,
+        description: 'Alumni session and experience sharing.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '8th February 2026',
         time: '2:00 PM - 3:00 PM',
         venue: 'IIIT Una Campus',
-        facultyCoordinator: 'Pranav Garg',
-        studentCoordinator: 'Pulkit Sujaan',
-        category: 'day2'
+        tags: ['Talk', 'Alumni'],
+        coordinators: {
+            faculty: 'Pranav Garg',
+            student: 'Pulkit Sujaan',
+            day: ''
+        },
+        category: ['Day 2']
     },
     'mentor-minds': {
-        id: 21,
+        id: 13,
         title: 'MENTOR MINDS (For Faculty)',
-        description: 'Faculty engagement and mentorship session.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Faculty', 'Mentorship'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Faculty engagement and mentorship session.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '8th February 2026',
         time: '2:00 PM - 3:00 PM',
         venue: 'OAT',
-        studentCoordinator: 'Vinit Aggarwal',
-        category: 'day2'
+        tags: ['Faculty', 'Mentorship'],
+        coordinators: {
+            faculty: '',
+            student: 'Vinit Aggarwal',
+            day: ''
+        },
+        category: ['Day 2']
     },
     'robo-trace': {
-        id: 22,
+        id: 14,
         title: 'ROBO-TRACE (LINE FOLLOWER ROBOT)',
-        description: 'Line follower robot competition where robots navigate a predefined path.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Robotics', 'Line Follower', 'Competition'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'This event is a multi-round robotics challenge designed to test participants’ problem-solving ability, teamwork, and line-following robot performance. Teams will progress through a pre-event puzzle-based qualification round followed by high-speed knockout races on a structured track.',
+        registrationLink: 'https://unstop.com/competitions/robo-trace-meraki-2026-indian-institute-of-information-technology-iiit-una-1627194',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '8th February 2026',
         time: '3:00 PM - 5:00 PM',
         venue: 'West Entrance, ACAD',
-        facultyCoordinator: 'Pranav Garg, Avadh Agarwal, Abhishek Nishad',
-        studentCoordinator: 'Sheena, Aditya Pandey',
-        category: 'day2'
+        tags: ['Robotics', 'Line Follower', 'Competition'],
+        coordinators: {
+            faculty: 'Pranav Garg, Avadh Agarwal, Abhishek Nishad',
+            student: 'Sheena, Aditya Pandey',
+            day: ''
+        },
+        category: ['Day 2']
     },
     'kaggle-clash': {
-        id: 23,
+        id: 15,
         title: 'KAGGLE CLASH',
-        description: 'Data science competition on Kaggle platform.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Data Science', 'ML', 'Competition'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Kaggle Clash is a competitive machine learning event designed to evaluate participants on model accuracy, efficiency, and conceptual understanding. Teams work on three distinct datasets structured data, images, and natural language within a strict time constraint. Participants must balance performance with computational efficiency while navigating.',
+        registrationLink: 'https://unstop.com/competitions/kaggle-clash-meraki-2026-indian-institute-of-information-technology-iiit-una-1628150',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '8th February 2026',
         time: '5:00 PM - 7:30 PM',
         venue: 'Room No. 006',
-        facultyCoordinator: 'Girdhar Gopal',
-        studentCoordinator: 'Sri Krishna, Shivansh',
-        category: 'day2'
+        tags: ['Data Science', 'ML', 'Competition'],
+        coordinators: {
+            faculty: 'Girdhar Gopal',
+            student: 'Sri Krishna, Shivansh',
+            day: ''
+        },
+        category: ['Day 2']
     },
     'hackermaze': {
-        id: 24,
+        id: 16,
         title: 'HACKERMAZE',
-        description: 'Maze-solving and hacking challenge.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Hacking', 'Puzzle', 'Competition'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'HackerMaze is a Minecraft-themed, escape-room style technical event designed to test participants\' logical reasoning, aptitude, and coding skills under time constraints. Teams must solve puzzles, decode clues, and complete programming challenges to progress through different stages. The event emphasizes problem-solving ability, analytical thinking, and teamwork in an immersive and competitive environment.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '8th February 2026',
         time: '5:30 PM - 7:30 PM',
         venue: 'Room No. 225, 226, 227, 230, 231',
-        studentCoordinator: 'Rudraksh, Shaurya Pandey, Dhruv Rana, Shashwat Singh',
-        category: 'day2'
+        tags: ['Hacking', 'Puzzle', 'Competition'],
+        coordinators: {
+            faculty: '',
+            student: 'Rudraksh, Shaurya Pandey, Dhruv Rana, Shashwat Singh',
+            day: ''
+        },
+        category: ['Day 2']
     },
     'pro-night': {
-        id: 25,
+        id: 17,
         title: 'PRO NIGHT',
-        description: 'Professional night event with special performances.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Entertainment', 'Night'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Professional night event with special performances.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '8th February 2026',
         time: '7:30 PM - 9:00 PM',
         venue: 'IIIT Una Campus',
-        facultyCoordinator: 'Rishav Raj',
-        studentCoordinator: 'Awadh Agrawal, Ayan Mishra',
-        category: 'day2'
-    },
-    'arenax-day2': {
-        id: 26,
-        title: 'ARENAX SPORTS CARNIVAL - II',
-        image: arenaXImg,
-        description: 'Day 2 of ArenaX Game Carnival esports competition.',
-        isElite: true,
-        comingSoon: false,
-        price: '₹12000/-',
-        tags: ['Esports', 'Gaming', 'BGMI', 'Valorant'],
-        eventDate: '8th February 2026',
-        time: '9:00 PM - 11:00 PM',
-        venue: 'Room No. 204',
-        studentCoordinator: 'Mayank Gulshan, Yash Mishra',
-        category: 'day2'
+        tags: ['Entertainment', 'Night'],
+        coordinators: {
+            faculty: 'Rishav Raj',
+            student: 'Awadh Agrawal, Ayan Mishra',
+            day: ''
+        },
+        category: ['Day 2']
     },
 
     // =====================
     // MERAKI DAY 3 - 9th February 2026
     // =====================
     'coding-casino': {
-        id: 27,
+        id: 18,
         title: 'CODING CASINO',
-        description: 'Fun coding competition with a casino twist.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Coding', 'Fun', 'Competition'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Coding Casino is an exciting, high-pressure coding event that blends DSA skills with an element of luck. Participants gamble virtual coins by spinning a DSA topic wheel and solving randomly assigned GFG problems. The event tests problem-solving ability, speed, and strategic decision-making in a fun and competitive casino-style environment.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '9th February 2026',
         time: '9:30 AM - 11:30 AM',
         venue: 'Room No. 104',
-        facultyCoordinator: 'Srinivas Prabhu',
-        studentCoordinator: 'Ridham, Purusharth Rana',
-        dayCoordinator: 'Ridham, Purusharth Rana',
-        category: 'day3'
+        tags: ['Coding', 'Fun', 'Competition'],
+        coordinators: {
+            faculty: 'Srinivas Prabhu',
+            student: 'Ridham, Purusharth Rana',
+            day: 'Ridham, Purusharth Rana'
+        },
+        category: ['Day 3']
     },
     'mystery-ops': {
-        id: 28,
+        id: 19,
         title: 'MYSTERY OPS',
-        description: 'Mystery operations final round.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Mystery', 'Competition'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'This event is a multi-round, escape-room style challenge designed to test participants\' logical thinking, observation skills, and teamwork. Participants will progress through an individual puzzle-based elimination round followed by a team-based challenge across multiple themed rooms. Strategy, coordination, and time management will determine the ultimate winner.',
+        registrationLink: 'https://unstop.com/competitions/mystery-ops-meraki-2026-indian-institute-of-information-technology-iiit-una-1627508',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '9th February 2026',
         time: '11:30 AM - 1:00 PM',
         venue: 'IIIT Una Campus',
-        studentCoordinator: 'Jayani Srivastava, Aryan Raj, Ankush Sharma',
-        category: 'day3'
+        tags: ['Mystery', 'Competition'],
+        coordinators: {
+            faculty: '',
+            student: 'Jayani Srivastava, Aryan Raj, Ankush Sharma',
+            day: ''
+        },
+        category: ['Day 3']
     },
     'bot-or-brain': {
-        id: 29,
+        id: 20,
         title: 'BOT OR BRAIN (For Faculty)',
-        description: 'AI vs Human faculty challenge.',
         isElite: false,
-        comingSoon: false,
-        tags: ['AI', 'Faculty', 'Fun'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'AI vs Human faculty challenge.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '9th February 2026',
         time: '2:00 PM - 5:00 PM',
         venue: 'OAT',
-        facultyCoordinator: 'Rishav Raj',
-        studentCoordinator: 'Aarohi Aggarwal, Vanshiv Garg',
-        category: 'day3'
+        tags: ['AI', 'Faculty', 'Fun'],
+        coordinators: {
+            faculty: 'Rishav Raj',
+            student: 'Aarohi Aggarwal, Vanshiv Garg',
+            day: ''
+        },
+        category: ['Day 3']
     },
     'scalesquest': {
-        id: 30,
+        id: 21,
         title: 'SCALESQUEST (For Faculty)',
-        description: 'Faculty engagement competition.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Faculty', 'Competition'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Faculty engagement competition.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '9th February 2026',
         time: '2:00 PM - 5:00 PM',
         venue: 'OAT',
-        facultyCoordinator: 'Rishav Raj',
-        studentCoordinator: 'Jayani Srivastva, Avadh Agarwal',
-        category: 'day3'
+        tags: ['Faculty', 'Competition'],
+        coordinators: {
+            faculty: 'Rishav Raj',
+            student: 'Jayani Srivastva, Avadh Agarwal',
+            day: ''
+        },
+        category: ['Day 3']
     },
     'ucpc': {
-        id: 31,
+        id: 22,
         title: 'UCPC',
-        description: 'Una Competitive Programming Championship - the ultimate coding showdown.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Coding', 'Competitive Programming'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'UCPC is a fun and competitive coding event inspired by the ICPC format, designed to improve participants\' problem-solving and programming skills.',
+        registrationLink: 'https://unstop.com/hackathons/ucpc-meraki-2026-indian-institute-of-information-technology-iiit-una-1628130',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '9th February 2026',
         time: '2:00 PM - 5:00 PM',
         venue: 'Room No. 006',
-        facultyCoordinator: 'Krish Choudhary',
-        studentCoordinator: 'Purusharth Rana, Saksham Sangwan, Parth Sharma',
-        category: 'day3'
+        tags: ['Coding', 'Competitive Programming'],
+        coordinators: {
+            faculty: 'Krish Choudhary',
+            student: 'Purusharth Rana, Saksham Sangwan, Parth Sharma',
+            day: ''
+        },
+        category: ['Day 3']
     },
     'framorama': {
-        id: 32,
+        id: 23,
         title: 'FRAMORAMA',
-        description: 'Photography and framing competition.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Photography', 'Creative'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Photography and framing competition.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '9th February 2026',
         time: '5:00 PM',
         venue: 'PIXCEL',
-        category: 'day3'
+        tags: ['Photography', 'Creative'],
+        coordinators: {
+            faculty: '',
+            student: '',
+            day: ''
+        },
+        category: ['Day 3']
     },
     'robodrive': {
-        id: 33,
+        id: 24,
         title: 'ROBODRIVE',
-        image: roboDriveImg,
-        description: 'Robo Drive is a robotics competition where teams design and manually control a robot car to complete a predefined track in the shortest possible time. The track includes sharp turns, obstacles, and checkpoints that must be navigated strictly according to the event rules.',
         isElite: true,
-        comingSoon: false,
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Robo Drive is a time-based robotics competition where participants design and manually control a robot car to complete a predefined track in the shortest possible time. The event emphasizes precision driving, speed control, and accurate obstacle navigation, with time penalties for errors such as touching track boundaries, missing checkpoints or collisions testing participants’ skills in robot design, motor control, Arduino fundamentals, and real-time decision-making.',
+        registrationLink: 'https://unstop.com/p/robodrive-meraki-2026-indian-institute-of-information-technology-iiit-una-1617278',
+        brochure: '/brochures/Event Brochure - Robo Drive.pdf',
         price: '₹20000/-',
-        tags: ['Robotics', 'Engineering', 'Competition', 'Innovation'],
+        image1: roboDriveImg,
+        image2: roboDriveImgLarge,
         eventDate: '9th February 2026',
         time: '5:00 PM - 8:30 PM',
         venue: 'Assembly Point, Admin Block',
-        facultyCoordinator: 'Vineet Agarwal',
-        studentCoordinator: 'Manan Babbar, Mayank Joshi, Pulkit Sujan, Nurandu Sri Krishna',
-        contact: 'meraki@iiitu.ac.in | +91 6283746751',
-        brochureLink: '/brochures/Event Brochure - Robo Drive.pdf',
-        registerLink: 'https://unstop.com/p/robodrive-meraki-2026-indian-institute-of-information-technology-iiit-una-1617278',
-        category: 'day3'
+        tags: ['Robotics', 'Engineering', 'Competition', 'Innovation'],
+        coordinators: {
+            faculty: 'Vineet Agarwal',
+            student: 'Manan Babbar, Mayank Joshi, Pulkit Sujan, Nurandu Sri Krishna',
+            day: ''
+        },
+        category: ['Day 3']
     },
     'musical-night-closing': {
-        id: 34,
+        id: 25,
         title: 'MUSICAL NIGHT & CLOSING CEREMONY',
-        description: 'Grand closing ceremony with musical performances by SARGAM.',
         isElite: false,
-        comingSoon: false,
-        tags: ['Music', 'Ceremony', 'Closing'],
+        isSpeakerSession: false,
+        isLive: true,
+        description: 'Grand closing ceremony with musical performances by SARGAM.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
         eventDate: '9th February 2026',
         time: '9:00 PM - 11:00 PM',
         venue: 'OAT',
-        studentCoordinator: 'SARGAM',
-        category: 'day3'
+        tags: ['Music', 'Ceremony', 'Closing'],
+        coordinators: {
+            faculty: '',
+            student: 'SARGAM',
+            day: ''
+        },
+        category: ['Day 3']
     }
 };
 
@@ -565,35 +649,41 @@ export const getAllEvents = () => Object.values(eventsData).sort((a, b) => a.id 
 export const getEliteEvents = () => getAllEvents().filter(e => e.isElite);
 
 /**
- * Get events by category.
- * @param {string} category - Category (elimination, day1, day2, day3)
+ * Get events by category (supports array categories).
+ * @param {string} day - Day filter (e.g., 'Day 1', 'Day 2', 'Day 3')
  * @returns {Array<Object>} Events in category
  */
-export const getEventsByCategory = (category) => getAllEvents().filter(e => e.category === category);
-
-/**
- * Get elimination round events.
- * @returns {Array<Object>} Elimination events
- */
-export const getEliminationEvents = () => getEventsByCategory('elimination');
+export const getEventsByCategory = (day) => getAllEvents().filter(e => e.category && e.category.includes(day));
 
 /**
  * Get Day 1 events.
  * @returns {Array<Object>} Day 1 events
  */
-export const getDay1Events = () => getEventsByCategory('day1');
+export const getDay1Events = () => getEventsByCategory('Day 1');
 
 /**
  * Get Day 2 events.
  * @returns {Array<Object>} Day 2 events
  */
-export const getDay2Events = () => getEventsByCategory('day2');
+export const getDay2Events = () => getEventsByCategory('Day 2');
 
 /**
  * Get Day 3 events.
  * @returns {Array<Object>} Day 3 events
  */
-export const getDay3Events = () => getEventsByCategory('day3');
+export const getDay3Events = () => getEventsByCategory('Day 3');
+
+/**
+ * Get speaker session events.
+ * @returns {Array<Object>} Speaker session events
+ */
+export const getSpeakerSessions = () => getAllEvents().filter(e => e.isSpeakerSession);
+
+/**
+ * Get live events.
+ * @returns {Array<Object>} Live events
+ */
+export const getLiveEvents = () => getAllEvents().filter(e => e.isLive);
 
 /**
  * Get short description (first sentence) for an event.
@@ -604,4 +694,3 @@ export const getShortDescription = (key) => {
     const event = eventsData[key];
     return event ? event.description.split('.')[0] + '.' : '';
 };
-

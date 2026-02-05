@@ -9,7 +9,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useParams } from "react-router-dom";
 import eventDetailBg from "../assets/event_detail.webp";
 import minecraftSignComingSoon from "../assets/minecraft_sign_coming_soon.webp";
-import { eventsData, getEventBySlug } from "../constants/eventsData";
+import { eventsData, getEventByKey } from "../constants/eventsData";
 
 /**
  * Event details page component.
@@ -19,20 +19,22 @@ const EventDetails = () => {
   const { eventId } = useParams();
 
   // Get event data from single source of truth
-  const eventData = getEventBySlug(eventId) || {
+  const eventData = getEventByKey(eventId) || {
     title: "Event Not Found",
-    price: "₹0/-",
+    price: "",
     tags: [],
-    badge: "EVENT",
     description: "Event details not available.",
     eventDate: "TBA",
-    teamSize: "TBA",
+    time: "TBA",
     venue: "TBA",
-    contact: "events@meraki.com",
-    registerLink: "#",
+    registrationLink: "#",
   };
 
-  const eventImage = eventData?.image;
+  // Use image2 for large display, fallback to image1 for thumbnails
+  const eventImage = eventData?.image2 || eventData?.image1;
+  
+  // Check if event is live to determine what to display
+  const isEventLive = eventData?.isLive ?? false;
 
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -93,9 +95,9 @@ const EventDetails = () => {
           <div className="w-20 sm:w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mx-auto"></div>
         </motion.div>
 
-        {/* Conditional Content: Coming Soon Wireframe vs Real Content */}
-        {eventData?.comingSoon ? (
-          /* Coming Soon Skeleton UI */
+        {/* Conditional Content: Display coming soon if event is not live */}
+        {!isEventLive ? (
+          /* Coming Soon Display - Event Not Live Yet */
           <div className="relative min-h-[50vh]">
             {/* Floating "Coming Soon" Badge */}
             <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none select-none">
@@ -144,7 +146,7 @@ const EventDetails = () => {
             </motion.div>
           </div>
         ) : (
-          /* Real Content */
+          /* Real Content - Event Is Live */
           <>
             {/* Content Grid */}
             <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.2 }}>
@@ -159,10 +161,10 @@ const EventDetails = () => {
                 {eventData.price && <div className="flex items-center gap-2 sm:gap-3"><span className="text-2xl sm:text-3xl md:text-4xl">💰</span><span className="font-pixel text-xl sm:text-2xl md:text-3xl text-yellow-400">{eventData.price}</span></div>}
                 <div className="flex flex-wrap gap-2 sm:gap-3">{eventData.tags.map((tag, index) => <span key={index} className="bg-gray-800 border border-gray-600 text-white font-terminal text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2">{tag}</span>)}</div>
                 <div className="flex flex-col gap-3 sm:gap-4">
-                  {eventData.brochureLink && (
-                    <motion.a href={eventData.brochureLink} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-block w-full sm:w-auto bg-gradient-to-r from-cyan-600 to-cyan-500 text-white font-pixel text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 border-cyan-800 hover:from-cyan-500 hover:to-cyan-400 transition-all min-h-[48px] text-center">VIEW BROCHURE</motion.a>
+                  {eventData.brochure && (
+                    <motion.a href={eventData.brochure} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-block w-full sm:w-auto bg-gradient-to-r from-cyan-600 to-cyan-500 text-white font-pixel text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 border-cyan-800 hover:from-cyan-500 hover:to-cyan-400 transition-all min-h-[48px] text-center">VIEW BROCHURE</motion.a>
                   )}
-                  <motion.a href={eventData.registerLink || "#"} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-block w-full sm:w-auto bg-gradient-to-r from-orange-600 to-orange-500 text-white font-pixel text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 border-orange-800 hover:from-orange-500 hover:to-orange-400 transition-all min-h-[48px] text-center">{eventData.buttonText || 'REGISTER NOW!'}</motion.a>
+                  <motion.a href={eventData.registrationLink || "#"} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-block w-full sm:w-auto bg-gradient-to-r from-orange-600 to-orange-500 text-white font-pixel text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 border-orange-800 hover:from-orange-500 hover:to-orange-400 transition-all min-h-[48px] text-center">REGISTER NOW!</motion.a>
                 </div>
               </div>
             </motion.div>
@@ -236,9 +238,9 @@ const EventDetails = () => {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8">
                 <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">EVENT DATE</h4><p className="font-terminal text-sm sm:text-base text-gray-400">{eventData.eventDate}</p></div>
-                <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">TEAM SIZE</h4><p className="font-terminal text-sm sm:text-base text-gray-400">{eventData.teamSize}</p></div>
+                <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">TIME</h4><p className="font-terminal text-sm sm:text-base text-gray-400">{eventData.time || 'TBA'}</p></div>
                 <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">VENUE</h4><p className="font-terminal text-sm sm:text-base text-gray-400">{eventData.venue}</p></div>
-                <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">CONTACT</h4><p className="font-terminal text-sm sm:text-base text-gray-400 break-all">{eventData.contact}</p></div>
+                <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">COORDINATOR</h4><p className="font-terminal text-sm sm:text-base text-gray-400 break-all">{eventData.coordinators?.student || 'TBA'}</p></div>
               </div>
             </motion.div>
           </>

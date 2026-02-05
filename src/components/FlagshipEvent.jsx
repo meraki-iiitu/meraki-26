@@ -14,7 +14,7 @@ import React, { useState, useRef, useMemo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import flagshipBg from "../assets/elite_minecraft_bg.webp";
-import { getEliteEvents, getShortDescription } from "../constants/eventsData";
+import { eventsData, getEliteEvents, getShortDescription } from "../constants/eventsData";
 import { appleSlideUp, sectionTransition } from "../utils/motion";
 
 /**
@@ -186,7 +186,7 @@ function FlagshipEvent() {
                         }
                       `}>
                         <img
-                          src={event.image}
+                          src={event.image1 || event.image2}
                           alt={event.title}
                           className={`w-full h-full object-cover transition-all duration-300 ${isActive ? "opacity-100" : "opacity-60 group-hover:opacity-80"}`}
                         />
@@ -213,12 +213,15 @@ function FlagshipEvent() {
              */}
             <div
               className="relative z-20 w-full md:w-2/3 bg-dark-200 border-2 border-dark-300 rounded-t-lg rounded-b-none md:rounded-l-none md:rounded-r-lg md:rounded-tl-lg mb-0 md:mt-0 md:-ml-[2px] overflow-hidden group cursor-pointer min-h-[320px] xs:min-h-[360px] sm:min-h-[400px] md:min-h-[450px]"
-              onClick={() => navigate(`/event/${activeEvent.slug}`)}
+              onClick={() => {
+                const eventKey = Object.keys(eventsData).find(key => eventsData[key].id === activeEvent.id);
+                if (eventKey) navigate(`/event/${eventKey}`);
+              }}
             >
               {/* Full Enclosing Image */}
               <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-dark-100">
                 <img
-                  src={activeEvent.image}
+                  src={activeEvent.image2 || activeEvent.image1}
                   alt={activeEvent.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />

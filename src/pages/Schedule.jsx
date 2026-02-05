@@ -311,7 +311,7 @@ const Schedule = () => {
                   {getScheduleForDay(activeDay).map((item, index) => (
                     <Link
                       key={item.eventId || index}
-                      to={item.event?.slug ? `/event/${item.event.slug}` : '#'}
+                      to={item.key ? `/event/${item.key}` : '#'}
                       className="block relative pl-8 sm:pl-12"
                     >
                       {/* Timeline Dot */}
@@ -332,9 +332,9 @@ const Schedule = () => {
 
                         {/* Event Thumbnail */}
                         <div className="w-full sm:w-20 md:w-24 aspect-video sm:aspect-square bg-gray-900 overflow-hidden border-2 border-gray-600 shrink-0 group-hover:border-cyan-400 transition-colors relative shadow-inner">
-                          {item.event?.image ? (
+                          {item.event?.image1 || item.event?.image2 ? (
                             <img
-                              src={item.event.image}
+                              src={item.event.image1 || item.event.image2}
                               alt={item.event.title}
                               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                             />
@@ -351,9 +351,9 @@ const Schedule = () => {
                              <div className="px-2 py-0.5 bg-gray-900 border border-gray-600 text-[10px] text-cyan-400 font-terminal tracking-wider">
                                 {item.eventId}
                              </div>
-                             {item.event?.category === 'elimination' && (
-                                <div className="px-2 py-0.5 bg-red-900/50 border border-red-500/50 text-[10px] text-red-400 font-terminal tracking-wider animate-pulse">
-                                   ELIMINATION
+                             {item.event?.isElite && (
+                                <div className="px-2 py-0.5 bg-gradient-to-r from-purple-900/70 to-pink-900/70 border border-purple-500/50 text-[10px] text-purple-300 font-terminal tracking-wider">
+                                   ELITE
                                 </div>
                              )}
                           </div>
@@ -369,10 +369,10 @@ const Schedule = () => {
                                     <span>{item.event.venue}</span>
                                 </div>
                             )}
-                             {item.event?.studentCoordinator && (
+                             {item.event?.coordinators?.student && (
                                 <div className="flex items-center gap-1.5">
                                     <span className="text-cyan-600">👤</span>
-                                    <span className="truncate max-w-[150px] sm:max-w-none">{item.event.studentCoordinator.split(',')[0]}</span>
+                                    <span className="truncate max-w-[150px] sm:max-w-none">{item.event.coordinators.student.split(',')[0]}</span>
                                 </div>
                             )}
                           </div>
