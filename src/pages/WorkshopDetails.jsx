@@ -88,7 +88,7 @@ const WorkshopDetails = () => {
         {/* Details Panel */}
         <motion.div className="bg-gray-800/80 border-2 border-gray-600 p-4 sm:p-6 md:p-8" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.4 }}>
           <h2 className="font-pixel text-lg sm:text-xl md:text-2xl text-white mb-4 sm:mb-6">DETAILS</h2>
-          
+
           {/* Description */}
           <div className="mb-4 sm:mb-6">
             <h3 className="font-pixel text-sm sm:text-base text-cyan-400 mb-2 sm:mb-3">DESCRIPTION</h3>
@@ -98,8 +98,8 @@ const WorkshopDetails = () => {
 
           {/* Grid Layout - Duration and Venue */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8 mb-6 sm:mb-8">
-            <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">DURATION</h4><p className="font-terminal text-sm sm:text-base text-gray-400">{workshopData.duration}</p></div>
-            <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">VENUE</h4><p className="font-terminal text-sm sm:text-base text-gray-400">{workshopData.venue}</p></div>
+            <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">DURATION</h4><p className="font-terminal text-base sm:text-lg font-bold text-gray-300">{workshopData.duration}</p></div>
+            <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">VENUE</h4><p className="font-terminal text-base sm:text-lg font-bold text-gray-300">{workshopData.venue}</p></div>
           </div>
 
           {/* Prerequisites */}

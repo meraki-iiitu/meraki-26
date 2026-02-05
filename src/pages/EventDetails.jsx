@@ -184,7 +184,7 @@ const EventDetails = () => {
               <div className="space-y-4 sm:space-y-6 order-2">
                 {eventData?.isElite && <div className="inline-block bg-blue-600/20 border-2 border-blue-500 px-4 py-2 mt-2"><span className="font-pixel text-blue-400 text-sm sm:text-base tracking-wider flex items-center gap-2"><span className="animate-pulse">★</span> FLAGSHIP EVENT</span></div>}
                 {eventData.price && <div className="flex items-center gap-2 sm:gap-3"><span className="text-2xl sm:text-3xl md:text-4xl">💰</span><span className="font-pixel text-xl sm:text-2xl md:text-3xl text-yellow-400">{eventData.price}</span></div>}
-                <div className="flex flex-wrap gap-2 sm:gap-3">{(eventData.tags || []).map((tag, index) => <span key={index} className="bg-gray-800 border border-gray-600 text-white font-terminal text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2">{tag}</span>)}</div>
+                {/* Tags removed as per request */}
                 <div className="flex flex-col gap-3 sm:gap-4">
                   {eventData.brochure && (
                     <motion.a href={eventData.brochure} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-block w-full sm:w-auto bg-gradient-to-r from-cyan-600 to-cyan-500 text-white font-pixel text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 border-cyan-800 hover:from-cyan-500 hover:to-cyan-400 transition-all min-h-[48px] text-center">VIEW BROCHURE</motion.a>
@@ -265,14 +265,14 @@ const EventDetails = () => {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8">
                 <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">EVENT DATE</h4><p className="font-terminal text-sm sm:text-base text-gray-400">{eventData.eventDate || 'TBA'}</p></div>
-                <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">TIME</h4><p className="font-terminal text-sm sm:text-base text-gray-400">{eventData.time || 'TBA'}</p></div>
-                <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">VENUE</h4><p className="font-terminal text-sm sm:text-base text-gray-400">{eventData.venue || 'TBA'}</p></div>
+                <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">TIME</h4><p className="font-terminal text-base sm:text-lg font-bold text-gray-300">{eventData.time || 'TBA'}</p></div>
+                <div className="border-l-3 sm:border-l-4 border-cyan-400 pl-3 sm:pl-4 py-1"><h4 className="font-pixel text-sm sm:text-base text-white mb-1 sm:mb-2">VENUE</h4><p className="font-terminal text-base sm:text-lg font-bold text-gray-300">{eventData.venue || 'TBA'}</p></div>
               </div>
             </motion.div>
           </>
         )}
       </motion.div>
-    </div>
+    </div >
   );
 };
 

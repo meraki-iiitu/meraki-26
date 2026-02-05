@@ -23,6 +23,8 @@ import teamShaktiLogo from "../assets/team_shakti.webp";
 import hackathoneBrochure from "../assets/brochures/hackathone.pdf";
 import roboDriveBrochure from "../assets/brochures/robo-drive.pdf";
 
+import chichiImg from "../assets/chichi.jpg";
+
 // Event Icons
 import bugBashIcon from "../assets/eventImages/icons/bug-bash-sq.jpeg";
 import kaggleClashIcon from "../assets/eventImages/icons/kaggle-clash-sq.jpeg";
@@ -50,9 +52,6 @@ export const flagshipEvents = {
         id: 3,
         slug: 'hack-the-throne',
         title: 'HACK-THE-THRONE',
-        isElite: true,
-        isSpeakerSession: false,
-        isLive: true,
         description: 'Hack-The-Throne is a national-level inter-college hackathon where students take ideas from problem identification to rapid prototyping, simulating real-world industry and startup environments. Participants build innovative solutions across the following domains:\n\nSustainability & Green Technology\n\nFinTech & Digital Innovation\n\nHealth Technology\n\nSmart Automation\n\nDigital Security Systems',
         registrationLink: 'https://hack-the-throne.devfolio.co/overview',
         brochure: hackathoneBrochure,
@@ -69,9 +68,6 @@ export const flagshipEvents = {
         id: 4,
         slug: 'skycircuit',
         title: 'SKYCIRCUIT',
-        isElite: true,
-        isSpeakerSession: false,
-        isLive: true,
         description: 'The Drone Showcase & Innovation Expo is a high-impact technical exhibition designed to bring together institute drone teams, research groups, and drone technology startups on a single platform. The event aims to highlight the rapid advancements in UAV technology, foster knowledge exchange.',
         registrationLink: 'mailto:meraki@iiitu.ac.in?subject=Sky Circuit Registration&body=Hello, I would like to showcase something cool at Sky Circuit event',
         brochure: '',
@@ -80,7 +76,7 @@ export const flagshipEvents = {
         image2: skyCircuitImgLarge,
         eventDate: '7th February 2026',
         time: '1:30 PM - 3:30 PM',
-        venue: 'Football Ground',
+        venue: 'Cricket Ground',
         tags: ['Aeromodelling', 'Drones', 'Aircrafts', 'FPVs'],
         category: ['Day 1'],
         sponsors: [
@@ -94,9 +90,6 @@ export const flagshipEvents = {
         id: 8,
         slug: 'arenax',
         title: 'ARENAX SPORTS CARNIVAL',
-        isElite: true,
-        isSpeakerSession: false,
-        isLive: true,
         description: 'Arena X Esports is a competitive esports tournament designed to test teamwork, strategy, and in-game skills across popular multiplayer titles. The event brings together skilled players to compete in structured qualifiers and matches under fair play and competitive conditions.',
         registrationLink: 'BGMI: https://unstop.com/p/arenax-esports-carnival-bgmi-meraki-2026-indian-institute-of-information-technology-iiit-una-1627499 | Valorant: https://unstop.com/p/arenax-esports-carnival-valorant-meraki-2026-indian-institute-of-information-technology-iiit-una-1627521 | Clash Royale: https://unstop.com/p/arenax-esports-carnival-clash-royale-meraki-2026-indian-institute-of-information-technology-iiit-una-1627520',
         brochure: '',
@@ -104,18 +97,15 @@ export const flagshipEvents = {
         image1: arenaXImg,
         image2: arenaXImg,
         eventDate: '7th-8th February 2026',
-        time: 'Day 1: 9:30 PM - 11:00 PM, Day 2: 9:00 PM - 11:00 PM',
-        venue: 'Room No. 204',
+        time: 'Day 1: 9:30 PM - 11:00 PM, Day 2: 9:00 PM - 11:00 PM, Day 3: 9:00 PM - 11:00 PM',
+        venue: 'Room No. 006',
         tags: ['Esports', 'Gaming', 'BGMI', 'Valorant'],
-        category: ['Day 1', 'Day 2']
+        category: ['Day 1', 'Day 2', 'Day 3']
     },
     'robodrive': {
         id: 24,
         slug: 'robodrive',
         title: 'ROBODRIVE',
-        isElite: true,
-        isSpeakerSession: false,
-        isLive: true,
         description: 'Robo Drive is a time-based robotics competition where participants design and manually control a robot car to complete a predefined track in the shortest possible time. The event emphasizes precision driving, speed control, and accurate obstacle navigation, with time penalties for errors such as touching track boundaries, missing checkpoints or collisions testing participants’ skills in robot design, motor control, Arduino fundamentals, and real-time decision-making.',
         registrationLink: 'https://unstop.com/p/robodrive-meraki-2026-indian-institute-of-information-technology-iiit-una-1617278',
         brochure: roboDriveBrochure,
@@ -125,7 +115,7 @@ export const flagshipEvents = {
         image2: roboDriveImgLarge,
         eventDate: '9th February 2026',
         time: '5:00 PM - 8:30 PM',
-        venue: 'Assembly Point, Admin Block',
+        venue: 'TBD',
         tags: ['Robotics', 'Engineering', 'Competition', 'Innovation'],
         category: ['Day 3']
     },
@@ -150,9 +140,6 @@ export const eventsData = {
     'inauguration': {
         id: 1,
         title: 'MERAKI INAUGURATION / OPENING CEREMONY',
-        isElite: false,
-        isSpeakerSession: false,
-        isLive: true,
         description: 'Grand opening ceremony of Meraki 2026.',
         registrationLink: '',
         brochure: '',
@@ -168,9 +155,6 @@ export const eventsData = {
     'innovation-expo': {
         id: 2,
         title: 'INNOVATION EXPO',
-        isElite: false,
-        isSpeakerSession: false,
-        isLive: true,
         description: 'Exhibition showcasing innovative projects and ideas.',
         registrationLink: '',
         brochure: '',
@@ -179,7 +163,7 @@ export const eventsData = {
         image2: '',
         eventDate: '7th February 2026',
         time: '11:30 AM - 03:00 PM',
-        venue: 'IIIT Una Campus',
+        venue: 'Academic Block',
         tags: ['Innovation', 'Exhibition'],
         category: ['Day 1']
     },
@@ -190,9 +174,6 @@ export const eventsData = {
     'defense-talk': {
         id: 5,
         title: 'DEFENSE TALK - Wg Cmdr Sonika Tanwar',
-        isElite: false,
-        isSpeakerSession: true,
-        isLive: true,
         description: 'Inspiring defense talk by Wing Commander Sonika Tanwar.',
         registrationLink: '',
         brochure: '',
@@ -200,47 +181,70 @@ export const eventsData = {
         image1: sonikaTanwarImg,
         image2: sonikaTanwarImg,
         eventDate: '7th February 2026',
-        time: '3:30 PM - 5:00 PM',
+        time: '3:30 PM - 4:30 PM',
         venue: 'OAT',
         tags: ['Talk', 'Defense', 'Inspiration'],
         category: ['Day 1']
     },
-    'technical-talk-amit-shukla': {
-        id: 6,
-        title: 'TECHNICAL TALK - Dr. Amit Shukla',
-        isElite: false,
-        isSpeakerSession: true,
-        isLive: true,
-        description: 'Technical talk by Dr. Amit Shukla.',
+    'techcadd-session': {
+        id: 26,
+        title: 'SESSION BY TECHCADD (The AI dog Chichi)',
+        description: 'Interactive session by TechCADD featuring the AI dog Chichi.',
         registrationLink: '',
         brochure: '',
         price: '',
-        image1: amitShuklaImg,
-        image2: amitShuklaImg,
+        image1: chichiImg,
+        image2: chichiImg,
         eventDate: '7th February 2026',
-        time: '6:00 PM - 7:00 PM',
-        venue: 'Room No. 227',
-        tags: ['Talk', 'Technical'],
+        time: '4:30 PM - 5:00 PM',
+        venue: 'TBD',
+        tags: ['Talk', 'AI', 'Tech'],
         category: ['Day 1']
     },
-    'robo-soccer': {
-        id: 7,
-        title: 'ROBO-SOCCER',
-        isElite: false,
-        isSpeakerSession: false,
-        isLive: true,
-        description: 'A robotics-based head-to-head arena where teams design, build, and operate an Arduino and Bluetooth-controlled RC robot within a compact field. Two teams enter the arena simultaneously with the objective of pushing a lightweight ball into the opponent’s goal. The challenge emphasizes real-time decision-making and precision under pressure, encouraging innovation, coordination, and competitive problem-solving in a dynamic environment.',
-        registrationLink: 'https://unstop.com/competitions/robo-soccer-meraki-2026-indian-institute-of-information-technology-iiit-una-1627487',
+    'mystery-ops-elimination': {
+        id: 27,
+        title: 'MYSTERY OPS - ELIMINATION',
+        description: 'Elimination round for Mystery Ops.',
+        registrationLink: 'https://unstop.com/college-fests/meraki-2026-indian-institute-of-information-technology-iiit-una-430446',
         brochure: '',
         price: '',
-        oslug: 'robo-soccer',
-        icon: roboSoccerIcon,
+        icon: mysteryOpsIcon,
         image1: '',
         image2: '',
         eventDate: '7th February 2026',
-        time: '7:30 PM - 9:00 PM',
+        time: '5:00 PM - 6:00 PM',
+        venue: 'Room No. 204',
+        tags: ['Mystery', 'Competition', 'Elimination'],
+        category: ['Day 1']
+    },
+    'talk-nidhish-bhatnagar': {
+        id: 10,
+        title: 'TALK - Col. Nidhish Bhatnagar',
+        description: 'Talk by Colonel Nidhish Bhatnagar.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: nidhishBhatnagarImg,
+        image2: nidhishBhatnagarImg,
+        eventDate: '7th February 2026',
+        time: '6:00 PM - 7:00 PM',
+        venue: 'Room No. 227',
+        tags: ['Talk', 'Defense', 'Inspiration'],
+        category: ['Day 1']
+    },
+    'musical-night-day1': {
+        id: 28,
+        title: 'MUSICAL NIGHT',
+        description: 'Musical night performance.',
+        registrationLink: '',
+        brochure: '',
+        price: '',
+        image1: '',
+        image2: '',
+        eventDate: '7th February 2026',
+        time: '7:30 PM - 9:30 PM',
         venue: 'BasketBall Court',
-        tags: ['Robotics', 'Competition', 'Soccer'],
+        tags: ['Music', 'Fun', 'Cultural'],
         category: ['Day 1']
     },
 
@@ -250,9 +254,6 @@ export const eventsData = {
     'bug-bash': {
         id: 9,
         title: 'BUG-BASH',
-        isElite: false,
-        isSpeakerSession: false,
-        isLive: true,
         description: 'Bug Bash is a hands-on technical event based on the Arduino Uno platform, designed to test participants’ debugging, logical reasoning, and circuit-building skills. Teams will work collaboratively to analyze a given problem statement, identify faults in provided Arduino code, and correct both software and hardware errors to achieve the desired output within a limited time.The event emphasizes real-world embedded system troubleshooting and practical problem-solving under pressure.',
         registrationLink: 'https://unstop.com/competitions/bug-bash-meraki-2026-indian-institute-of-information-technology-iiit-una-1627497',
         brochure: '',
@@ -262,34 +263,28 @@ export const eventsData = {
         image2: '',
         eventDate: '8th February 2026',
         time: '9:00 AM - 10:30 AM',
-        venue: 'Room No. 222',
+        venue: 'Room No. 007',
         tags: ['Coding', 'Debugging', 'Competition'],
         category: ['Day 2']
     },
-    'talk-nidhish-bhatnagar': {
-        id: 10,
-        title: 'TALK - Col. Nidhish Bhatnagar',
-        isElite: false,
-        isSpeakerSession: true,
-        isLive: true,
-        description: 'Talk by Colonel Nidhish Bhatnagar.',
+    'technical-talk-amit-shukla': {
+        id: 6,
+        title: 'TECHNICAL TALK - Dr. Amit Shukla',
+        description: 'Technical talk by Dr. Amit Shukla.',
         registrationLink: '',
         brochure: '',
         price: '',
-        image1: nidhishBhatnagarImg,
-        image2: nidhishBhatnagarImg,
+        image1: amitShuklaImg,
+        image2: amitShuklaImg,
         eventDate: '8th February 2026',
-        time: '10:30 AM - 12:00 PM',
+        time: '10:30 AM - 12 PM',
         venue: 'OAT',
-        tags: ['Talk', 'Defense', 'Inspiration'],
+        tags: ['Talk', 'Technical'],
         category: ['Day 2']
     },
     'pixelforge': {
         id: 11,
         title: 'PIXELFORGE',
-        isElite: false,
-        isSpeakerSession: false,
-        isLive: true,
         description: 'PicxelForge is a multi-round, hands-on front-end web development event designed to test participants\' understanding of UI design, layout logic, and implementation skills. Participants will first analyze real-world UI components to understand how they are built, followed by a team-based challenge where they recreate a given UI design using HTML, CSS, and JavaScript. Accuracy, responsiveness, and clean implementation will determine the final winners.',
         registrationLink: 'https://unstop.com/p/pixelforge-indian-institute-of-information-technology-iiit-una-1628146',
         brochure: '',
@@ -305,9 +300,6 @@ export const eventsData = {
     'alumni-session': {
         id: 12,
         title: 'ALUMNI SESSION - Rishav Sir',
-        isElite: false,
-        isSpeakerSession: true,
-        isLive: true,
         description: 'Alumni session and experience sharing.',
         registrationLink: '',
         brochure: '',
@@ -316,17 +308,13 @@ export const eventsData = {
         image2: rishavMishraImg,
         eventDate: '8th February 2026',
         time: '2:00 PM - 3:00 PM',
-        venue: 'IIIT Una Campus',
+        venue: 'Room 228',
         tags: ['Talk', 'Alumni'],
         category: ['Day 2']
     },
-
     'robo-trace': {
         id: 14,
         title: 'ROBO-TRACE (LINE FOLLOWER ROBOT)',
-        isElite: false,
-        isSpeakerSession: false,
-        isLive: true,
         description: 'This event is a multi-round robotics challenge designed to test participants’ problem-solving ability, teamwork, and line-following robot performance. Teams will progress through a pre-event puzzle-based qualification round followed by high-speed knockout races on a structured track.',
         registrationLink: 'https://unstop.com/competitions/robo-trace-meraki-2026-indian-institute-of-information-technology-iiit-una-1627194',
         brochure: '',
@@ -336,16 +324,13 @@ export const eventsData = {
         image2: '',
         eventDate: '8th February 2026',
         time: '3:00 PM - 5:00 PM',
-        venue: 'West Entrance, ACAD',
+        venue: 'West Entrance, Academic Block',
         tags: ['Robotics', 'Line Follower', 'Competition'],
         category: ['Day 2']
     },
     'kaggle-clash': {
         id: 15,
         title: 'KAGGLE CLASH',
-        isElite: false,
-        isSpeakerSession: false,
-        isLive: true,
         description: 'Kaggle Clash is a competitive machine learning event designed to evaluate participants on model accuracy, computational efficiency, and conceptual understanding. Teams work under a strict time constraint on three distinct datasets—structured data, image data, and natural language data—requiring them to make strategic decisions on model selection and optimization. Participants must carefully balance performance with efficient use of computational resources, while demonstrating strong problem-solving skills and practical machine learning judgment under pressure.',
         registrationLink: 'https://unstop.com/competitions/kaggle-clash-meraki-2026-indian-institute-of-information-technology-iiit-una-1628150',
         brochure: '',
@@ -355,29 +340,42 @@ export const eventsData = {
         image2: '',
         eventDate: '8th February 2026',
         time: '5:00 PM - 7:30 PM',
-        venue: 'Room No. 006',
+        venue: 'Room No. 103',
         tags: ['Data Science', 'ML', 'Competition'],
         category: ['Day 2']
     },
     'hackermaze': {
         id: 16,
         title: 'HACKERMAZE',
-        isElite: false,
-        isSpeakerSession: false,
-        isLive: true,
         description: 'HackerMaze is a Minecraft-themed, escape-room style technical event designed to test participants\' logical reasoning, aptitude, and coding skills under time constraints. Teams must solve puzzles, decode clues, and complete programming challenges to progress through different stages. The event emphasizes problem-solving ability, analytical thinking, and teamwork in an immersive and competitive environment.',
-        registrationLink: '',
+        registrationLink: 'https://unstop.com/college-fests/meraki-2026-indian-institute-of-information-technology-iiit-una-430446',
         brochure: '',
         price: '',
         image1: '',
         image2: '',
         eventDate: '8th February 2026',
         time: '5:30 PM - 7:30 PM',
-        venue: 'Room No. 225, 226, 227, 230, 231',
+        venue: 'Room No. 227/228, 133, 328, 204',
         tags: ['Hacking', 'Puzzle', 'Competition'],
         category: ['Day 2']
     },
-
+    'robo-soccer': {
+        id: 7,
+        title: 'ROBO-SOCCER',
+        description: 'A robotics-based head-to-head arena where teams design, build, and operate an Arduino and Bluetooth-controlled RC robot within a compact field. Two teams enter the arena simultaneously with the objective of pushing a lightweight ball into the opponent’s goal. The challenge emphasizes real-time decision-making and precision under pressure, encouraging innovation, coordination, and competitive problem-solving in a dynamic environment.',
+        registrationLink: 'https://unstop.com/competitions/robo-soccer-meraki-2026-indian-institute-of-information-technology-iiit-una-1627487',
+        brochure: '',
+        price: '',
+        oslug: 'robo-soccer',
+        icon: roboSoccerIcon,
+        image1: '',
+        image2: '',
+        eventDate: '7th February 2026',
+        time: '7:30 PM - 9:00 PM',
+        venue: 'TBD',
+        tags: ['Robotics', 'Competition', 'Soccer'],
+        category: ['Day 2']
+    },
 
     // =====================
     // MERAKI DAY 3 - 9th February 2026
@@ -385,27 +383,21 @@ export const eventsData = {
     'coding-casino': {
         id: 18,
         title: 'CODING CASINO',
-        isElite: false,
-        isSpeakerSession: false,
-        isLive: true,
         description: 'Coding Casino is an exciting, high-pressure coding event that blends DSA skills with an element of luck. Participants gamble virtual coins by spinning a DSA topic wheel and solving randomly assigned GFG problems. The event tests problem-solving ability, speed, and strategic decision-making in a fun and competitive casino-style environment.',
-        registrationLink: '',
+        registrationLink: 'https://unstop.com/college-fests/meraki-2026-indian-institute-of-information-technology-iiit-una-430446',
         brochure: '',
         price: '',
         image1: '',
         image2: '',
         eventDate: '9th February 2026',
         time: '9:30 AM - 11:30 AM',
-        venue: 'Room No. 104',
+        venue: 'Room No. 005',
         tags: ['Coding', 'Fun', 'Competition'],
         category: ['Day 3']
     },
     'mystery-ops': {
         id: 19,
         title: 'MYSTERY OPS',
-        isElite: false,
-        isSpeakerSession: false,
-        isLive: true,
         description: 'This event is a multi-round, escape-room style challenge designed to test participants\' logical thinking, observation skills, and teamwork. Participants will progress through an individual puzzle-based elimination round followed by a team-based challenge across multiple themed rooms. Strategy, coordination, and time management will determine the ultimate winner.',
         registrationLink: 'https://unstop.com/competitions/mystery-ops-meraki-2026-indian-institute-of-information-technology-iiit-una-1627508',
         brochure: '',
@@ -415,52 +407,13 @@ export const eventsData = {
         image2: '',
         eventDate: '9th February 2026',
         time: '11:30 AM - 1:00 PM',
-        venue: 'IIIT Una Campus',
+        venue: 'Room 326,327,328,329',
         tags: ['Mystery', 'Competition'],
-        category: ['Day 3']
-    },
-    'bot-or-brain': {
-        id: 20,
-        title: 'BOT OR BRAIN (For Faculty)',
-        isElite: false,
-        isSpeakerSession: false,
-        isLive: true,
-        description: 'AI vs Human faculty challenge.',
-        registrationLink: '',
-        brochure: '',
-        price: '',
-        image1: '',
-        image2: '',
-        eventDate: '9th February 2026',
-        time: '2:00 PM - 5:00 PM',
-        venue: 'OAT',
-        tags: ['AI', 'Faculty', 'Fun'],
-        category: ['Day 3']
-    },
-    'scalesquest': {
-        id: 21,
-        title: 'SCALESQUEST (For Faculty)',
-        isElite: false,
-        isSpeakerSession: false,
-        isLive: true,
-        description: 'Faculty engagement competition.',
-        registrationLink: '',
-        brochure: '',
-        price: '',
-        image1: '',
-        image2: '',
-        eventDate: '9th February 2026',
-        time: '2:00 PM - 5:00 PM',
-        venue: 'OAT',
-        tags: ['Faculty', 'Competition'],
         category: ['Day 3']
     },
     'ucpc': {
         id: 22,
         title: 'UCPC',
-        isElite: false,
-        isSpeakerSession: false,
-        isLive: true,
         description: 'UCPC is a fun and competitive coding event inspired by the ICPC format, designed to improve participants\' problem-solving and programming skills.',
         registrationLink: 'https://unstop.com/hackathons/ucpc-meraki-2026-indian-institute-of-information-technology-iiit-una-1628130',
         brochure: '',
@@ -477,39 +430,18 @@ export const eventsData = {
     'framorama': {
         id: 23,
         title: 'FRAMORAMA',
-        isElite: false,
-        isSpeakerSession: false,
-        isLive: true,
         description: 'Photography and framing competition.',
-        registrationLink: '',
+        registrationLink: 'https://unstop.com/college-fests/meraki-2026-indian-institute-of-information-technology-iiit-una-430446',
         brochure: '',
         price: '',
         image1: '',
         image2: '',
         eventDate: '9th February 2026',
-        time: '5:00 PM',
-        venue: 'PIXCEL',
+        time: '5:00 PM - 8:30 PM',
+        venue: 'TBD',
         tags: ['Photography', 'Creative'],
         category: ['Day 3']
     },
-    'musical-night-closing': {
-        id: 25,
-        title: 'MUSICAL NIGHT & CLOSING CEREMONY',
-        isElite: false,
-        isSpeakerSession: false,
-        isLive: true,
-        description: 'Grand closing ceremony with musical performances by SARGAM.',
-        registrationLink: '',
-        brochure: '',
-        price: '',
-        image1: '',
-        image2: '',
-        eventDate: '9th February 2026',
-        time: '9:00 PM - 11:00 PM',
-        venue: 'OAT',
-        tags: ['Music', 'Ceremony', 'Closing'],
-        category: ['Day 3']
-    }
 };
 
 /**
@@ -536,7 +468,7 @@ export const getAllEvents = () => Object.values(eventsData).sort((a, b) => a.id 
  * Get elite events for homepage display.
  * @returns {Array<Object>} Elite events array
  */
-export const getEliteEvents = () => getAllEvents().filter(e => e.isElite);
+export const getEliteEvents = () => eliteEvents;
 
 /**
  * Get events by category (supports array categories).
@@ -567,13 +499,19 @@ export const getDay3Events = () => getEventsByCategory('Day 3');
  * Get speaker session events.
  * @returns {Array<Object>} Speaker session events
  */
-export const getSpeakerSessions = () => getAllEvents().filter(e => e.isSpeakerSession);
+export const getSpeakerSessions = () => [
+    getEventById(5), // Defense Talk
+    getEventById(26), // TechCADD
+    getEventById(10), // COL. Nidhish
+    getEventById(6), // Amit Shukla
+    getEventById(12) // Alumni
+].filter(Boolean);
 
 /**
  * Get live events.
  * @returns {Array<Object>} Live events
  */
-export const getLiveEvents = () => getAllEvents().filter(e => e.isLive);
+export const getLiveEvents = () => [];
 
 /**
  * Get short description (first sentence) for an event.

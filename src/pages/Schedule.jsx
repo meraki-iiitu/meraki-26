@@ -90,7 +90,7 @@ const Schedule = () => {
   return (
     <div
       ref={containerRef}
-      className="min-h-screen relative text-white pt-20 sm:pt-24 pb-12 sm:pb-16"
+      className="min-h-[100dvh] relative text-white pt-20 sm:pt-28 pb-12 sm:pb-16"
       style={{
         backgroundImage: `url(${scheduleBg})`,
         backgroundSize: "cover",
@@ -107,7 +107,7 @@ const Schedule = () => {
       >
         {/* Page Header */}
         <motion.div
-          className="text-center mb-8 sm:mb-12 md:mb-16"
+          className="text-center mb-6 sm:mb-12 md:mb-16"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
