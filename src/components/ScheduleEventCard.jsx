@@ -1,9 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import ArenaXPopup from './ArenaXPopup';
 
 const ScheduleEventCard = ({ item }) => {
     const { event, time } = item;
+    const [isArenaXPopupOpen, setIsArenaXPopupOpen] = useState(false);
 
     // Variants for hover animations
     const cardVariants = {
@@ -16,7 +19,15 @@ const ScheduleEventCard = ({ item }) => {
         }
     };
 
-    const hasRegistration = event?.registrationLink && event.registrationLink !== '' && event.registrationLink !== 'N/A';
+    // Check if event has direct registration or sub-events (like ArenaX)
+    const hasRegistration = (event?.registrationLink && event.registrationLink !== '' && event.registrationLink !== 'N/A') || (event?.subEvents && event.subEvents.length > 0);
+
+    const handleCardClick = (e) => {
+        if (event?.subEvents && event.subEvents.length > 0) {
+            e.preventDefault();
+            setIsArenaXPopupOpen(true);
+        }
+    };
 
     const CardContent = () => (
         <>
@@ -33,7 +44,7 @@ const ScheduleEventCard = ({ item }) => {
                 {/* Main Visual - Pixelated Image Frame */}
                 <div className="
         relative shrink-0 
-        w-full sm:w-48 aspect-video sm:aspect-[4/3]
+        w-full sm:w-48 aspect-square
         bg-[#000] border-4 border-[#333]
         overflow-hidden
       ">
@@ -41,7 +52,7 @@ const ScheduleEventCard = ({ item }) => {
                         <img
                             src={event.icon || event.image1 || event.image2}
                             alt={event.title}
-                            className={`w-full h-full object-contain bg-[#050505] opacity-90 ${hasRegistration ? 'group-hover:opacity-100' : ''} transition-opacity duration-300 pixel-image`}
+                            className={`w-full h-full object-cover bg-[#050505] opacity-90 ${hasRegistration ? 'group-hover:opacity-100' : ''} transition-opacity duration-300 pixel-image`}
                             style={{ imageRendering: 'pixelated' }}
                         />
                     ) : (
@@ -116,7 +127,7 @@ const ScheduleEventCard = ({ item }) => {
         </>
     );
 
-    return (
+    const CardComponent = (
         <motion.div
             initial="rest"
             whileHover={hasRegistration ? "hover" : "rest"}
@@ -129,6 +140,7 @@ const ScheduleEventCard = ({ item }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block"
+                    onClick={handleCardClick}
                 >
                     <CardContent />
                 </a>
@@ -139,6 +151,21 @@ const ScheduleEventCard = ({ item }) => {
             )}
         </motion.div>
     );
+
+    if (event?.subEvents) {
+        return (
+            <>
+                {CardComponent}
+                <ArenaXPopup
+                    isOpen={isArenaXPopupOpen}
+                    onClose={() => setIsArenaXPopupOpen(false)}
+                    subEvents={event.subEvents}
+                />
+            </>
+        );
+    }
+
+    return CardComponent;
 };
 
 export default ScheduleEventCard;

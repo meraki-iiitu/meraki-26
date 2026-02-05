@@ -41,7 +41,7 @@ const Footer = () => {
    * @constant {number}
    */
   const blockSize = 17;
-  
+
   /**
    * Size for the custom decorative triangular squares.
    * Responsive: 35px on mobile, 40px on tablet, 50px on desktop
@@ -82,12 +82,12 @@ const Footer = () => {
     { x: 6, y: -1, color: "#242424", xMobile: 0, xDesktop: 6 },
     { x: 7, y: -2, color: "#242424", xMobile: 3, xDesktop: 7 },
     { x: 8, y: -1, color: "#242424", xMobile: 6, xDesktop: 8 },
-    
+
     // Right triangle pattern - with gap on mobile
     { x: 30, y: -1, color: "#242424", xMobile: 32, xDesktop: 30.5 },
     { x: 32, y: -2, color: "#242424", xMobile: 35, xDesktop: 32 },
     { x: 33, y: -1, color: "#242424", xMobile: 38, xDesktop: 33 },
-    
+
     // Two #303030 colored squares (responsive size with gap on mobile)
     // Square 1 - More spacing on mobile screens
     { x: 7, y: 0, color: "#303030", size: 35, xMobile: 9, xDesktop: 10 },
@@ -100,7 +100,7 @@ const Footer = () => {
   const topBorderSquaresSmall = [];
   const topBorderSquaresMedium = [];
   const topBorderSquaresLarge = [];
-  
+
   // For small screens, use larger increment (3) to create bigger gaps
   for (let i = 0; i <= 30; i += 3) {
     topBorderSquaresSmall.push({ x: i, max: 30 });
@@ -114,7 +114,7 @@ const Footer = () => {
 
   return (
     <footer
-      className="relative w-full overflow-visible"
+      className="relative w-full overflow-visible z-40"
       style={{ fontFamily: "'Press Start 2P', cursive" }}
     >
       {/* 
@@ -226,11 +226,11 @@ const Footer = () => {
           // Calculate responsive sizes
           const smSize = baseSize + 5;  // 40px for tablets
           const lgSize = baseSize + 15; // 50px for desktop
-          
+
           // Use different x positions for mobile vs desktop if specified
           const xMobile = square.xMobile !== undefined ? square.xMobile : square.x;
           const xDesktop = square.xDesktop !== undefined ? square.xDesktop : square.x;
-          
+
           return (
             <React.Fragment key={idx}>
               {/* Mobile view - 35px with 45% split */}

@@ -40,6 +40,9 @@ import pixelforgeIcon from "../assets/eventImages/icons/pixelforge-sq.jpeg";
 import hackermazeIcon from "../assets/eventImages/icons/hackermaze-sq.jpeg";
 import codingCasinoIcon from "../assets/eventImages/icons/coding-casino-sq.jpeg";
 import framoramaIcon from "../assets/eventImages/icons/framorama-sq.jpeg";
+import bgmiIcon from "../assets/eventImages/icons/bgmi-pixel.png";
+import valorantIcon from "../assets/eventImages/icons/valorant-pixel.png";
+import clashRoyaleIcon from "../assets/eventImages/icons/clash-royale-pixel.png";
 
 // Expert Talks Images
 import amitShuklaImg from "../assets/experts/amit.jpg";
@@ -98,7 +101,24 @@ export const flagshipEvents = {
         slug: 'arenax',
         title: 'ARENAX SPORTS CARNIVAL',
         description: 'Arena X Esports is a competitive esports tournament designed to test teamwork, strategy, and in-game skills across popular multiplayer titles. The event brings together skilled players to compete in structured qualifiers and matches under fair play and competitive conditions.',
-        registrationLink: 'BGMI: https://unstop.com/p/arenax-esports-carnival-bgmi-meraki-2026-indian-institute-of-information-technology-iiit-una-1627499 | Valorant: https://unstop.com/p/arenax-esports-carnival-valorant-meraki-2026-indian-institute-of-information-technology-iiit-una-1627521 | Clash Royale: https://unstop.com/p/arenax-esports-carnival-clash-royale-meraki-2026-indian-institute-of-information-technology-iiit-una-1627520',
+        registrationLink: null, // Multiple links handled via popup
+        subEvents: [
+            {
+                name: 'BGMI',
+                logo: bgmiIcon,
+                registrationLink: 'https://unstop.com/p/arenax-esports-carnival-bgmi-meraki-2026-indian-institute-of-information-technology-iiit-una-1627499'
+            },
+            {
+                name: 'Valorant',
+                logo: valorantIcon,
+                registrationLink: 'https://unstop.com/p/arenax-esports-carnival-valorant-meraki-2026-indian-institute-of-information-technology-iiit-una-1627521'
+            },
+            {
+                name: 'Clash Royale',
+                logo: clashRoyaleIcon,
+                registrationLink: 'https://unstop.com/p/arenax-esports-carnival-clash-royale-meraki-2026-indian-institute-of-information-technology-iiit-una-1627520'
+            }
+        ],
         brochure: '',
         price: '₹12000/-',
         image1: arenaXImg,
