@@ -9,16 +9,17 @@ import unstopLogo from '../assets/sponsors/unstop_logo.svg';
 import aerostarLogo from '../assets/sponsors/aerostar.webp';
 import devfolioLogo from '../assets/sponsors/devfolio_logo.webp';
 import whosNextLogo from '../assets/sponsors/whosnext.webp';
-import mioartaiLogo from '../assets/mioartai.jpg';
-import dopamineStoreLogo from '../assets/dopamine_store.avif';
-import ethindiaLogo from '../assets/ethindia.svg';
+import mioartaiLogo from '../assets/sponsors/mioartai.jpg';
+import dopamineStoreLogo from '../assets/sponsors/dopamine_store.avif';
+import ethindiaLogo from '../assets/sponsors/ethindia.svg';
 import sjvnLogo from '../assets/sponsors/sjvn.webp';
+import doonLogo from '../assets/sponsors/doonmerch.webp';
+import gfgLogo from '../assets/sponsors/gfg-gg-logo.svg';
+import codechefLogo from '../assets/sponsors/codechef.jpeg';
+import abhibusLogo from '../assets/sponsors/abhibus.png';
 
 // Placeholder for missing logos
 const placeholderLogo = iiituLogo;
-const doonLogo = "/doonmerch.webp";
-const gfgLogo = "/gfg-gg-logo.svg";
-const codechefLogo = "/codechef.jpeg";
 
 // Partner Data with Categories
 
@@ -26,9 +27,6 @@ const codechefLogo = "/codechef.jpeg";
 // export const platinumPartners = [
 //     { name: "Platinum 1", firm: "Platinum Firm", designation: "Title Sponsor", logo: placeholderLogo, url: "#" }
 // ];
-
-const abhibusLogo = "/abhibus.png";
-const plutoDronesLogo = "/pluto drones.webp";
 
 export const goldPartners = [
     { name: "SJVN", firm: "SJVN", designation: "Gold Sponsor", logo: sjvnLogo, url: "https://sjvn.nic.in" }

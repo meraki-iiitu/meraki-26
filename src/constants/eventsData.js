@@ -20,6 +20,8 @@ import cairLogo from "../assets/sponsors/iitlogo.webp";
 import aerostarLogo from "../assets/sponsors/aerostar.webp";
 import agastyaLogo from "../assets/agastya.jpg";
 import teamShaktiLogo from "../assets/team_shakti.webp";
+import hackathoneBrochure from "../assets/brochures/hackathone.pdf";
+import roboDriveBrochure from "../assets/brochures/robo-drive.pdf";
 
 /**
  * Master events data object keyed by event key.
@@ -85,7 +87,7 @@ export const eventsData = {
         isLive: true,
         description: 'Hack-The-Throne is a national-level inter-college hackathon where students take ideas from problem identification to rapid prototyping, simulating real-world industry and startup environments. Participants build innovative solutions across the following domains:\n\nSustainability & Green Technology\n\nFinTech & Digital Innovation\n\nHealth Technology\n\nSmart Automation\n\nDigital Security Systems',
         registrationLink: 'https://hack-the-throne.devfolio.co/overview',
-        brochure: '/brochures/hackathone.pdf',
+        brochure: hackathoneBrochure,
         price: '₹48000/-',
         image1: hackTheThroneImg,
         image2: hackTheThroneImgLarge,
@@ -582,7 +584,7 @@ export const eventsData = {
         isLive: true,
         description: 'Robo Drive is a time-based robotics competition where participants design and manually control a robot car to complete a predefined track in the shortest possible time. The event emphasizes precision driving, speed control, and accurate obstacle navigation, with time penalties for errors such as touching track boundaries, missing checkpoints or collisions testing participants’ skills in robot design, motor control, Arduino fundamentals, and real-time decision-making.',
         registrationLink: 'https://unstop.com/p/robodrive-meraki-2026-indian-institute-of-information-technology-iiit-una-1617278',
-        brochure: '/brochures/Event Brochure - Robo Drive.pdf',
+        brochure: roboDriveBrochure,
         price: '₹20000/-',
         image1: roboDriveImg,
         image2: roboDriveImgLarge,
