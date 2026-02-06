@@ -14,7 +14,7 @@ import React, { useState, useRef, useMemo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import eliteBg from "../assets/elite_minecraft_bg.webp";
-import { getEliteEvents, getShortDescription } from "../constants/eventsData";
+import { eliteEvents } from "../constants/eventsData";
 import { appleSlideUp, sectionTransition } from "../utils/motion";
 
 /**
@@ -26,11 +26,11 @@ import { appleSlideUp, sectionTransition } from "../utils/motion";
  */
 function Elite() {
   // Get elite (featured) events from single source of truth
-  const eliteEvents = useMemo(() => getEliteEvents(), []);
+  const events = useMemo(() => eliteEvents, []);
 
-  const [activeTab, setActiveTab] = useState(eliteEvents[0]?.id || null);
+  const [activeTab, setActiveTab] = useState(events[0]?.id || null);
   const navigate = useNavigate();
-  const activeEvent = eliteEvents.find((event) => event.id === activeTab);
+  const activeEvent = events.find((event) => event.id === activeTab);
   const sectionRef = useRef(null);
 
   /**
@@ -134,10 +134,10 @@ function Elite() {
               className="w-full md:w-1/3 flex flex-row md:flex-col overflow-x-auto md:overflow-visible z-30 gap-0 pb-0 scrollbar-hide snap-x snap-mandatory"
               variants={appleSlideUp(0.1)}
             >
-              {eliteEvents.map((event, index) => {
+              {events.map((event, index) => {
                 const isActive = activeTab === event.id;
                 const isFirst = index === 0;
-                const isLast = index === eliteEvents.length - 1;
+                const isLast = index === events.length - 1;
 
                 return (
                   <motion.button
@@ -179,7 +179,7 @@ function Elite() {
                         }
                       `}>
                         <img
-                          src={event.image}
+                          src={event.image1 || event.image2}
                           alt={event.title}
                           className={`w-full h-full object-cover object-top transition-all duration-300 ${isActive ? "opacity-100" : "opacity-60 group-hover:opacity-80"}`}
                         />
@@ -211,7 +211,7 @@ function Elite() {
                 {/* Event Image with hover zoom */}
                 <div className="w-full relative group rounded-lg h-40 sm:h-48 md:h-56 lg:h-64 overflow-hidden ring-1 ring-white/10">
                   <img
-                    src={activeEvent.image}
+                    src={activeEvent.image1 || activeEvent.image2}
                     alt={activeEvent.title}
                     className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-500"
                   />

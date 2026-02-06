@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { appleSlideUp, appleScaleIn } from "../utils/motion";
 import { STORE_ASSETS, DOON_PRODUCTS, DOPAMINE_PRODUCTS } from "../constants/merchandiseData";
+import noiseTexture from "../assets/noise.png";
 
 /**
  * Modern Glassmorphism Product Card
@@ -164,7 +165,7 @@ const MerchandisePage = () => {
                     ${isCyan ? 'bg-cyan-600' : 'bg-red-600'}
                 `} />
                 <div className="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full blur-[150px] bg-purple-900/20" />
-                <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
+                <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay" style={{ backgroundImage: `url(${noiseTexture})` }} />
             </div>
 
             {/* Brand Selection Screen - Full Screen No Scroll */}

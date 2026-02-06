@@ -17,6 +17,7 @@ import nikhilImg from '../assets/devteam/nikhil.webp';
 import pulkitImg from '../assets/devteam/pulkit.webp';
 import sundaramImg from '../assets/devteam/sundaram.webp';
 import ayushImg from '../assets/devteam/ayush.webp';
+import sreekarImg from '../assets/devteam/sreekar.webp';
 
 /**
  * Development team members array.
@@ -83,6 +84,11 @@ export const devTeamMembers = [
     {
         name: "Ayush Arya",
         photo: ayushImg,
+        tier: 3,
+    },
+    {
+        name: "Sreekar",
+        photo: sreekarImg,
         tier: 3,
     },
 ];

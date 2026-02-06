@@ -14,7 +14,7 @@ import React, { useState, useRef, useMemo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import flagshipBg from "../assets/elite_minecraft_bg.webp";
-import { eventsData, getEliteEvents, getShortDescription } from "../constants/eventsData";
+import { flagshipEvents } from "../constants/eventsData";
 import { appleSlideUp, sectionTransition } from "../utils/motion";
 
 /**
@@ -26,11 +26,11 @@ import { appleSlideUp, sectionTransition } from "../utils/motion";
  */
 function FlagshipEvent() {
   // Get flagship events from single source of truth
-  const flagshipEvents = useMemo(() => getEliteEvents(), []);
+  const events = useMemo(() => Object.values(flagshipEvents), []);
 
-  const [activeTab, setActiveTab] = useState(flagshipEvents[0]?.id || null);
+  const [activeTab, setActiveTab] = useState(events[0]?.id || null);
   const navigate = useNavigate();
-  const activeEvent = flagshipEvents.find((event) => event.id === activeTab);
+  const activeEvent = events.find((event) => event.id === activeTab);
   const sectionRef = useRef(null);
 
   /**
@@ -134,10 +134,10 @@ function FlagshipEvent() {
               className="w-full md:w-1/3 grid grid-cols-2 md:flex md:flex-col gap-0 z-30"
               variants={appleSlideUp(0.1)}
             >
-              {flagshipEvents.map((event, index) => {
+              {events.map((event, index) => {
                 const isActive = activeTab === event.id;
                 const isFirst = index === 0;
-                const isLast = index === flagshipEvents.length - 1;
+                const isLast = index === events.length - 1;
 
                 return (
                   <motion.button
@@ -214,8 +214,7 @@ function FlagshipEvent() {
             <div
               className="relative z-20 w-full md:w-2/3 bg-dark-200 border-2 border-dark-300 rounded-t-lg rounded-b-none md:rounded-l-none md:rounded-r-lg md:rounded-tl-lg mb-0 md:mt-0 md:-ml-[2px] overflow-hidden group cursor-pointer min-h-[320px] xs:min-h-[360px] sm:min-h-[400px] md:min-h-[450px]"
               onClick={() => {
-                const eventKey = Object.keys(eventsData).find(key => eventsData[key].id === activeEvent.id);
-                if (eventKey) navigate(`/event/${eventKey}`);
+                if (activeEvent?.slug) navigate(`/event/${activeEvent.slug}`);
               }}
             >
               {/* Full Enclosing Image */}

@@ -10,11 +10,11 @@
 
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { Link } from "react-router-dom";
 import scheduleBg from "../assets/schedule_bg.png";
-import avatarImg from "../assets/avatar_pixel.webp";
 import minecraftSignComingSoon from "../assets/minecraft_sign_coming_soon.webp";
 import { getScheduleForDay, showSchedule } from "../constants";
+import ScheduleEventCard from "../components/ScheduleEventCard";
+import ServerInfoCard from "../components/ServerInfoCard";
 
 /**
  * Schedule page component with day tabs.
@@ -90,7 +90,7 @@ const Schedule = () => {
   return (
     <div
       ref={containerRef}
-      className="min-h-screen relative text-white pt-20 sm:pt-24 pb-12 sm:pb-16"
+      className="min-h-[100dvh] relative text-white pt-20 sm:pt-28 pb-12 sm:pb-16"
       style={{
         backgroundImage: `url(${scheduleBg})`,
         backgroundSize: "cover",
@@ -99,7 +99,7 @@ const Schedule = () => {
       }}
     >
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/70"></div>
+      <div className="absolute inset-0 bg-black/80"></div>
 
       <motion.div
         className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10"
@@ -107,7 +107,7 @@ const Schedule = () => {
       >
         {/* Page Header */}
         <motion.div
-          className="text-center mb-8 sm:mb-12 md:mb-16"
+          className="text-center mb-6 sm:mb-12 md:mb-16"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -122,7 +122,7 @@ const Schedule = () => {
           <h1
             className="font-minecraft text-3xl sm:text-5xl md:text-7xl text-white mb-3 sm:mb-4 tracking-wider"
             style={{
-              textShadow: "3px 3px 0px #000",
+              textShadow: "4px 4px 0px #000",
             }}
           >
             SCHEDULE
@@ -188,72 +188,24 @@ const Schedule = () => {
           <div className="flex flex-col lg:grid lg:grid-cols-4 gap-6 lg:gap-8">
             {/* Server Info Sidebar */}
             <motion.div
-              className="lg:col-span-1 order-2 lg:order-1"
+              className="lg:col-span-1 order-2 lg:order-1 h-fit sticky top-24"
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.0 }}
             >
-              <div className="bg-gray-800/90 backdrop-blur-sm border-2 sm:border-4 border-gray-700 p-4 sm:p-6 font-terminal">
-                <div className="border-b-2 border-gray-700 pb-3 mb-4 flex justify-between items-center">
-                  <span className="text-cyan-400 text-xs sm:text-sm tracking-widest">[ SERVER INFO ]</span>
-                  <div className="flex gap-1.5">
-                    <div className="w-2 h-2 rounded-full bg-red-500/30"></div>
-                    <div className="w-2 h-2 rounded-full bg-yellow-500/30"></div>
-                    <div className="w-2 h-2 rounded-full bg-green-500/30"></div>
-                  </div>
-                </div>
-
-                <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm">
-                  <div className="flex justify-between items-center group">
-                    <span className="text-gray-500 group-hover:text-gray-400 transition-colors">HOST</span>
-                    <span className="text-white">IIIT UNA</span>
-                  </div>
-                  <div className="flex justify-between items-center group">
-                    <span className="text-gray-500 group-hover:text-gray-400 transition-colors">REALM</span>
-                    <span className="text-cyan-400">MERAKI</span>
-                  </div>
-                  <div className="flex justify-between items-center group">
-                    <span className="text-gray-500 group-hover:text-gray-400 transition-colors">REGION</span>
-                    <span className="text-white">INDIA_HP</span>
-                  </div>
-
-                  <div className="border-t border-gray-700/50 my-2"></div>
-
-                  <div className="flex justify-between items-center bg-gray-900/50 p-2 sm:p-3 rounded border border-gray-700/50">
-                    <span className="text-gray-400">STATUS</span>
-                    <div className="flex items-center gap-2">
-                      <span className="relative flex h-2.5 w-2.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                      </span>
-                      <span className="text-emerald-400 font-bold tracking-wider">ONLINE</span>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center bg-gray-900/50 p-2 sm:p-3 rounded border border-gray-700/50">
-                    <span className="text-gray-400">PING</span>
-                    <span className="text-emerald-400 font-bold tracking-wider">12ms</span>
-                  </div>
-                </div>
-
-                <div className="mt-4 pt-3 border-t-2 border-gray-700 text-[10px] sm:text-xs text-center text-gray-500">
-                  // READY TO CONNECT...
-                </div>
-              </div>
+              <ServerInfoCard />
             </motion.div>
 
             {/* Schedule Main Content */}
             <div className="lg:col-span-3 order-1 lg:order-2">
               {/* 
                * Day Selector Tabs
-               * 
-               * Horizontal scrollable on mobile.
-               * Uses layoutId for animated underline.
                */}
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="flex gap-3 sm:gap-4 mb-8 sm:mb-10 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0"
+                className="flex gap-4 mb-8 sm:mb-10 overflow-x-auto pb-6 pt-2 scrollbar-hide snap-x snap-mandatory -mx-4 px-6 sm:mx-0 sm:px-2"
               >
                 {[1, 2, 3].map((day) => (
                   <motion.button
@@ -261,16 +213,12 @@ const Schedule = () => {
                     onClick={() => setActiveDay(day)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`font-minecraft px-6 sm:px-8 py-4 sm:py-5 text-sm sm:text-base border-[3px] border-b-[6px] transition-all relative whitespace-nowrap snap-start shrink-0 min-w-[120px] sm:min-w-[160px] shadow-lg ${
-                      activeDay === day
-                        ? "bg-gray-700 text-white border-gray-500 border-b-gray-400"
-                        : "bg-gray-800 text-gray-400 border-gray-700 border-b-gray-900 hover:bg-gray-750 hover:text-gray-200 hover:border-gray-600"
-                    }`}
+                    className={`font-minecraft px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base border-4 transition-all relative whitespace-nowrap snap-start shrink-0 min-w-[120px] sm:min-w-[140px] shadow-[4px_4px_0px_rgba(0,0,0,0.5)] ${activeDay === day
+                      ? "bg-[#333] text-white border-white border-b-gray-400 translate-y-1 shadow-[2px_2px_0px_rgba(0,0,0,0.5)]"
+                      : "bg-[#111] text-gray-400 border-[#444] border-b-[#222] hover:bg-[#222] hover:text-white hover:border-gray-500"
+                      }`}
                   >
                     <span className="relative z-10 drop-shadow-md">Day {day}</span>
-                    {activeDay === day && (
-                       <div className="absolute top-1 right-1 w-2 h-2 bg-green-500 animate-pulse"></div>
-                    )}
                   </motion.button>
                 ))}
               </motion.div>
@@ -285,13 +233,9 @@ const Schedule = () => {
                   transition={{ duration: 0.3 }}
                   className="mb-8 flex items-center justify-between"
                 >
-                  <div className="bg-cyan-400 text-black font-minecraft py-2 px-4 border-[3px] border-b-[6px] border-cyan-800 shadow-xl inline-flex items-center gap-2">
+                  <div className="bg-cyan-600 text-white font-minecraft py-2 px-4 border-2 border-cyan-300 shadow-[4px_4px_0px_#000] inline-flex items-center gap-2">
                     <span className="animate-pulse">_</span>
                     <span>DAY {activeDay} LOGS</span>
-                  </div>
-                  
-                  <div className="hidden sm:block font-terminal text-gray-500 text-xs">
-                     // SYNCED AT {new Date().toLocaleTimeString()}
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -303,98 +247,27 @@ const Schedule = () => {
                   variants={containerVariants}
                   initial="hidden"
                   animate="show"
-                  className="space-y-4 sm:space-y-6 relative ml-2 sm:ml-4"
+                  className="space-y-6 relative ml-2 sm:ml-4"
                 >
-                   {/* Vertical Timeline Bar */}
-                   <div className="absolute left-2.5 sm:left-4 top-2 bottom-2 w-0.5 sm:w-1 bg-gray-700/50"></div>
+                  {/* Vertical Timeline Bar - Dashed for retro feel */}
+                  <div className="hidden sm:block absolute left-[-30px] top-2 bottom-2 w-1 border-l-2 border-dashed border-gray-700"></div>
 
                   {getScheduleForDay(activeDay).map((item, index) => (
-                    <Link
+                    <motion.div
                       key={item.eventId || index}
-                      to={item.key ? `/event/${item.key}` : '#'}
-                      className="block relative pl-8 sm:pl-12"
+                      variants={itemVariants}
                     >
-                      {/* Timeline Dot */}
-                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 sm:w-8 sm:h-8 bg-gray-900 border-2 sm:border-4 border-cyan-400 rounded-none z-10 flex items-center justify-center">
-                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-cyan-400"></div>
-                      </div>
-
-                      <motion.div
-                        variants={itemVariants}
-                        whileHover={{ scale: 1.01, x: 5 }}
-                        whileTap={{ scale: 0.99 }}
-                        className="bg-gray-800/80 backdrop-blur-md border-[3px] border-b-[6px] border-gray-700 hover:border-cyan-400 hover:border-b-cyan-600 transition-all p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 group cursor-pointer shadow-lg relative overflow-hidden"
-                      >
-                         {/* Subtle grid pattern overlay */}
-                         <div className="absolute inset-0 opacity-10 pointer-events-none" 
-                              style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '20px 20px' }}
-                         ></div>
-
-                        {/* Event Thumbnail */}
-                        <div className="w-full sm:w-20 md:w-24 aspect-video sm:aspect-square bg-gray-900 overflow-hidden border-2 border-gray-600 shrink-0 group-hover:border-cyan-400 transition-colors relative shadow-inner">
-                          {item.event?.image1 || item.event?.image2 ? (
-                            <img
-                              src={item.event.image1 || item.event.image2}
-                              alt={item.event.title}
-                              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                            />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center text-gray-700 font-pixel text-xs">NO IMG</div>
-                          )}
-                           {/* Scanline effect */}
-                           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/10 to-transparent opacity-0 group-hover:opacity-100 animate-scanline pointer-events-none"></div>
-                        </div>
-
-                        {/* Event Info */}
-                        <div className="flex-1 min-w-0 w-full relative z-10">
-                          <div className="flex items-center gap-2 mb-1">
-                             <div className="px-2 py-0.5 bg-gray-900 border border-gray-600 text-[10px] text-cyan-400 font-terminal tracking-wider">
-                                {item.eventId}
-                             </div>
-                             {item.event?.isElite && (
-                                <div className="px-2 py-0.5 bg-gradient-to-r from-purple-900/70 to-pink-900/70 border border-purple-500/50 text-[10px] text-purple-300 font-terminal tracking-wider">
-                                   ELITE
-                                </div>
-                             )}
-                          </div>
-                          
-                          <h3 className="font-minecraft text-lg sm:text-xl text-white mb-2 truncate group-hover:text-cyan-400 transition-colors drop-shadow-sm">
-                            {item.event?.title || 'Unknown Event'}
-                          </h3>
-                          
-                          <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs sm:text-sm text-gray-400 font-terminal">
-                            {item.event?.venue && (
-                                <div className="flex items-center gap-1.5">
-                                    <span className="text-cyan-600">📍</span>
-                                    <span>{item.event.venue}</span>
-                                </div>
-                            )}
-                             {item.event?.coordinators?.student && (
-                                <div className="flex items-center gap-1.5">
-                                    <span className="text-cyan-600">👤</span>
-                                    <span className="truncate max-w-[150px] sm:max-w-none">{item.event.coordinators.student.split(',')[0]}</span>
-                                </div>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Time Badge - Prominent */}
-                        <div className="w-full sm:w-auto mt-2 sm:mt-0 relative z-10">
-                           <div className="font-pixel text-xs sm:text-sm text-black bg-cyan-400 px-4 py-2 border-2 border-cyan-600 shadow-[4px_4px_0px_rgba(0,0,0,0.5)] text-center whitespace-nowrap group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
-                              {item.time}
-                           </div>
-                        </div>
-                        
-                      </motion.div>
-                    </Link>
+                      <ScheduleEventCard item={item} />
+                    </motion.div>
                   ))}
                 </motion.div>
               </AnimatePresence>
             </div>
           </div>
-        )}
-      </motion.div>
-    </div>
+        )
+        }
+      </motion.div >
+    </div >
   );
 };
 

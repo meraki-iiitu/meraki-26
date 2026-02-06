@@ -9,6 +9,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { devTeamMembers, devTeamConfig } from "../constants";
 import avatarImg from "../assets/avatar_pixel.webp";
+import noiseTexture from "../assets/noise.png";
 
 /**
  * Get tier label based on member tier.
@@ -99,7 +100,7 @@ const DevTeam = () => {
                 <div className="absolute top-[40%] right-[20%] w-[300px] h-[300px] rounded-full blur-[100px] bg-emerald-800 opacity-10" />
 
                 {/* Noise Texture Overlay */}
-                <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
+                <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay" style={{ backgroundImage: `url(${noiseTexture})` }} />
             </div>
 
             {/* Main Content */}
