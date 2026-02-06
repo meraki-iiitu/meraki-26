@@ -25,6 +25,11 @@ import roboDriveBrochure from "../assets/brochures/robo-drive.pdf";
 
 import chichiImg from "../assets/chichi.jpg";
 
+// Sponsor Logos
+import devfolioLogo from "../assets/sponsors/devfolio_logo.webp";
+import ethIndiaLogo from "../assets/sponsors/ethindia.svg";
+import requestlyLogo from "../assets/sponsors/RQ-Logo.svg";
+
 // Event Icons
 import bugBashIcon from "../assets/eventImages/icons/bug-bash-sq.jpeg";
 import kaggleClashIcon from "../assets/eventImages/icons/kaggle-clash-sq.jpeg";
@@ -72,7 +77,12 @@ export const flagshipEvents = {
         time: 'Opening: 12:00 PM - 1:00 PM (Day 1), Judgement: 12:00 PM - 5:00 PM (Day 2)',
         venue: 'Room No. 102, 103, 104, 227',
         tags: ['Coding', 'Hackathon', 'Innovation', 'Tech', 'National Level'],
-        category: ['Day 1', 'Day 2']
+        category: ['Day 1', 'Day 2'],
+        sponsors: [
+            { name: "Devfolio", logo: devfolioLogo, type: "Platform Partner" },
+            { name: "ETHIndia", logo: ethIndiaLogo, type: "Track Sponsor" },
+            { name: "Requestly", logo: requestlyLogo, type: "Track Sponsor" }
+        ]
     },
     'skycircuit': {
         id: 4,

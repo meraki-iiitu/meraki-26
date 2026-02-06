@@ -227,9 +227,9 @@ const EventDetails = () => {
                   <div className="h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent flex-1 opacity-30"></div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-y-12 sm:gap-y-16 lg:gap-y-10 gap-x-6 sm:gap-x-8 lg:gap-x-10 pb-8 max-w-7xl mx-auto">
+                <div className="flex flex-wrap justify-center gap-x-8 gap-y-12 pb-8 max-w-7xl mx-auto">
                   {eventData.sponsors.map((sponsor, index) => (
-                    <div key={index} className="group relative w-full max-w-[280px] mb-4 sm:mb-6 lg:mb-0">
+                    <div key={index} className="group relative w-full max-w-[280px]">
                       {/* Item Frame Background */}
                       <div className="absolute -inset-3 bg-[#5c3a21] rounded-sm transform rotate-3 transition-transform duration-300 group-hover:rotate-6"></div>
                       <div className="absolute -inset-3 bg-[#8b5e34] border-t-4 border-l-4 border-[#a67c52] border-b-4 border-r-4 border-[#3d2616] shadow-xl"></div>
@@ -240,7 +240,7 @@ const EventDetails = () => {
                         <div className="absolute inset-0 bg-[#3d2616] opacity-10 pointer-events-none"></div>
 
                         {/* Logo Box */}
-                        <div className="relative w-full h-24 sm:h-32 md:h-36 bg-white border-2 border-[#3d2616] flex items-center justify-center p-3 sm:p-4 rounded-sm overflow-hidden group-hover:border-[#a67c52] transition-colors">
+                        <div className={`relative w-full h-24 sm:h-32 md:h-36 ${eventId === 'hack-the-throne' ? 'bg-black' : 'bg-white'} border-2 border-[#3d2616] flex items-center justify-center p-3 sm:p-4 rounded-sm overflow-hidden group-hover:border-[#a67c52] transition-colors`}>
                           <img
                             src={sponsor.logo}
                             alt={sponsor.name}
